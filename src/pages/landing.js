@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import "../styles/animation.css";
 
 const Container = styled.div`
   display: flex;
@@ -23,22 +24,24 @@ const Header1 = styled.div`
   font-weight: bold;
   color: #294cff;
   line-height: 150%;
+  text-align: center;
 `;
 
 const Body = styled.div`
   font-size: 18px;
   color: #bbbbbb;
   line-height: 150%;
+  text-align: center;
 `;
 
 const Landing = () => {
   return (
-    <Container>
-      <BorderedContainer>
-        <Header1>~ Ship ~</Header1>
-        <Body>From the creators of YPost</Body>
-        <Body>Coming this Valentine's</Body>
-      </BorderedContainer>
+    <Container className="bob">
+      <Header1>~~ Ship ~~</Header1>
+      <Body style={{ width: "400px" }}>
+        Have some fun this Valentine's day. From the creators of YPost. Coming
+        soon
+      </Body>
     </Container>
   );
 };
