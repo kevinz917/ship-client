@@ -20,7 +20,7 @@ const BorderedContainer = styled.div`
 `;
 
 const Header1 = styled.div`
-  font-size: 60px;
+  font-size: 62px;
   font-weight: bold;
   color: #294cff;
   line-height: 150%;
@@ -37,7 +37,7 @@ const Body = styled.div`
 const Landing = () => {
   return (
     <Container className="bob">
-      <Header1>~~ Ship ~~</Header1>
+      <Header1>👀~ Ship ~👀</Header1>
       <Body style={{ width: "400px" }}>
         Have some fun this Valentine's day. From the creators of YPost. Coming
         soon

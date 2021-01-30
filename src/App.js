@@ -1,6 +1,6 @@
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 // pages
 import Landing from "./pages/landing";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 function App() {
   return (
