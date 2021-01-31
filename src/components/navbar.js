@@ -2,6 +2,7 @@ import React from "react";
 import { Nav, Navbar } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
+import { FiUser } from "react-icons/fi";
 
 const StyledNavLink = styled(NavLink)`
   padding: 0.5rem 2rem 0.5rem 0rem;
@@ -24,6 +25,9 @@ const ShipNavbar = () => {
       <Navbar.Collapse className="d-flex justify-content-end">
         <StyledNavLink to="/leaderboard">Leaderboard</StyledNavLink>
         <StyledNavLink to="/ship">Ship</StyledNavLink>
+        <StyledNavLink to="/profile">
+          <FiUser size={23} />
+        </StyledNavLink>
       </Navbar.Collapse>
     </Navbar>
   );

@@ -6,9 +6,10 @@ import { ThemeProvider } from "styled-components";
 import Landing from "./pages/landing";
 import Leaderboard from "./pages/leaderboard";
 import NewShip from "./pages/newship";
+import Profile from "./pages/profile";
 
 //components
-import ShipNavbar from "./components/navbar";
+import ShipNavbar from "./components/Navbar";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Switch>
           <Route exact path="/leaderboard" component={Leaderboard} />
           <Route exact path="/ship" component={NewShip} />
+          <Route exact path="/profile" component={Profile} />
           <Route exact path="/" component={Landing} />
         </Switch>
       </Router>
