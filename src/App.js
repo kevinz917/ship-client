@@ -9,7 +9,7 @@ import NewShip from "./pages/newship";
 import Profile from "./pages/profile";
 
 //components
-import ShipNavbar from "./components/Navbar";
+import ShipNavbar from "./components/navbar";
 
 function App() {
   return (
