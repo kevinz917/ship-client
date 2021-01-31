@@ -8,4 +8,11 @@ export const addUser = async () => {};
 export const addShip = async () => {};
 
 // Fetch ships
-export const getShips = async () => {};
+export const fetchShips = async (user) => {
+  let fetchedShips = await axios.get(`${Base}/ship/`);
+
+  if (fetchedShips) {
+    return fetchedShips.data.ships;
+  }
+  return null;
+};

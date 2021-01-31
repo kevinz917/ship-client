@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 const StyledNavLink = styled(NavLink)`
-  padding: 0.5rem 1rem 0.5rem 0rem;
+  padding: 0.5rem 2rem 0.5rem 0rem;
   transition: 0.1s;
   color: ${({ theme }) => theme.text[1]};
   font-weight: 500;
