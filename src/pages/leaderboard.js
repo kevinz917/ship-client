@@ -1,24 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Row, Col } from "react-bootstrap";
-import { StyledHeader } from "../components/styledcomponents";
-import { fetchShips } from "../util/api";
-import Ship from "../components/ship";
-import styled from "styled-components";
-
-export const StyledTextArea = styled.textarea`
-  width: 350px;
-  max-width: 400px;
-  border: none;
-  color: ${({ theme }) => theme.text[0]};
-  background-color: ${({ theme }) => theme.surface[1]};
-  padding: 6px 8px;
-  border-radius: 8px;
-
-  &:active,
-  &:focus {
-    outline: none;
-  }
-`;
+import { Header1, Header2, Header3, Body } from "../global_styles/typography";
+import { MainInput } from "../global_styles/other";
+import { fetchShips } from "../api/ship";
+import VoteCard from "../components/VoteCard";
 
 const Leaderboard = () => {
   const [searchText, setSearchText] = useState("");
@@ -27,32 +12,31 @@ const Leaderboard = () => {
 
   useEffect(() => {
     const onMount = async () => {
-      let fetchedShips = await fetchShips(searchText);
-
-      setShips(fetchedShips);
+      // let fetchedShips = await fetchShips(searchText);
+      // setShips(fetchedShips);
     };
     onMount();
   }, [searchText]);
+
   return (
     <Col className="p-0">
       <Row className="mx-auto mt-5 justify-content-center">
-        <StyledHeader>Leaderboard</StyledHeader>
+        <Header1>Leaderboard ✌️</Header1>
       </Row>
       <Row className="mx-auto mt-3 justify-content-center">
-        <StyledTextArea
-          rows={1}
+        <MainInput
           placeholder="Search friends' names, etc..."
           onChange={(e) => {
             setSearchText(e.target.value);
           }}
-          style={{ resize: "none" }}
         />
       </Row>
+      <br />
       <Row className="mx-auto mt-4 justify-content-center">
-        <div className="mx-auto" style={{ width: "500px" }}>
+        <div className="mx-auto" style={{ width: "700px" }}>
           <Row className="mx-auto justify-content-center">
             {votes.map((vote) => (
-              <Ship users={["Max Yuan", "Kevin Zhang"]} votes={vote} />
+              <VoteCard users={["Max Yuan", "Kevin Zhang"]} votes={vote} />
             ))}
           </Row>
         </div>
