@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import "../styles/animation.css";
+import "../global_styles/animation.css";
 
 const Container = styled.div`
   display: flex;
