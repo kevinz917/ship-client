@@ -6,14 +6,14 @@ import styled from "styled-components";
 const StyledNavLink = styled(NavLink)`
   padding: 0.5rem 1rem 0.5rem 0rem;
   transition: 0.1s;
-  color: black;
+  color: ${({ theme }) => theme.text[1]};
   font-weight: 500;
   &:hover {
     text-decoration: none !important;
-    color: blue;
+    color: ${({ theme }) => theme.text[0]};
   }
   &.active {
-    color: blue;
+    color: ${({ theme }) => theme.primary};
   }
 `;
 
