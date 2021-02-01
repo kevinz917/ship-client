@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
 import { HiArrowUp } from "react-icons/hi";
 import { Body, SubtitleMain } from "../global_styles/typography";
-import styled from "styled-components";
 import { toggleVote } from "../api/ship";
 import { VotingBtn } from "../global_styles/button";
 import { StyledProfilePic, StyledShipBox } from "../global_styles/other";
+import { VscLoading } from "react-icons/vsc";
 
 const VoteCard = ({ ship, userVotes }) => {
   const [isVoting, setIsVoting] = useState(false);
@@ -22,18 +22,18 @@ const VoteCard = ({ ship, userVotes }) => {
   }, [userVotes]);
 
   // Main toggle vote func
-  const toggleVote = async () => {
+  const toggle = async () => {
+    setIsVoting(true);
     if (voteToggle === true) {
-      // already voted
       setVotes(votes - 1);
       setVoteToggle(false);
-      // await toggleVote(ship._id, -1);
+      await toggleVote(ship._id, -1);
     } else {
-      // increase
       setVotes(votes + 1);
       setVoteToggle(true);
-      // await toggleVote(ship._id, 1);
+      await toggleVote(ship._id, 1);
     }
+    setIsVoting(false);
   };
 
   return (
@@ -55,8 +55,21 @@ const VoteCard = ({ ship, userVotes }) => {
           </Row>
         </Col>
         <Col xs="auto" className="p-0">
-          <VotingBtn clicked={voteToggle} onClick={() => toggleVote()}>
-            <HiArrowUp style={{ display: "block" }} size={20} />
+          <VotingBtn clicked={voteToggle} onClick={() => toggle()}>
+            {isVoting ? (
+              <div
+                style={{ width: "20px", height: "20px" }}
+                className="d-flex flex-row align-items-center justify-content-center"
+              >
+                <VscLoading
+                  size={20}
+                  className="rotate-fast"
+                  style={{ color: voteToggle ? "white" : "black" }}
+                />
+              </div>
+            ) : (
+              <HiArrowUp style={{ display: "block" }} size={20} />
+            )}
           </VotingBtn>
           <Row className="mx-auto mt-1 justify-content-center">
             <SubtitleMain>{votes}</SubtitleMain>
