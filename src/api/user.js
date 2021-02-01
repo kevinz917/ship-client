@@ -21,3 +21,24 @@ export const fetchStudents = async () => {
     return fetchedStudentList.data.data;
   }
 };
+
+// Fetch all ships from 1 user
+export const fetchShips = async () => {
+  let fetchedShips = await axios.get(`${Base}/user/fetchShips`);
+  if (fetchedShips) {
+    return fetchedShips.data.ships;
+  }
+};
+
+// Fetch user info
+export const fetchUser = async () => {
+  let fetchedInfo = await axios.get(`${Base}/user/fetchUser`);
+  if (fetchedInfo) {
+    return fetchedInfo.data.user;
+  }
+};
+
+export const TogglePrivacy = async (privacy) => {
+  let toggled = await axios.post(`${Base}/user/togglePrivacy`, { privacy });
+  return toggled;
+};

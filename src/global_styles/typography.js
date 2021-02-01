@@ -25,5 +25,5 @@ export const Body = styled.div`
 
 export const SubtitleMain = styled.div`
   color: ${({ theme }) => theme.text[1]};
-  font-size: 13px;
+  font-size: 15px;
 `;

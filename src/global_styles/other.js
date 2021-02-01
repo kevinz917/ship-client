@@ -26,3 +26,10 @@ export const DeleteMarker = styled.div`
     transition: 0.1s;
   }
 `;
+
+export const HeaderBlock = styled.div`
+  width: 100%;
+  height: 100px;
+  border-radius: 8px;
+  background-color: #f3f2ff;
+`;
