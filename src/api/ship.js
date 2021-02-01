@@ -1,10 +1,8 @@
 import api from "./index";
-import axios from "axios";
-import { Base } from "../util/base";
 
 // Create ship
 export const addShip = async (student1, student2) => {
-  let newShip = axios.post(`${Base}/ship/add`, {
+  let newShip = api.post("/ship/add", {
     userIds: [
       student1.split(" ").slice(0, 2).join(" "),
       student2.split(" ").slice(0, 2).join(" "),

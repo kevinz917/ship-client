@@ -19,7 +19,7 @@ import NewShip from "./pages/newship";
 import Profile from "./pages/profile";
 
 //components
-import ShipNavbar from "./components/navbar";
+import ShipNavbar from "./components/Navbar";
 
 function App() {
   axios.defaults.withCredentials = true;
