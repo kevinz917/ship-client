@@ -21,7 +21,7 @@ import Profile from "./pages/profile";
 import PrivateRoute from "./components/PrivateRoute";
 
 //components
-import ShipNavbar from "./components/Navbar";
+import ShipNavbar from "./components/navbar";
 
 function App() {
   const dispatch = useDispatch();

@@ -57,9 +57,10 @@ const Shipcard = (props) => {
               loadOptions={loadOptions}
               placeholder="first student"
               autoFocus
-              onChange={(e) =>
-                setName(idx, 0, { value: e.value, label: e.label })
-              }
+              onChange={(e) => {
+                if (e) setName(idx, 0, { value: e.value, label: e.label });
+                else setName(idx, 0, null);
+              }}
               isClearable={true}
               value={masterList[idx][0]}
               styles={StyledSelect}
@@ -73,9 +74,10 @@ const Shipcard = (props) => {
               loadOptions={loadOptions}
               placeholder="second student"
               autoFocus
-              onChange={(e) =>
-                setName(idx, 1, { value: e.value, label: e.label })
-              }
+              onChange={(e) => {
+                if (e) setName(idx, 1, { value: e.value, label: e.label });
+                else setName(idx, 1, null);
+              }}
               isClearable={true}
               value={masterList[idx][1]}
               styles={StyledSelect}

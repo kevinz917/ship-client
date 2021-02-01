@@ -15,6 +15,7 @@ const NewShip = () => {
   const [masterList, setMasterList] = useState([[null, null]]);
   const [isLoading, setIsLoading] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
     const onMount = async () => {
@@ -28,6 +29,18 @@ const NewShip = () => {
     };
     onMount();
   }, []);
+
+  useEffect(() => {
+    for (let i = 0; i < masterList.length; i++) {
+      for (let j = 0; j < masterList[i].length; j++) {
+        if (!masterList[i][j]) {
+          setReady(false);
+          return;
+        }
+      }
+    }
+    setReady(true);
+  }, [masterList]);
 
   const addShip = () => {
     if (masterList.length === 3) return;
@@ -84,17 +97,19 @@ const NewShip = () => {
           <MainBtn secondary width="100%" onClick={addShip}>
             Add new ship
           </MainBtn>
-          <MainBtn primary width="100%" onClick={submitShip}>
-            {isSaving ? (
-              <VscLoading
-                size={20}
-                className="rotate-fast"
-                style={{ color: "white" }}
-              />
-            ) : (
-              "Save"
-            )}
-          </MainBtn>
+          {ready && (
+            <MainBtn primary width="100%" onClick={submitShip}>
+              {isSaving ? (
+                <VscLoading
+                  size={20}
+                  className="rotate-fast"
+                  style={{ color: "white" }}
+                />
+              ) : (
+                "Save"
+              )}
+            </MainBtn>
+          )}
         </NewshipContainer>
       )}
     </div>
