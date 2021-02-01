@@ -4,6 +4,7 @@ import AsyncSelect from "react-select/async";
 import { StyledSelect } from "../global_styles/select";
 import { Row } from "react-bootstrap";
 import { DeleteMarker } from "../global_styles/other";
+import { VscLoading } from "react-icons/vsc";
 
 const BlackHeader = styled.span`
   font-weight: 500;
@@ -21,9 +22,6 @@ const StyledShipBox = styled.div`
 
 const Shipcard = (props) => {
   const { masterList, studentList, idx, deleteShip, setName } = props;
-
-  const [student1, setStudent1] = useState();
-  const [student2, setStudent2] = useState();
 
   const filterStudents = (inputValue) => {
     return studentList.filter((i) =>
@@ -50,10 +48,10 @@ const Shipcard = (props) => {
     <div className="fade-in">
       <StyledShipBox>
         <div className="w-100 h-100">
-          <Row className="w-100" onClick={() => deleteShip(idx)}>
-            <DeleteMarker className="float-right">✖️</DeleteMarker>
-          </Row>
-          <Row className="mx-auto ">
+          <div onClick={() => deleteShip(idx)} className="mb-1">
+            <DeleteMarker>✖</DeleteMarker>
+          </div>
+          <Row className="mx-auto">
             <BlackHeader className="mr-2">I want</BlackHeader>
             <div className="flex-grow-1">
               <AsyncSelect

@@ -40,10 +40,10 @@ export const StyledSelect = {
     borderRadius: "0px",
     border: "none",
     backgroundColor: "transparent",
-    borderBottom: "3px solid black",
+    borderBottom: "2px solid #D6D6D6",
     ":hover": {
       border: "none",
-      borderBottom: "3px solid black",
+      borderBottom: "2px solid black",
     },
   }),
 };

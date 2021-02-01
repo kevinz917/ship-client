@@ -5,15 +5,15 @@ import { Row } from "react-bootstrap";
 import { fetchStudents, fetchShips } from "../api/user";
 import { saveShips } from "../api/ship";
 import Shipcard from "../components/ShipCard";
-import { toast } from "react-toastify";
-
 import { Spinner } from "../components/LoadingSpinner";
 import Shipbanner from "../assets/shipbanner.png";
+import { VscLoading } from "react-icons/vsc";
 
 const NewShip = () => {
   const [studentList, setStudentList] = useState();
   const [masterList, setMasterList] = useState([[null, null]]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
 
   useEffect(() => {
     const onMount = async () => {
@@ -46,8 +46,9 @@ const NewShip = () => {
   };
 
   const submitShip = async () => {
+    setIsSaving(true);
     await saveShips(masterList);
-    toast.info("Ships saved ~ ");
+    setIsSaving(false);
   };
 
   // <HeaderBlock />
@@ -82,7 +83,15 @@ const NewShip = () => {
             Add new ship
           </MainBtn>
           <MainBtn primary width="100%" onClick={submitShip}>
-            Save
+            {isSaving ? (
+              <VscLoading
+                size={20}
+                className="rotate-fast"
+                style={{ color: "white" }}
+              />
+            ) : (
+              "Save"
+            )}
           </MainBtn>
         </div>
       )}

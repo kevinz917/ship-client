@@ -58,7 +58,11 @@ const Leaderboard = () => {
             <div className="mx-auto" style={{ width: "700px" }}>
               <Row className="mx-auto justify-content-center">
                 {ships.map((ship) => (
-                  <VoteCard ship={ship} userVotes={userVal.votes} />
+                  <VoteCard
+                    ship={ship}
+                    userVotes={userVal.votes}
+                    key={ship._id}
+                  />
                 ))}
               </Row>
             </div>

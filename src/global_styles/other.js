@@ -17,9 +17,11 @@ export const MainInput = styled.input`
 `;
 
 export const DeleteMarker = styled.div`
+  margin-left: -2px;
   cursor: pointer;
   opacity: 0.2;
   transition: 0.1s;
+  display: inline-block;
 
   &:hover {
     opacity: 1;
