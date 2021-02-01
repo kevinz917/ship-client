@@ -18,6 +18,8 @@ export const MainBtn = styled.button`
   border-radius: 8px;
   border: none;
   transition: 0.1s;
+  margin: 4px 0;
+  width: ${(props) => props.width};
 
   &:hover {
     background: ${(props) =>

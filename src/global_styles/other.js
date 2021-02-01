@@ -15,3 +15,14 @@ export const MainInput = styled.input`
     outline: none;
   }
 `;
+
+export const DeleteMarker = styled.div`
+  cursor: pointer;
+  opacity: 0.2;
+  transition: 0.1s;
+
+  &:hover {
+    opacity: 1;
+    transition: 0.1s;
+  }
+`;
