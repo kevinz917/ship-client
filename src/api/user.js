@@ -12,3 +12,12 @@ export const casCheck = async () => {
     return auth;
   }
 };
+
+// Fetch all students
+export const fetchStudents = async () => {
+  let fetchedStudentList = await axios.get(`${Base}/user/allStudents`);
+
+  if (fetchedStudentList) {
+    return fetchedStudentList.data.data;
+  }
+};

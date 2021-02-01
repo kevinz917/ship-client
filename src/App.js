@@ -23,7 +23,7 @@ import ShipNavbar from "./components/navbar";
 
 function App() {
   axios.defaults.withCredentials = true;
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(-1);
 
   useEffect(() => {
     const onMount = async () => {
@@ -47,23 +47,25 @@ function App() {
     <ThemeProvider theme={Theme}>
       <Router>
         <ShipNavbar />
-        <Switch>
-          <Route exact path="/login">
-            {loggedIn ? <Redirect to="/leaderboard" /> : <Login />}
-          </Route>
-          <Route exact path="/leaderboard">
-            {loggedIn ? <Leaderboard /> : <Redirect to="/login" />}
-          </Route>
-          <Route exact path="/ship">
-            {loggedIn ? <NewShip /> : <Redirect to="/login" />}
-          </Route>
-          <Route exact path="/profile">
-            {loggedIn ? <Profile /> : <Redirect to="/login" />}
-          </Route>
-          <Route exact path="/">
-            {loggedIn ? <Landing /> : <Redirect to="/login" />}
-          </Route>
-        </Switch>
+        {loggedIn !== -1 && (
+          <Switch>
+            <Route exact path="/login">
+              {loggedIn ? <Redirect to="/leaderboard" /> : <Login />}
+            </Route>
+            <Route exact path="/leaderboard">
+              {loggedIn ? <Leaderboard /> : <Redirect to="/login" />}
+            </Route>
+            <Route exact path="/ship">
+              {loggedIn ? <NewShip /> : <Redirect to="/login" />}
+            </Route>
+            <Route exact path="/profile">
+              {loggedIn ? <Profile /> : <Redirect to="/login" />}
+            </Route>
+            <Route exact path="/">
+              {loggedIn ? <Landing /> : <Redirect to="/login" />}
+            </Route>
+          </Switch>
+        )}
       </Router>
     </ThemeProvider>
   );
