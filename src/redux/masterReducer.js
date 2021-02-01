@@ -15,6 +15,7 @@ const RESET_STATE = () => {
 };
 
 const defaultState = {
+  auth: -1,
   isLoading: false,
   ships: [],
 };

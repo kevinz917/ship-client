@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -9,6 +9,8 @@ import { Theme } from "./global_styles/themes";
 import { ThemeProvider } from "styled-components";
 import axios from "axios";
 import { casCheck } from "./api/user";
+import { useSelector, useDispatch } from "react-redux";
+import { SET_VAL } from "./redux/masterReducer";
 
 // pages
 import Login from "./pages/login";
@@ -16,13 +18,15 @@ import Landing from "./pages/landing";
 import Leaderboard from "./pages/leaderboard";
 import NewShip from "./pages/newship";
 import Profile from "./pages/profile";
+import PrivateRoute from "./components/PrivateRoute";
 
 //components
 import ShipNavbar from "./components/Navbar";
 
 function App() {
+  const dispatch = useDispatch();
   axios.defaults.withCredentials = true;
-  const [loggedIn, setLoggedIn] = useState(-1);
+  const auth = useSelector((state) => state.state.auth);
 
   useEffect(() => {
     const onMount = async () => {
@@ -34,9 +38,9 @@ function App() {
         !auth.data.user ||
         !auth.data.user.userId
       ) {
-        setLoggedIn(false);
+        dispatch(SET_VAL("auth", false));
       } else {
-        setLoggedIn(true);
+        dispatch(SET_VAL("auth", true));
       }
     };
     onMount();
@@ -46,22 +50,16 @@ function App() {
     <ThemeProvider theme={Theme}>
       <Router>
         <ShipNavbar />
-        {loggedIn !== -1 && (
+        {auth !== -1 && (
           <Switch>
             <Route exact path="/login">
-              {loggedIn ? <Redirect to="/leaderboard" /> : <Login />}
+              {auth ? <Redirect to="/leaderboard" /> : <Login />}
             </Route>
-            <Route exact path="/leaderboard">
-              {loggedIn ? <Leaderboard /> : <Redirect to="/login" />}
-            </Route>
-            <Route exact path="/ship">
-              {loggedIn ? <NewShip /> : <Redirect to="/login" />}
-            </Route>
-            <Route exact path="/profile">
-              {loggedIn ? <Profile /> : <Redirect to="/login" />}
-            </Route>
+            <PrivateRoute exact path="/leaderboard" component={Leaderboard} />
+            <PrivateRoute exact path="/ship" component={NewShip} />
+            <PrivateRoute exact path="/profile" component={Profile} />
             <Route exact path="/">
-              {loggedIn ? <Landing /> : <Redirect to="/login" />}
+              {auth ? <Redirect to="/ship" /> : <Landing />}
             </Route>
           </Switch>
         )}
