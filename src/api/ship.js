@@ -15,7 +15,7 @@ export const addShip = async (student1, student2) => {
 };
 
 export const saveShips = async (shipList) => {
-  let newShips = axios.post(`${Base}/ship/addMultiple`, {
+  let newShips = await axios.post(`${Base}/ship/addMultiple`, {
     shipList,
   });
 };

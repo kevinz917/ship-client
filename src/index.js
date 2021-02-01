@@ -5,6 +5,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./global_styles/animation.css";
+import "react-toastify/dist/ReactToastify.css";
 
 import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";

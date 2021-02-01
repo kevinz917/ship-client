@@ -6,8 +6,10 @@ import { HeaderBlock } from "../global_styles/other";
 import { fetchStudents, fetchShips } from "../api/user";
 import { saveShips } from "../api/ship";
 import Shipcard from "../components/ShipCard";
+import { toast } from "react-toastify";
+
 import { Spinner } from "../components/LoadingSpinner";
-import { QueryClient, QueryClientProvider, useQuery } from "react-query";
+import Shipbanner from "../assets/shipbanner.png";
 
 const NewShip = () => {
   const [studentList, setStudentList] = useState();
@@ -48,11 +50,15 @@ const NewShip = () => {
 
   const submitShip = async () => {
     await saveShips(masterList);
+    toast.info("Ships saved ~ ");
   };
+
+  // <HeaderBlock />
 
   return (
     <div style={{ width: "700px" }} className="ml-auto mr-auto mt-4 fade-in">
-      <HeaderBlock />
+      <img src={Shipbanner} />
+      <br />
       <br />
       <div className="ml-auto mr-auto text-center">
         <Header2>Create your ships </Header2>
