@@ -6,6 +6,7 @@ import { fetchStudents, fetchShips } from "../api/user";
 import { saveShips } from "../api/ship";
 import Shipcard from "../components/ShipCard";
 import { Spinner } from "../components/LoadingSpinner";
+import { NewshipContainer } from "../global_styles/other";
 import Shipbanner from "../assets/shipbanner.png";
 import { VscLoading } from "react-icons/vsc";
 
@@ -54,8 +55,11 @@ const NewShip = () => {
   // <HeaderBlock />
 
   return (
-    <div style={{ width: "700px" }} className="ml-auto mr-auto mt-4 fade-in">
-      <img src={Shipbanner} alt="Ship banner" />
+    <div
+      style={{ maxWidth: "700px", padding: "10px" }}
+      className="ml-auto mr-auto mt-4 fade-in"
+    >
+      <img src={Shipbanner} alt="Ship banner" style={{ maxWidth: "100%" }} />
       <br />
       <br />
       <div className="ml-auto mr-auto text-center">
@@ -65,7 +69,7 @@ const NewShip = () => {
       {isLoading ? (
         <Spinner />
       ) : (
-        <div style={{ width: "400px" }} className="ml-auto mr-auto">
+        <NewshipContainer>
           <Row className="mx-auto mt-4 justify-content-center">
             {masterList.map((ship, idx) => (
               <Shipcard
@@ -93,7 +97,7 @@ const NewShip = () => {
               "Save"
             )}
           </MainBtn>
-        </div>
+        </NewshipContainer>
       )}
     </div>
   );

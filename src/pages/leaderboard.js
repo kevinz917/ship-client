@@ -38,7 +38,7 @@ const Leaderboard = () => {
 
   return (
     <Col className="p-0 fade-in w-100">
-      <Row className="mx-auto mt-5 justify-content-center">
+      <Row className="mx-auto justify-content-center mt-lg-5 mt-3">
         <Header1>Leaderboard ✌️</Header1>
       </Row>
       {isLoading ? (
@@ -53,7 +53,6 @@ const Leaderboard = () => {
               }}
             />
           </Row>
-          <br />
           <Row className="mx-auto mt-4 justify-content-center">
             <div className="mx-auto" style={{ width: "700px" }}>
               <Row className="mx-auto justify-content-center">

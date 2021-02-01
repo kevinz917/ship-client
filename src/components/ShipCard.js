@@ -13,7 +13,7 @@ const BlackHeader = styled.span`
 `;
 
 const StyledShipBox = styled.div`
-  width: 400px;
+  width: 100%;
   background-color: ${({ theme }) => theme.surface[1]};
   border-radius: 8px;
   padding: 20px;
@@ -45,50 +45,48 @@ const Shipcard = (props) => {
   }
 
   return (
-    <div className="fade-in">
-      <StyledShipBox>
-        <div className="w-100 h-100">
-          <div onClick={() => deleteShip(idx)} className="mb-1">
-            <DeleteMarker>✖</DeleteMarker>
-          </div>
-          <Row className="mx-auto">
-            <BlackHeader className="mr-2">I want</BlackHeader>
-            <div className="flex-grow-1">
-              <AsyncSelect
-                loadOptions={loadOptions}
-                placeholder="first student"
-                autoFocus
-                onChange={(e) =>
-                  setName(idx, 0, { value: e.value, label: e.label })
-                }
-                isClearable={true}
-                value={masterList[idx][0]}
-                styles={StyledSelect}
-              />
-            </div>
-          </Row>
-          <Row className="mx-auto mt-1">
-            <BlackHeader className="mr-2">and</BlackHeader>
-            <div className="flex-grow-1">
-              <AsyncSelect
-                loadOptions={loadOptions}
-                placeholder="second student"
-                autoFocus
-                onChange={(e) =>
-                  setName(idx, 1, { value: e.value, label: e.label })
-                }
-                isClearable={true}
-                value={masterList[idx][1]}
-                styles={StyledSelect}
-              />
-            </div>
-          </Row>
-          <Row className="mx-auto mt-1">
-            <BlackHeader>to be shipped.</BlackHeader>
-          </Row>
+    <StyledShipBox className="fade-in">
+      <div className="w-100 h-100">
+        <div onClick={() => deleteShip(idx)} className="mb-1">
+          <DeleteMarker>✖</DeleteMarker>
         </div>
-      </StyledShipBox>
-    </div>
+        <Row className="mx-auto">
+          <BlackHeader className="mr-2">I want</BlackHeader>
+          <div className="flex-grow-1">
+            <AsyncSelect
+              loadOptions={loadOptions}
+              placeholder="first student"
+              autoFocus
+              onChange={(e) =>
+                setName(idx, 0, { value: e.value, label: e.label })
+              }
+              isClearable={true}
+              value={masterList[idx][0]}
+              styles={StyledSelect}
+            />
+          </div>
+        </Row>
+        <Row className="mx-auto mt-1">
+          <BlackHeader className="mr-2">and</BlackHeader>
+          <div className="flex-grow-1">
+            <AsyncSelect
+              loadOptions={loadOptions}
+              placeholder="second student"
+              autoFocus
+              onChange={(e) =>
+                setName(idx, 1, { value: e.value, label: e.label })
+              }
+              isClearable={true}
+              value={masterList[idx][1]}
+              styles={StyledSelect}
+            />
+          </div>
+        </Row>
+        <Row className="mx-auto mt-1">
+          <BlackHeader>to be shipped.</BlackHeader>
+        </Row>
+      </div>
+    </StyledShipBox>
   );
 };
 

@@ -50,4 +50,18 @@ export const StyledShipBox = styled.div`
   border-radius: 8px;
   padding: 16px;
   margin: 10px;
+
+  @media (max-width: 450px) {
+    width: 100%;
+  }
+`;
+
+export const NewshipContainer = styled.div`
+  width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+
+  @media (max-width: 450px) {
+    max-width: 100%;
+  }
 `;

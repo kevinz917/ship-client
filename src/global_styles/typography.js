@@ -4,6 +4,10 @@ export const Header1 = styled.div`
   color: ${({ theme }) => theme.primary};
   font-weight: 700;
   font-size: 38px;
+
+  @media (max-width: 450px) {
+    font-size: 30px;
+  }
 `;
 
 export const Header2 = styled.div`
