@@ -4,7 +4,7 @@ import { MainBtn } from "../global_styles/button";
 import { Row } from "react-bootstrap";
 import styled from "styled-components";
 import { fetchStudents } from "../api/user";
-import { addShip } from "../api/ship";
+import { saveShips } from "../api/ship";
 import Shipcard from "../components/ShipCard";
 import { Spinner } from "../components/LoadingSpinner";
 
@@ -43,7 +43,7 @@ const NewShip = () => {
   };
 
   const submitShip = async () => {
-    // let newShip = await addShip(student1.label, student2.label);
+    await saveShips(masterList);
   };
 
   return (

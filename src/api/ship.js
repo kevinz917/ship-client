@@ -4,13 +4,19 @@ import { Base } from "../util/base";
 
 // Create ship
 export const addShip = async (student1, student2) => {
-  let newShip = axios.post(`${Base}/ship/add`, {
+  let newShip = await axios.post(`${Base}/ship/add`, {
     userNames: [
       student1.split(" ").slice(0, 2).join(" "),
       student2.split(" ").slice(0, 2).join(" "),
     ],
     note: "",
     privacy: "public",
+  });
+};
+
+export const saveShips = async (shipList) => {
+  let newShips = api.post("/ship/addmultiple", {
+    shipList,
   });
 };
 

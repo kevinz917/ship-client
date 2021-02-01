@@ -19,7 +19,7 @@ const Leaderboard = () => {
   }, [searchText]);
 
   return (
-    <Col className="p-0">
+    <Col className="p-0 fade-in">
       <Row className="mx-auto mt-5 justify-content-center">
         <Header1>Leaderboard ✌️</Header1>
       </Row>
