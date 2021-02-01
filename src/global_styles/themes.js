@@ -3,6 +3,6 @@ export const Theme = {
   surface: ["#FFFFFF", "#FAFAFA", "#d6d6d6"], // [White background, light grey, dark grey]
   primary: "#403DFF", // primary color
   primaryDark: "#2E2BCB", // primary dark
-  secondary: "#EFDA8F",
+  secondary: "#FFD850",
   secondaryDark: "#D9D0B0",
 };

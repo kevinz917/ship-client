@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Header2, Body, SubtitleMain } from "../global_styles/typography";
+import { Header2, SubtitleMain } from "../global_styles/typography";
 import { MainBtn } from "../global_styles/button";
 import { Row } from "react-bootstrap";
-import { HeaderBlock } from "../global_styles/other";
 import { fetchStudents, fetchShips } from "../api/user";
 import { saveShips } from "../api/ship";
 import Shipcard from "../components/ShipCard";
@@ -25,8 +24,6 @@ const NewShip = () => {
 
       setMasterList(fetchedShips);
       setIsLoading(false);
-
-      // fetch saved ships from user
     };
     onMount();
   }, []);
@@ -57,7 +54,7 @@ const NewShip = () => {
 
   return (
     <div style={{ width: "700px" }} className="ml-auto mr-auto mt-4 fade-in">
-      <img src={Shipbanner} />
+      <img src={Shipbanner} alt="Ship banner" />
       <br />
       <br />
       <div className="ml-auto mr-auto text-center">

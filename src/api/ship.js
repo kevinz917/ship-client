@@ -20,12 +20,22 @@ export const saveShips = async (shipList) => {
   });
 };
 
-// Fetch ships
-export const fetchShips = async (user) => {
-  let fetchedShips = api.get("/ship");
+// Fetch all ships
+export const fetchShips = async () => {
+  let fetchedShips = await axios.get(`${Base}/ship/all`);
 
   if (fetchedShips) {
     return fetchedShips.data.ships;
+  }
+  return null;
+};
+
+// Vote
+export const toggleVote = async (shipId, vote) => {
+  let fetchedVote = await axios.post(`${Base}/ship/vote`, { shipId, vote });
+
+  if (fetchedVote) {
+    return fetchedVote;
   }
   return null;
 };

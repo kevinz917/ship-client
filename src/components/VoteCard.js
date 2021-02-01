@@ -1,43 +1,41 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
 import { HiArrowUp } from "react-icons/hi";
 import { Body, SubtitleMain } from "../global_styles/typography";
 import styled from "styled-components";
+import { toggleVote } from "../api/ship";
+import { VotingBtn } from "../global_styles/button";
+import { StyledProfilePic, StyledShipBox } from "../global_styles/other";
 
-export const StyledShipBox = styled.div`
-  width: 275px;
-  background-color: ${({ theme }) => theme.surface[1]};
-  border-radius: 8px;
-  padding: 16px;
-  margin: 10px;
-`;
+const VoteCard = ({ ship, userVotes }) => {
+  const [isVoting, setIsVoting] = useState(false);
+  const [votes, setVotes] = useState(null); // total reactions
+  const [voteToggle, setVoteToggle] = useState(false); // whether user has voted
 
-export const StyledBtnBackground = styled.div`
-  background-color: ${({ theme }) => theme.surface[2]};
-  color: ${({ theme }) => theme.text[1]};
-  padding: 7px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: 0.3s transform;
+  useEffect(() => {
+    setVotes(ship.votes);
+    if (userVotes) {
+      if (userVotes.includes(ship._id)) {
+        setVoteToggle(true);
+      }
+    }
+  }, [userVotes]);
 
-  &:hover {
-    transform: scale(1.1);
-  }
+  // Main toggle vote func
+  const toggleVote = async () => {
+    if (voteToggle === true) {
+      // already voted
+      setVotes(votes - 1);
+      setVoteToggle(false);
+      // await toggleVote(ship._id, -1);
+    } else {
+      // increase
+      setVotes(votes + 1);
+      setVoteToggle(true);
+      // await toggleVote(ship._id, 1);
+    }
+  };
 
-  &.active {
-    background-color: ${({ theme }) => theme.primary};
-    color: white;
-  }
-`;
-
-export const StyledProfilePic = styled.span`
-  background-color: ${({ theme }) => theme.surface[2]};
-  width: 20px;
-  height: 20px;
-  border-radius: 10px;
-`;
-
-const VoteCard = ({ users, votes }) => {
   return (
     <StyledShipBox>
       <Row className="mx-auto">
@@ -47,21 +45,19 @@ const VoteCard = ({ users, votes }) => {
             <StyledProfilePic />
           </Row>
           <Row className="mx-auto mt-2">
-            <Body>{users[0]}</Body>
+            <Body>{ship.userNames[0]}</Body>
           </Row>
           <Row className="mx-auto">
             <SubtitleMain>and</SubtitleMain>
           </Row>
           <Row className="mx-auto">
-            <Body>{users[1]}</Body>
+            <Body>{ship.userNames[1]}</Body>
           </Row>
         </Col>
         <Col xs="auto" className="p-0">
-          <StyledBtnBackground
-            className={votes === 69 || votes === 5 ? "active" : ""}
-          >
+          <VotingBtn clicked={voteToggle} onClick={() => toggleVote()}>
             <HiArrowUp style={{ display: "block" }} size={20} />
-          </StyledBtnBackground>
+          </VotingBtn>
           <Row className="mx-auto mt-1 justify-content-center">
             <SubtitleMain>{votes}</SubtitleMain>
           </Row>

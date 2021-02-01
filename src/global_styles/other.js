@@ -33,3 +33,19 @@ export const HeaderBlock = styled.div`
   border-radius: 8px;
   background-color: #f3f2ff;
 `;
+
+// Shipping leaderboard page
+export const StyledProfilePic = styled.span`
+  background-color: ${({ theme }) => theme.surface[2]};
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+`;
+
+export const StyledShipBox = styled.div`
+  width: 275px;
+  background-color: ${({ theme }) => theme.surface[1]};
+  border-radius: 8px;
+  padding: 16px;
+  margin: 10px;
+`;
