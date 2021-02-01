@@ -57,12 +57,10 @@ const NewShip = () => {
   return (
     <div
       style={{ maxWidth: "700px", padding: "10px" }}
-      className="ml-auto mr-auto mt-4 fade-in"
+      className="ml-auto mr-auto mt-lg-4 mt-1 fade-in"
     >
       <img src={Shipbanner} alt="Ship banner" style={{ maxWidth: "100%" }} />
-      <br />
-      <br />
-      <div className="ml-auto mr-auto text-center">
+      <div className="ml-auto mr-auto mt-lg-4 mt-2 text-center">
         <Header2>Create your ships </Header2>
         <SubtitleMain>Up to 3 pairs</SubtitleMain>
       </div>

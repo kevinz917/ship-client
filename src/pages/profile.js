@@ -54,10 +54,9 @@ const Profile = () => {
   }
 
   return (
-    <div style={{ width: "500px" }} className="ml-auto mr-auto mt-4 fade-in">
-      <div>
-        <Header2>My profile</Header2>
-        <br />
+    <div style={{ maxWidth: "500px" }} className="ml-auto mr-auto mt-4 fade-in">
+      <div style={{ padding: "10px" }} className="w-100">
+        <Header2 className="mb-2">My profile</Header2>
         <Body>Privacy setting: {info[userInfo.privacy]}</Body>
         {isChanging ? (
           <Spinner />
