@@ -9,7 +9,6 @@ import { Theme } from "./global_styles/themes";
 import { ThemeProvider } from "styled-components";
 import axios from "axios";
 import { casCheck } from "./api/user";
-import { ToastContainer, Slide } from "react-toastify";
 
 // pages
 import Login from "./pages/login";
@@ -66,11 +65,6 @@ function App() {
             </Route>
           </Switch>
         )}
-        <ToastContainer
-          transition={Slide}
-          autoClose={2000}
-          hideProgressBar={true}
-        />
       </Router>
     </ThemeProvider>
   );
