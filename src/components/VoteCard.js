@@ -7,7 +7,7 @@ import { VotingBtn } from "../global_styles/button";
 import { StyledProfilePic, StyledShipBox } from "../global_styles/other";
 import { VscLoading } from "react-icons/vsc";
 
-const VoteCard = ({ ship, userVotes }) => {
+const VoteCard = ({ ship, userVotes, rerender }) => {
   const [isVoting, setIsVoting] = useState(false);
   const [votes, setVotes] = useState(null); // total reactions
   const [voteToggle, setVoteToggle] = useState(false); // whether user has voted
@@ -34,6 +34,7 @@ const VoteCard = ({ ship, userVotes }) => {
       await toggleVote(ship._id, 1);
     }
     setIsVoting(false);
+    rerender();
   };
 
   return (
@@ -55,7 +56,7 @@ const VoteCard = ({ ship, userVotes }) => {
           </Row>
         </Col>
         <Col xs="auto" className="p-0">
-          <VotingBtn clicked={voteToggle} onClick={() => toggle()}>
+          <VotingBtn clicked={voteToggle} onClick={toggle}>
             {isVoting ? (
               <div
                 style={{ width: "20px", height: "20px" }}

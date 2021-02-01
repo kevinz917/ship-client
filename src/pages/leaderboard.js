@@ -12,6 +12,10 @@ import { fetchUser } from "../api/user";
 // import { FixedSizeList as List } from "react-window";
 // import AutoSizer from "react-virtualized-auto-sizer";
 
+const sortFunc = (a, b) => {
+  return a.votes > b.votes ? -1 : 1;
+};
+
 const Leaderboard = () => {
   const dispatch = useDispatch();
   const ships = useSelector((state) => state.state.ships);
@@ -19,13 +23,18 @@ const Leaderboard = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [userVal, setUserVal] = useState(false);
 
+  const fetchSortShips = async () => {
+    let fetchedShips = await fetchShips(searchText);
+    fetchedShips.sort(sortFunc);
+    dispatch(SET_VAL("ships", fetchedShips));
+  };
+
   useEffect(() => {
     const onMount = async () => {
       setIsLoading(true);
 
       // Fetch ships
-      let fetchedShips = await fetchShips(searchText);
-      dispatch(SET_VAL("ships", fetchedShips));
+      fetchSortShips();
 
       // Fetch user info
       let fetchedUser = await fetchUser();
@@ -34,7 +43,7 @@ const Leaderboard = () => {
       setIsLoading(false);
     };
     onMount();
-  }, [searchText]);
+  }, [searchText, dispatch]);
 
   return (
     <Col className="p-0 fade-in w-100">
@@ -56,11 +65,12 @@ const Leaderboard = () => {
           <Row className="mx-auto mt-4 justify-content-center">
             <div className="mx-auto" style={{ width: "700px" }}>
               <Row className="mx-auto justify-content-center">
-                {ships.map((ship) => (
+                {ships.map((ship, index) => (
                   <VoteCard
                     ship={ship}
                     userVotes={userVal.votes}
                     key={ship._id}
+                    rerender={fetchSortShips}
                   />
                 ))}
               </Row>
