@@ -1,5 +1,3 @@
-import { useState, useEffect } from "react";
-import styled from "styled-components";
 import "../global_styles/animation.css";
 import {
   Body,
@@ -12,17 +10,29 @@ import { MainBtn } from "../global_styles/button";
 import Shipbanner from "../assets/shipbanner.png";
 import { Base } from "../util/base";
 
+const randNum = (a, b) => {
+  return Math.random() * (b - a) + a;
+};
 const Landing = () => {
-  const [location, setLocation] = useState([null, null]);
-
   const setCoordinates = (x, y) => {
-    setLocation([x - 25, y - 25]);
+    // place new ship
+    const newDiv = document.createElement("div");
+    newDiv.style.position = `absolute`;
+    newDiv.style.left = `${x - 25}px`;
+    newDiv.style.top = `${y - 25}px`;
+    newDiv.style.fontSize = `${randNum(10, 100)}px`;
+    const newContent = document.createTextNode("🚢");
+    newDiv.appendChild(newContent);
+
+    const currentDiv = document.getElementById("root");
+    document.body.insertBefore(newDiv, currentDiv);
   };
 
   return (
     <div
       className="vw-100 vh-100"
       onClick={(e) => setCoordinates(e.clientX, e.clientY)}
+      id="main"
     >
       <div
         style={{ maxWidth: "700px", padding: "10px" }}
@@ -51,19 +61,20 @@ const Landing = () => {
           </MainBtn>
         </div>
       </div>
-      <div
-        style={{
-          position: "absolute",
-          left: `${location[0]}px`,
-          top: `${location[1]}px`,
-          fontSize: "50px",
-        }}
-        className="fade-in"
-      >
-        🚢
-      </div>
     </div>
   );
 };
 
 export default Landing;
+
+// <div
+// style={{
+//   position: "absolute",
+//   left: `${location[0]}px`,
+//   top: `${location[1]}px`,
+//   fontSize: "50px",
+// }}
+// className="fade-in"
+// >
+// 🚢
+// </div>
