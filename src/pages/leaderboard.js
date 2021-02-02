@@ -19,26 +19,38 @@ const Leaderboard = () => {
   const ships = useSelector((state) => state.state.ships);
   const [searchText, setSearchText] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [userVal, setUserVal] = useState(false);
+  const [userVotes, setUserVotes] = useState();
   const [filteredShips, setFilteredShips] = useState(ships);
 
   const fetchSortInfo = useCallback(async () => {
-    // Fetch user info
-    let fetchedUser = await fetchUser();
-    setUserVal(fetchedUser);
     // Fetch ship info
     let fetchedShips = await fetchShips();
     fetchedShips.sort(sortFunc);
     dispatch(SET_VAL("ships", fetchedShips));
   }, [dispatch]);
 
+  const handleVote = useCallback(
+    (id) => {
+      let temp = [...userVotes];
+      const indx = temp.indexOf(id);
+      if (indx > -1) {
+        temp.splice(indx, 1);
+      } else temp.push(id);
+      setUserVotes(temp);
+    },
+    [userVotes]
+  );
+
   useEffect(() => {
     const onMount = async () => {
       setIsLoading(true);
 
-      // Fetch ships and user info
+      // Fetch ships info
       fetchSortInfo();
 
+      // Fetch user info
+      let fetchedUser = await fetchUser();
+      setUserVotes(fetchedUser.votes);
       setIsLoading(false);
     };
     onMount();
@@ -68,7 +80,8 @@ const Leaderboard = () => {
         temp_row.push(
           <VoteCard
             ship={ship}
-            userVotes={userVal.votes}
+            userVotes={userVotes}
+            handleVote={handleVote}
             key={ship._id}
             rerender={fetchSortInfo}
           />
@@ -80,7 +93,7 @@ const Leaderboard = () => {
         </div>
       );
     },
-    [fetchSortInfo, filteredShips, userVal.votes]
+    [fetchSortInfo, filteredShips, handleVote, userVotes]
   );
 
   // CHANGE LAUNCH DATE

@@ -7,7 +7,7 @@ import { VotingBtn } from "../global_styles/button";
 import { StyledProfilePic, StyledShipBox } from "../global_styles/other";
 import { VscLoading } from "react-icons/vsc";
 
-const VoteCard = ({ ship, userVotes, rerender }) => {
+const VoteCard = ({ ship, userVotes, rerender, handleVote }) => {
   const [isVoting, setIsVoting] = useState(false);
   const [votes, setVotes] = useState(null); // total reactions
   const [voteToggle, setVoteToggle] = useState(false); // whether user has voted
@@ -19,11 +19,12 @@ const VoteCard = ({ ship, userVotes, rerender }) => {
         setVoteToggle(true);
       }
     }
-  }, [userVotes]);
+  }, [userVotes, ship._id, ship.votes]);
 
   // Main toggle vote func
   const toggle = async () => {
     setIsVoting(true);
+    handleVote(ship._id);
     if (voteToggle === true) {
       setVotes(votes - 1);
       setVoteToggle(false);
