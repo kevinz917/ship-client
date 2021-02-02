@@ -11,6 +11,7 @@ import Shipbanner from "../assets/shipbanner.png";
 import { VscLoading } from "react-icons/vsc";
 import { useSelector, useDispatch } from "react-redux";
 import { SET_VAL } from "../redux/masterReducer";
+import { TogglePrivacy } from "../api/user";
 
 const NewShip = () => {
   const dispatch = useDispatch();
@@ -29,8 +30,13 @@ const NewShip = () => {
         dispatch(SET_VAL("students", fetchedStudentList));
       }
 
-      let fetchedShips = await fetchShips();
-      setMasterList(fetchedShips);
+      let fetchedInfo = await fetchUser();
+      setUserInfo(fetchedInfo);
+
+      if (fetchedInfo.privacy !== "private") {
+        let fetchedShips = await fetchShips();
+        setMasterList(fetchedShips);
+      }
 
       setIsLoading(false);
     };
@@ -48,6 +54,13 @@ const NewShip = () => {
     }
     setReady(true);
   }, [masterList]);
+
+  const togglePublic = async () => {
+    setIsLoading(true);
+    let toggled = await TogglePrivacy("public");
+    setUserInfo(toggled);
+    setIsLoading(false);
+  };
 
   const addShip = () => {
     if (masterList.length === 3) return;
@@ -72,8 +85,6 @@ const NewShip = () => {
     setIsSaving(false);
   };
 
-  // <HeaderBlock />
-
   return (
     <div
       style={{ maxWidth: "700px", padding: "10px" }}
@@ -86,6 +97,16 @@ const NewShip = () => {
       </div>
       {isLoading ? (
         <Spinner />
+      ) : userInfo && userInfo.privacy === "private" ? (
+        <Row className="mx-auto mt-4 justify-content-center">
+          <div className="text-center">
+            In order to create ships, you must turn your account to public. This
+            way you can vote on others and others can vote on ships you're in.
+          </div>
+          <MainBtn secondary onClick={() => togglePublic()}>
+            Turn to public
+          </MainBtn>
+        </Row>
       ) : (
         <NewshipContainer>
           <Row className="mx-auto mt-4 justify-content-center">
