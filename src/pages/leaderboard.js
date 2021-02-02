@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useMemo } from "react";
 import { Row, Col } from "react-bootstrap";
 import { Header1 } from "../global_styles/typography";
 import { MainInput } from "../global_styles/other";
@@ -8,9 +8,7 @@ import { Spinner } from "../components/LoadingSpinner";
 import { SET_VAL } from "../redux/masterReducer";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchUser } from "../api/user";
-// import InfiniteScroll from "react-infinite-scroll-component";
-// import { FixedSizeList as List } from "react-window";
-// import AutoSizer from "react-virtualized-auto-sizer";
+import { List, WindowScroller, AutoSizer } from "react-virtualized";
 
 const sortFunc = (a, b) => {
   return a.votes > b.votes ? -1 : 1;
@@ -24,27 +22,27 @@ const Leaderboard = () => {
   const [userVal, setUserVal] = useState(false);
   const [filteredShips, setFilteredShips] = useState(ships);
 
-  const fetchSortShips = useCallback(async () => {
+  const fetchSortInfo = useCallback(async () => {
+    // Fetch ship info
     let fetchedShips = await fetchShips();
     fetchedShips.sort(sortFunc);
     dispatch(SET_VAL("ships", fetchedShips));
+    // Fetch user info
+    let fetchedUser = await fetchUser();
+    setUserVal(fetchedUser);
   }, [dispatch]);
 
   useEffect(() => {
     const onMount = async () => {
       setIsLoading(true);
 
-      // Fetch ships
-      fetchSortShips();
-
-      // Fetch user info
-      let fetchedUser = await fetchUser();
-      setUserVal(fetchedUser);
+      // Fetch ships and user info
+      fetchSortInfo();
 
       setIsLoading(false);
     };
     onMount();
-  }, [fetchSortShips, dispatch]);
+  }, [fetchSortInfo, dispatch]);
 
   useEffect(() => {
     const filtered = ships.filter((ship) => {
@@ -56,6 +54,31 @@ const Leaderboard = () => {
     setFilteredShips(filtered);
   }, [searchText, ships]);
 
+  const ncol = 2;
+  const items = useMemo(() => {
+    const temp_items = [];
+    for (let i = 0; i < filteredShips.length; i += ncol) {
+      const temp_row = [];
+      for (let j = i; j < Math.min(filteredShips.length, i + ncol); j++) {
+        const ship = filteredShips[j];
+        temp_row.push(
+          <VoteCard
+            ship={ship}
+            userVotes={userVal.votes}
+            key={ship._id}
+            rerender={fetchSortInfo}
+          />
+        );
+      }
+      temp_items.push(
+        <Row className="mx-auto justify-content-center">{temp_row}</Row>
+      );
+    }
+    return temp_items;
+  }, [fetchSortInfo, filteredShips, userVal.votes]);
+
+  console.log(items);
+
   return (
     <Col className="p-0 fade-in w-100">
       <Row className="mx-auto justify-content-center mt-lg-5 mt-3">
@@ -65,7 +88,7 @@ const Leaderboard = () => {
         <Spinner />
       ) : (
         <div>
-          <Row className="mx-auto mt-3 justify-content-center">
+          <Row className="mx-auto mt-3 mb-4 justify-content-center">
             <MainInput
               placeholder="Search friends' names, etc..."
               onChange={(e) => {
@@ -73,20 +96,7 @@ const Leaderboard = () => {
               }}
             />
           </Row>
-          <Row className="mx-auto mt-4 justify-content-center">
-            <div className="mx-auto" style={{ width: "700px" }}>
-              <Row className="mx-auto justify-content-center">
-                {filteredShips.map((ship) => (
-                  <VoteCard
-                    ship={ship}
-                    userVotes={userVal.votes}
-                    key={ship._id}
-                    rerender={fetchSortShips}
-                  />
-                ))}
-              </Row>
-            </div>
-          </Row>
+          {items}
         </div>
       )}
     </Col>
