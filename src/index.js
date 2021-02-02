@@ -6,11 +6,14 @@ import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./global_styles/animation.css";
 
+import * as Sentry from "@sentry/react";
+import { Integrations } from "@sentry/tracing";
+
 import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import { Provider } from "react-redux";
 import { MasterReducer } from "./redux/masterReducer";
-import { PROD } from "./util/base";
+import { PROD, SENTRY } from "./util/base";
 
 import { QueryClient, QueryClientProvider } from "react-query";
 const queryClient = new QueryClient();
@@ -25,6 +28,15 @@ const store = createStore(
   MasterReducer,
   composeEnhancer(applyMiddleware(thunk))
 );
+
+Sentry.init({
+  dsn: SENTRY,
+  integrations: [new Integrations.BrowserTracing()],
+
+  // We recommend adjusting this value in production, or using tracesSampler
+  // for finer control
+  tracesSampleRate: 1.0,
+});
 
 ReactDOM.render(
   <QueryClientProvider client={queryClient}>
