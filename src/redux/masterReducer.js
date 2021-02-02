@@ -18,6 +18,7 @@ const defaultState = {
   auth: -1,
   isLoading: false,
   ships: [],
+  students: [],
 };
 
 const state = (state = defaultState, action) => {

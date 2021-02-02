@@ -4,10 +4,6 @@ import { useSelector } from "react-redux";
 const PrivateRoute = (props) => {
   const auth = useSelector((state) => state.state.auth);
 
-  // 0 : not checked
-  // 1 : auth success
-  // -1: auth failed
-
   switch (auth) {
     case false:
       return <Redirect to="/login" />;
@@ -25,9 +21,3 @@ const PrivateRoute = (props) => {
 };
 
 export default PrivateRoute;
-
-// <Route
-//           path={props.path}
-//           exact={props.exact}
-//           component={props.component}
-//         />

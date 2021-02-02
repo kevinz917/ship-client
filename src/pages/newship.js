@@ -2,29 +2,36 @@ import React, { useState, useEffect } from "react";
 import { Header2, SubtitleMain } from "../global_styles/typography";
 import { MainBtn } from "../global_styles/button";
 import { Row } from "react-bootstrap";
-import { fetchStudents, fetchShips } from "../api/user";
+import { fetchStudents, fetchShips, fetchUser } from "../api/user";
 import { saveShips } from "../api/ship";
 import Shipcard from "../components/ShipCard";
 import { Spinner } from "../components/LoadingSpinner";
 import { NewshipContainer } from "../global_styles/other";
 import Shipbanner from "../assets/shipbanner.png";
 import { VscLoading } from "react-icons/vsc";
+import { useSelector, useDispatch } from "react-redux";
+import { SET_VAL } from "../redux/masterReducer";
 
 const NewShip = () => {
-  const [studentList, setStudentList] = useState();
+  const dispatch = useDispatch();
+  const studentList = useSelector((state) => state.state.students);
   const [masterList, setMasterList] = useState([[null, null]]);
   const [isLoading, setIsLoading] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [ready, setReady] = useState(false);
+  const [userInfo, setUserInfo] = useState(null);
 
   useEffect(() => {
     const onMount = async () => {
       setIsLoading(true);
-      let fetchedStudentList = await fetchStudents();
-      setStudentList(fetchedStudentList);
-      let fetchedShips = await fetchShips();
+      if (studentList.length === 0) {
+        let fetchedStudentList = await fetchStudents();
+        dispatch(SET_VAL("students", fetchedStudentList));
+      }
 
+      let fetchedShips = await fetchShips();
       setMasterList(fetchedShips);
+
       setIsLoading(false);
     };
     onMount();
