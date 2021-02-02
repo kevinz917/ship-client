@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Row, Col } from "react-bootstrap";
 import { HiArrowUp } from "react-icons/hi";
 import { Body, SubtitleMain } from "../global_styles/typography";
@@ -7,35 +7,22 @@ import { VotingBtn } from "../global_styles/button";
 import { StyledProfilePic, StyledShipBox } from "../global_styles/other";
 import { VscLoading } from "react-icons/vsc";
 
-const VoteCard = ({ ship, userVotes, rerender, handleVote }) => {
+const VoteCard = ({ ship, userVotes, handleVote, updateShip, indx }) => {
   const [isVoting, setIsVoting] = useState(false);
-  const [votes, setVotes] = useState(null); // total reactions
-  const [voteToggle, setVoteToggle] = useState(false); // whether user has voted
 
-  useEffect(() => {
-    setVotes(ship.votes);
-    if (userVotes) {
-      if (userVotes.includes(ship._id)) {
-        setVoteToggle(true);
-      }
-    }
-  }, [userVotes, ship._id, ship.votes]);
+  const voteToggle = userVotes.includes(ship._id);
 
   // Main toggle vote func
   const toggle = async () => {
     setIsVoting(true);
     handleVote(ship._id);
+    updateShip(indx, voteToggle === true ? -1 : +1);
     if (voteToggle === true) {
-      setVotes(votes - 1);
-      setVoteToggle(false);
       await toggleVote(ship._id, -1);
     } else {
-      setVotes(votes + 1);
-      setVoteToggle(true);
       await toggleVote(ship._id, 1);
     }
     setIsVoting(false);
-    rerender();
   };
 
   return (
@@ -74,7 +61,7 @@ const VoteCard = ({ ship, userVotes, rerender, handleVote }) => {
             )}
           </VotingBtn>
           <Row className="mx-auto mt-1 justify-content-center">
-            <SubtitleMain>{votes}</SubtitleMain>
+            <SubtitleMain>{ship.votes}</SubtitleMain>
           </Row>
         </Col>
       </Row>

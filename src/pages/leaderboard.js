@@ -19,15 +19,9 @@ const Leaderboard = () => {
   const ships = useSelector((state) => state.state.ships);
   const [searchText, setSearchText] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [userVotes, setUserVotes] = useState();
+  const [userVotes, setUserVotes] = useState([]);
+  const [shipInfo, setShipInfo] = useState([]);
   const [filteredShips, setFilteredShips] = useState(ships);
-
-  const fetchSortInfo = useCallback(async () => {
-    // Fetch ship info
-    let fetchedShips = await fetchShips();
-    fetchedShips.sort(sortFunc);
-    dispatch(SET_VAL("ships", fetchedShips));
-  }, [dispatch]);
 
   const handleVote = useCallback(
     (id) => {
@@ -41,12 +35,26 @@ const Leaderboard = () => {
     [userVotes]
   );
 
+  const updateShip = useCallback(
+    (indx, change) => {
+      let temp = [...shipInfo];
+      temp[indx].votes += change;
+      temp.sort(sortFunc);
+      setShipInfo(temp);
+      dispatch(SET_VAL("ships", temp));
+    },
+    [dispatch, shipInfo]
+  );
+
   useEffect(() => {
     const onMount = async () => {
       setIsLoading(true);
 
       // Fetch ships info
-      fetchSortInfo();
+      let fetchedShips = await fetchShips();
+      fetchedShips.sort(sortFunc);
+      setShipInfo(fetchedShips);
+      dispatch(SET_VAL("ships", fetchedShips));
 
       // Fetch user info
       let fetchedUser = await fetchUser();
@@ -54,17 +62,17 @@ const Leaderboard = () => {
       setIsLoading(false);
     };
     onMount();
-  }, [fetchSortInfo, dispatch]);
+  }, [dispatch]);
 
   useEffect(() => {
-    const filtered = ships.filter((ship) => {
+    const filtered = shipInfo.filter((ship) => {
       return (
         ship.userNames[0].toLowerCase().includes(searchText) ||
         ship.userNames[1].toLowerCase().includes(searchText)
       );
     });
     setFilteredShips(filtered);
-  }, [searchText, ships]);
+  }, [searchText, shipInfo]);
 
   const ncol = 2;
 
@@ -82,8 +90,9 @@ const Leaderboard = () => {
             ship={ship}
             userVotes={userVotes}
             handleVote={handleVote}
+            updateShip={updateShip}
             key={ship._id}
-            rerender={fetchSortInfo}
+            indx={j}
           />
         );
       }
@@ -93,7 +102,7 @@ const Leaderboard = () => {
         </div>
       );
     },
-    [fetchSortInfo, filteredShips, handleVote, userVotes]
+    [filteredShips, handleVote, updateShip, userVotes]
   );
 
   // CHANGE LAUNCH DATE
