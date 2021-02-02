@@ -4,12 +4,12 @@
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-20px);
+    transform: translateY(-5px);
   }
 }
 
 .bob {
-  animation: MoveUpDown 3s infinite;
+  animation: MoveUpDown 2s infinite;
 }
 
 .fade-in {

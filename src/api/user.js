@@ -1,4 +1,3 @@
-import api from "./index";
 import axios from "axios";
 import { Base } from "../util/base";
 

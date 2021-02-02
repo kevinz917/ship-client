@@ -13,12 +13,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { SET_VAL } from "./redux/masterReducer";
 
 // pages
-import Login from "./pages/login";
 import Landing from "./pages/landing";
 import Leaderboard from "./pages/leaderboard";
 import NewShip from "./pages/newship";
 import Profile from "./pages/profile";
 import PrivateRoute from "./components/PrivateRoute";
+import NotFound from "./pages/notFound";
 
 //components
 import ShipNavbar from "./components/navbar";
@@ -52,15 +52,13 @@ function App() {
         <ShipNavbar />
         {auth !== -1 && (
           <Switch>
-            <Route exact path="/login">
-              {auth ? <Redirect to="/leaderboard" /> : <Login />}
-            </Route>
             <PrivateRoute exact path="/leaderboard" component={Leaderboard} />
             <PrivateRoute exact path="/ship" component={NewShip} />
             <PrivateRoute exact path="/profile" component={Profile} />
             <Route exact path="/">
               {auth ? <Redirect to="/ship" /> : <Landing />}
             </Route>
+            <Route exact={false} component={NotFound} />
           </Switch>
         )}
       </Router>

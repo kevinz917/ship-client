@@ -6,7 +6,7 @@ const PrivateRoute = (props) => {
 
   switch (auth) {
     case false:
-      return <Redirect to="/login" />;
+      return <Redirect to="/" />;
     case true:
       return (
         <Route
