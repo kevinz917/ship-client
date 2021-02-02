@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback, useMemo } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { Row, Col } from "react-bootstrap";
 import { Header1 } from "../global_styles/typography";
 import { MainInput } from "../global_styles/other";
@@ -23,13 +23,13 @@ const Leaderboard = () => {
   const [filteredShips, setFilteredShips] = useState(ships);
 
   const fetchSortInfo = useCallback(async () => {
+    // Fetch user info
+    let fetchedUser = await fetchUser();
+    setUserVal(fetchedUser);
     // Fetch ship info
     let fetchedShips = await fetchShips();
     fetchedShips.sort(sortFunc);
     dispatch(SET_VAL("ships", fetchedShips));
-    // Fetch user info
-    let fetchedUser = await fetchUser();
-    setUserVal(fetchedUser);
   }, [dispatch]);
 
   useEffect(() => {
@@ -55,11 +55,15 @@ const Leaderboard = () => {
   }, [searchText, ships]);
 
   const ncol = 2;
-  const items = useMemo(() => {
-    const temp_items = [];
-    for (let i = 0; i < filteredShips.length; i += ncol) {
+
+  const renderRow = useCallback(
+    ({ index, key, style }) => {
       const temp_row = [];
-      for (let j = i; j < Math.min(filteredShips.length, i + ncol); j++) {
+      for (
+        let j = index * ncol;
+        j < Math.min(filteredShips.length, (index + 1) * ncol);
+        j++
+      ) {
         const ship = filteredShips[j];
         temp_row.push(
           <VoteCard
@@ -70,14 +74,14 @@ const Leaderboard = () => {
           />
         );
       }
-      temp_items.push(
-        <Row className="mx-auto justify-content-center">{temp_row}</Row>
+      return (
+        <div key={key} style={style}>
+          <Row className="mx-auto justify-content-center">{temp_row}</Row>
+        </div>
       );
-    }
-    return temp_items;
-  }, [fetchSortInfo, filteredShips, userVal.votes]);
-
-  console.log(items);
+    },
+    [fetchSortInfo, filteredShips, userVal.votes]
+  );
 
   return (
     <Col className="p-0 fade-in w-100">
@@ -96,7 +100,28 @@ const Leaderboard = () => {
               }}
             />
           </Row>
-          {items}
+          <WindowScroller>
+            {({ height, isScrolling, onChildScroll, scrollTop }) => (
+              // Make infinite list take up 100% of its container
+              <AutoSizer disableHeight>
+                {({ width }) => (
+                  <List
+                    autoHeight
+                    width={width}
+                    height={height}
+                    isScrolling={isScrolling}
+                    onScroll={onChildScroll}
+                    scrollTop={scrollTop}
+                    rowCount={Math.ceil(filteredShips.length / ncol)}
+                    rowHeight={156}
+                    rowRenderer={renderRow}
+                    style={{ outline: "none" }}
+                  />
+                )}
+              </AutoSizer>
+            )}
+          </WindowScroller>
+          {/* {items} */}
         </div>
       )}
     </Col>
