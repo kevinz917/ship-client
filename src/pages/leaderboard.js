@@ -83,6 +83,18 @@ const Leaderboard = () => {
     [fetchSortInfo, filteredShips, userVal.votes]
   );
 
+  // CHANGE LAUNCH DATE
+  let launchDateStr = "01-Jan-2021";
+  var launchDate = new Date(Date.parse(launchDateStr.replace(/-/g, " ")));
+
+  if (launchDate >= new Date()) {
+    return (
+      <div className="w-100 d-flex flex-column align-items-center mt-lg-5 mt-3">
+        <Header1>Coming soon ✌️</Header1>
+      </div>
+    );
+  }
+
   return (
     <Col className="p-0 fade-in w-100">
       <Row className="mx-auto justify-content-center mt-lg-5 mt-3">
