@@ -54,6 +54,14 @@ const VoteCard = ({
           <Row className="mx-auto">
             <Body>{ship.userNames[1]}</Body>
           </Row>
+          {disabled && (
+            <div>
+              <hr />
+              <Row className="mx-auto">Contacts</Row>
+              <Row className="mx-auto">{ship.emails[0]}</Row>
+              <Row className="mx-auto">{ship.emails[1]}</Row>
+            </div>
+          )}
         </Col>
         <Col xs="auto" className="p-0">
           {!disabled && (
