@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
-import { Header2 } from "../global_styles/typography";
+import { Header3 } from "../global_styles/typography";
 import { MainBtn } from "../global_styles/button";
 import { fetchUser, TogglePrivacy } from "../api/user";
+import { fetchMyShips } from "../api/ship";
 import { Body } from "../global_styles/typography";
 import { Spinner } from "../components/LoadingSpinner";
+import Votecard from "../components/VoteCard";
 
 const Profile = () => {
   const [userInfo, setUserInfo] = useState({ privacy: null });
   const [isLoading, setIsloading] = useState(false);
   const [isChanging, setIsChanging] = useState(false);
+  const [myShips, setMyShips] = useState([]);
 
   const info = {
     private: "Others will not be able to vote on ships that includes you",
@@ -20,6 +23,11 @@ const Profile = () => {
       setIsloading(true);
       let fetchedUser = await fetchUser();
       setUserInfo(fetchedUser);
+
+      let fetchedShips = await fetchMyShips();
+      setMyShips(fetchedShips);
+      console.log(fetchedShips);
+
       setIsloading(false);
     };
 
@@ -29,9 +37,9 @@ const Profile = () => {
   const togglePrivacy = async () => {
     setIsChanging(true);
     if (userInfo.privacy === "public") {
-      let toggled = await TogglePrivacy("private");
+      await TogglePrivacy("private");
     } else if (userInfo.privacy === "private") {
-      let toggled = await TogglePrivacy("public");
+      await TogglePrivacy("public");
     }
     let fetchedUser = await fetchUser();
     setUserInfo(fetchedUser);
@@ -56,7 +64,13 @@ const Profile = () => {
   return (
     <div style={{ maxWidth: "500px" }} className="ml-auto mr-auto mt-4 fade-in">
       <div style={{ padding: "10px" }} className="w-100">
-        <Header2 className="mb-2">My profile</Header2>
+        <Header3 className="mb-2">My ships</Header3>
+        {myShips.map((ship, idx) => (
+          <Votecard ship={ship} disabled={true} />
+        ))}
+        <br />
+        <hr />
+        <Header3 className="mb-2">My profile</Header3>
         <Body>Privacy setting: {info[userInfo.privacy]}</Body>
         {isChanging ? (
           <Spinner />
@@ -70,7 +84,6 @@ const Profile = () => {
           </MainBtn>
         )}
         <br />
-        <hr />
         <MainBtn primary onClick={Logout}>
           Log out
         </MainBtn>

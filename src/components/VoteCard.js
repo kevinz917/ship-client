@@ -7,23 +7,35 @@ import { VotingBtn } from "../global_styles/button";
 import { StyledProfilePic, StyledShipBox } from "../global_styles/other";
 import { VscLoading } from "react-icons/vsc";
 
-const VoteCard = ({ ship, userVotes, handleVote, updateShip, indx }) => {
+const VoteCard = ({
+  ship,
+  userVotes,
+  handleVote,
+  updateShip,
+  indx,
+  disabled,
+}) => {
   const [isVoting, setIsVoting] = useState(false);
 
-  const voteToggle = userVotes.includes(ship._id);
+  const voteToggle = null;
+  const toggle = null;
 
-  // Main toggle vote func
-  const toggle = async () => {
-    setIsVoting(true);
-    handleVote(ship._id);
-    updateShip(indx, voteToggle === true ? -1 : +1);
-    if (voteToggle === true) {
-      await toggleVote(ship._id, -1);
-    } else {
-      await toggleVote(ship._id, 1);
-    }
-    setIsVoting(false);
-  };
+  if (!disabled) {
+    const voteToggle = userVotes.includes(ship._id);
+
+    // Main toggle vote func
+    const toggle = async () => {
+      setIsVoting(true);
+      handleVote(ship._id);
+      updateShip(indx, voteToggle === true ? -1 : +1);
+      if (voteToggle === true) {
+        await toggleVote(ship._id, -1);
+      } else {
+        await toggleVote(ship._id, 1);
+      }
+      setIsVoting(false);
+    };
+  }
 
   return (
     <StyledShipBox>
@@ -44,22 +56,24 @@ const VoteCard = ({ ship, userVotes, handleVote, updateShip, indx }) => {
           </Row>
         </Col>
         <Col xs="auto" className="p-0">
-          <VotingBtn clicked={voteToggle} onClick={toggle}>
-            {isVoting ? (
-              <div
-                style={{ width: "20px", height: "20px" }}
-                className="d-flex flex-row align-items-center justify-content-center"
-              >
-                <VscLoading
-                  size={20}
-                  className="rotate-fast"
-                  style={{ color: voteToggle ? "white" : "black" }}
-                />
-              </div>
-            ) : (
-              <HiArrowUp style={{ display: "block" }} size={20} />
-            )}
-          </VotingBtn>
+          {!disabled && (
+            <VotingBtn clicked={voteToggle} onClick={toggle}>
+              {isVoting ? (
+                <div
+                  style={{ width: "20px", height: "20px" }}
+                  className="d-flex flex-row align-items-center justify-content-center"
+                >
+                  <VscLoading
+                    size={20}
+                    className="rotate-fast"
+                    style={{ color: voteToggle ? "white" : "black" }}
+                  />
+                </div>
+              ) : (
+                <HiArrowUp style={{ display: "block" }} size={20} />
+              )}
+            </VotingBtn>
+          )}
           <Row className="mx-auto mt-1 justify-content-center">
             <SubtitleMain>{ship.votes + 10 * (ship.shippers - 1)}</SubtitleMain>
           </Row>

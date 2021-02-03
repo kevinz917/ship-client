@@ -39,3 +39,12 @@ export const toggleVote = async (shipId, vote) => {
   }
   return null;
 };
+
+// fetchMyShips
+export const fetchMyShips = async () => {
+  let res = await axios.post(`${Base}/ship/fetchMyShips`);
+
+  if (res) {
+    return res.data.ships;
+  }
+};

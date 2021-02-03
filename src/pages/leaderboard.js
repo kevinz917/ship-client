@@ -93,6 +93,7 @@ const Leaderboard = () => {
             updateShip={updateShip}
             key={ship._id}
             indx={j}
+            disabled={false}
           />
         );
       }
