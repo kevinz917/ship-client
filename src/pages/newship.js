@@ -27,10 +27,6 @@ const NewShip = () => {
   useEffect(() => {
     const onMount = async () => {
       setIsLoading(true);
-      if (studentList.length === 0) {
-        let fetchedStudentList = await fetchStudents();
-        dispatch(SET_VAL("students", fetchedStudentList));
-      }
 
       let fetchedInfo = await fetchUser();
       setUserInfo(fetchedInfo);
@@ -38,6 +34,11 @@ const NewShip = () => {
       if (fetchedInfo.privacy !== "private") {
         let fetchedShips = await fetchShips();
         setMasterList(fetchedShips);
+      }
+
+      if (studentList.length === 0) {
+        let fetchedStudentList = await fetchStudents();
+        dispatch(SET_VAL("students", fetchedStudentList));
       }
 
       setIsLoading(false);
