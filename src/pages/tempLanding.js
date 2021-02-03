@@ -2,7 +2,7 @@ import React from "react";
 import { Row } from "react-bootstrap";
 import styled from "styled-components";
 import "../global_styles/animation.css";
-import Logo from "../assets/logo.png";
+import Logo from "../assets/logo.svg";
 
 const StyledContainer = styled.div`
   height: 100vh;
