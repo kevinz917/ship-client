@@ -24,7 +24,7 @@ const tempLanding = () => {
     <StyledContainer>
       <div className="m-auto bob">
         <Row className="mx-auto mb-2 justify-content-center">
-          <img width={300} src={Logo} />
+          <img width={200} src={Logo} />
         </Row>
         <Row className="mx-auto justify-content-center">
           <StyledDescription>
