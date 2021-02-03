@@ -61,7 +61,7 @@ const VoteCard = ({ ship, userVotes, handleVote, updateShip, indx }) => {
             )}
           </VotingBtn>
           <Row className="mx-auto mt-1 justify-content-center">
-            <SubtitleMain>{ship.votes}</SubtitleMain>
+            <SubtitleMain>{ship.votes + 10 * (ship.shippers - 1)}</SubtitleMain>
           </Row>
         </Col>
       </Row>
