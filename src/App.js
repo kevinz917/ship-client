@@ -11,6 +11,7 @@ import axios from "axios";
 import { casCheck } from "./api/user";
 import { useSelector, useDispatch } from "react-redux";
 import { SET_VAL } from "./redux/masterReducer";
+import { PROD } from "./util/base";
 
 // pages
 import Landing from "./pages/landing";
@@ -19,9 +20,12 @@ import NewShip from "./pages/newship";
 import Profile from "./pages/profile";
 import PrivateRoute from "./components/PrivateRoute";
 import NotFound from "./pages/notFound";
+import TempLanding from "./pages/tempLanding";
 
 //components
 import ShipNavbar from "./components/navbar";
+
+const dotenv = require("dotenv");
 
 function App() {
   const dispatch = useDispatch();
@@ -44,9 +48,11 @@ function App() {
       }
     };
     onMount();
-  }, []);
+  }, [dispatch]);
 
-  return (
+  return PROD === "1" ? (
+    <TempLanding />
+  ) : (
     <ThemeProvider theme={Theme}>
       <Router>
         <ShipNavbar />
