@@ -17,14 +17,14 @@ const VoteCard = ({
 }) => {
   const [isVoting, setIsVoting] = useState(false);
 
-  const voteToggle = null;
-  const toggle = null;
+  let voteToggle = null;
+  let toggle = null;
 
   if (!disabled) {
-    const voteToggle = userVotes.includes(ship._id);
+    voteToggle = userVotes.includes(ship._id);
 
     // Main toggle vote func
-    const toggle = async () => {
+    toggle = async () => {
       setIsVoting(true);
       handleVote(ship._id);
       updateShip(indx, voteToggle === true ? -1 : +1);

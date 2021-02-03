@@ -9,6 +9,12 @@ import { SET_VAL } from "../redux/masterReducer";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchUser } from "../api/user";
 import { List, WindowScroller, AutoSizer } from "react-virtualized";
+import {
+  BrowserView,
+  MobileView,
+  isBrowser,
+  isMobile,
+} from "react-device-detect";
 
 const sortFunc = (a, b) => {
   return a.votes > b.votes ? -1 : 1;
@@ -74,7 +80,11 @@ const Leaderboard = () => {
     setFilteredShips(filtered);
   }, [searchText, shipInfo]);
 
-  const ncol = 2;
+  let ncol = 2;
+
+  if (isMobile) {
+    ncol = 1;
+  }
 
   const renderRow = useCallback(
     ({ index, key, style }) => {

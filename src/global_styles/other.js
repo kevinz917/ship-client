@@ -49,7 +49,7 @@ export const StyledShipBox = styled.div`
   background-color: ${({ theme }) => theme.surface[1]};
   border-radius: 8px;
   padding: 16px;
-  /* margin: 10px; */
+  margin: 10px;
 
   @media (max-width: 450px) {
     width: 100%;

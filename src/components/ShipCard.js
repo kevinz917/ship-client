@@ -35,11 +35,6 @@ const Shipcard = (props) => {
     }, 1000);
   };
 
-  const onInputChange = (setFunc) => (e) => {
-    if (!e) setFunc(e);
-    else setFunc({ value: e.value, label: e.label });
-  };
-
   if (!studentList) {
     return null;
   }
