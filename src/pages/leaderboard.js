@@ -110,7 +110,7 @@ const Leaderboard = () => {
         </div>
       );
     },
-    [filteredShips, handleVote, updateShip, userVotes]
+    [filteredShips, handleVote, updateShip, userVotes, ncol]
   );
 
   // CHANGE LAUNCH DATE

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import AsyncSelect from "react-select/async";
 import { StyledSelect } from "../global_styles/select";

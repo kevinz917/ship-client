@@ -43,7 +43,7 @@ const NewShip = () => {
       setIsLoading(false);
     };
     onMount();
-  }, []);
+  }, [dispatch, studentList]);
 
   useEffect(() => {
     for (let i = 0; i < masterList.length; i++) {
