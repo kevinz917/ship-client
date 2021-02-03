@@ -1,21 +1,19 @@
 import "../global_styles/animation.css";
-import {
-  Body,
-  Header1,
-  Header2,
-  Header3,
-  SubtitleMain,
-} from "../global_styles/typography";
+import { Body, Header1 } from "../global_styles/typography";
 import { MainBtn } from "../global_styles/button";
 import Shipbanner from "../assets/shipbanner.png";
 import { Base } from "../util/base";
+import { sendAmplitudeData } from "../util/amplitude";
 
 const randNum = (a, b) => {
   return Math.random() * (b - a) + a;
 };
 const Landing = () => {
+  sendAmplitudeData("visit_landing");
+
   const setCoordinates = (x, y) => {
     // place new ship
+    sendAmplitudeData("place_ships");
     const newDiv = document.createElement("div");
     newDiv.style.position = `absolute`;
     newDiv.style.left = `${x - 25}px`;
@@ -54,6 +52,7 @@ const Landing = () => {
           <MainBtn
             primary
             onClick={() => {
+              sendAmplitudeData("login");
               window.location.href = `${Base}/auth/cas`;
             }}
           >

@@ -12,8 +12,10 @@ import { VscLoading } from "react-icons/vsc";
 import { useSelector, useDispatch } from "react-redux";
 import { SET_VAL } from "../redux/masterReducer";
 import { TogglePrivacy } from "../api/user";
+import { sendAmplitudeData } from "../util/amplitude";
 
 const NewShip = () => {
+  sendAmplitudeData("visit_shipping");
   const dispatch = useDispatch();
   const studentList = useSelector((state) => state.state.students);
   const [masterList, setMasterList] = useState([[null, null]]);
@@ -63,7 +65,9 @@ const NewShip = () => {
   };
 
   const addShip = () => {
+    sendAmplitudeData("add_ship", { currentShips: masterList.length });
     if (masterList.length === 3) return;
+
     setMasterList([...masterList, [null, null]]);
   };
 
@@ -80,6 +84,7 @@ const NewShip = () => {
   };
 
   const submitShip = async () => {
+    sendAmplitudeData("save_ships", { shipCount: masterList.length });
     setIsSaving(true);
     await saveShips(masterList);
     setIsSaving(false);

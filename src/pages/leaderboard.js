@@ -9,18 +9,15 @@ import { SET_VAL } from "../redux/masterReducer";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchUser } from "../api/user";
 import { List, WindowScroller, AutoSizer } from "react-virtualized";
-import {
-  BrowserView,
-  MobileView,
-  isBrowser,
-  isMobile,
-} from "react-device-detect";
+import { isMobile } from "react-device-detect";
+import { sendAmplitudeData } from "../util/amplitude";
 
 const sortFunc = (a, b) => {
   return a.votes > b.votes ? -1 : 1;
 };
 
 const Leaderboard = () => {
+  sendAmplitudeData("visit_leaderboard");
   const dispatch = useDispatch();
   const ships = useSelector((state) => state.state.ships);
   const [searchText, setSearchText] = useState("");
@@ -143,6 +140,7 @@ const Leaderboard = () => {
               onChange={(e) => {
                 setSearchText(e.target.value.toLowerCase());
               }}
+              onClick={() => sendAmplitudeData("click_filter")}
             />
           </Row>
           <WindowScroller>

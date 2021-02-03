@@ -12,6 +12,7 @@ import { casCheck } from "./api/user";
 import { useSelector, useDispatch } from "react-redux";
 import { SET_VAL } from "./redux/masterReducer";
 import { PROD } from "./util/base";
+import { setAmplitudeUserId } from "./util/amplitude";
 
 // pages
 import Landing from "./pages/landing";
@@ -44,6 +45,7 @@ function App() {
       ) {
         dispatch(SET_VAL("auth", false));
       } else {
+        setAmplitudeUserId(`${auth.data.user.netId}`);
         dispatch(SET_VAL("auth", true));
       }
     };

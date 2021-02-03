@@ -6,8 +6,11 @@ import { fetchMyShips } from "../api/ship";
 import { Body } from "../global_styles/typography";
 import { Spinner } from "../components/LoadingSpinner";
 import Votecard from "../components/VoteCard";
+import { sendAmplitudeData } from "../util/amplitude";
 
 const Profile = () => {
+  sendAmplitudeData("visit_profile");
+
   const [userInfo, setUserInfo] = useState({ privacy: null });
   const [isLoading, setIsloading] = useState(false);
   const [isChanging, setIsChanging] = useState(false);
@@ -37,8 +40,10 @@ const Profile = () => {
   const togglePrivacy = async () => {
     setIsChanging(true);
     if (userInfo.privacy === "public") {
+      sendAmplitudeData("toggle_private");
       await TogglePrivacy("private");
     } else if (userInfo.privacy === "private") {
+      sendAmplitudeData("toggle_public");
       await TogglePrivacy("public");
     }
     let fetchedUser = await fetchUser();
@@ -47,6 +52,7 @@ const Profile = () => {
   };
 
   const Logout = () => {
+    sendAmplitudeData("log_out");
     // Clear cookies
     document.cookie.split(";").forEach((c) => {
       document.cookie = c

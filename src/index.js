@@ -15,6 +15,8 @@ import { Provider } from "react-redux";
 import { MasterReducer } from "./redux/masterReducer";
 import { PROD, SENTRY } from "./util/base";
 
+import { initAmplitude } from "./util/amplitude";
+
 import { QueryClient, QueryClientProvider } from "react-query";
 const queryClient = new QueryClient();
 
@@ -33,10 +35,10 @@ Sentry.init({
   dsn: SENTRY,
   integrations: [new Integrations.BrowserTracing()],
 
-  // We recommend adjusting this value in production, or using tracesSampler
-  // for finer control
   tracesSampleRate: 1.0,
 });
+
+initAmplitude();
 
 ReactDOM.render(
   <QueryClientProvider client={queryClient}>
