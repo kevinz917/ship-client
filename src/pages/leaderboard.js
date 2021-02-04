@@ -143,7 +143,7 @@ const Leaderboard = () => {
         </div>
       );
     },
-    [filteredShips, handleVote, updateShip, userVotes, ncol]
+    [filteredShips, handleVote, updateShip, userVotes, ncol, userEmail]
   );
 
   return (
@@ -173,6 +173,7 @@ const Leaderboard = () => {
                 onChange={(college) => {
                   setSelectedCollege(college);
                 }}
+                placeholder="Select a res college..."
               />
             </div>
           </Row>
