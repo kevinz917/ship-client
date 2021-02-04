@@ -18,19 +18,20 @@ const sortFunc = (a, b) => {
 };
 
 const colleges = [
-  { label: "Benjamin Franklin", value: "Benjamin Franklin" },
-  { label: "Branford", value: "Branford" },
-  { label: "Ezra Stiles", value: "Ezra Stiles" },
-  { label: "Jonathan Edwards", value: "Jonathan Edwards" },
-  { label: "Pauli Murray", value: "Pauli Murray" },
-  { label: "Saybrook", value: "Saybrook" },
-  { label: "Timothy Dwight", value: "Timothy Dwight" },
-  { label: "Berkeley", value: "Berkeley" },
-  { label: "Davenport", value: "Davenport" },
-  { label: "Grace Hopper", value: "Grace Hopper" },
-  { label: "Pierson", value: "Pierson" },
-  { label: "Silliman", value: "Silliman" },
-  { label: "Trumbull", value: "Benjamin Franklin" },
+  { label: "Benjamin Franklin", value: "New kids suck" },
+  { label: "Branford", value: "Shittiest dining hall" },
+  { label: "Ezra Stiles", value: "Kevin the goat" },
+  { label: "Jonathan Edwards", value: "Alright college ig" },
+  { label: "Pauli Murray", value: "New kids suck" },
+  { label: "Saybrook", value: "Suck at intramurals" },
+  { label: "Timothy Dwight", value: "Fucking GOATED" },
+  { label: "Berkeley", value: "Nice pizza ig" },
+  { label: "Davenport", value: "Got hella friends here" },
+  { label: "Grace Hopper", value: "Forgot this college existed" },
+  { label: "Morse", value: "Harshal the goat" },
+  { label: "Pierson", value: "L dub sucks ass" },
+  { label: "Silliman", value: "Inferior TD" },
+  { label: "Trumbull", value: "Late lunches ftw" },
 ];
 
 const Leaderboard = () => {
