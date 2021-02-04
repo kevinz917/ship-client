@@ -27,10 +27,6 @@ const NewShip = () => {
   useEffect(() => {
     const onMount = async () => {
       setIsLoading(true);
-      if (studentList.length === 0) {
-        let fetchedStudentList = await fetchStudents();
-        dispatch(SET_VAL("students", fetchedStudentList));
-      }
 
       let fetchedInfo = await fetchUser();
       setUserInfo(fetchedInfo);
@@ -40,10 +36,15 @@ const NewShip = () => {
         setMasterList(fetchedShips);
       }
 
+      if (studentList.length === 0) {
+        let fetchedStudentList = await fetchStudents();
+        dispatch(SET_VAL("students", fetchedStudentList));
+      }
+
       setIsLoading(false);
     };
     onMount();
-  }, []);
+  }, [dispatch, studentList]);
 
   useEffect(() => {
     for (let i = 0; i < masterList.length; i++) {
