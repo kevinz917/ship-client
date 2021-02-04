@@ -11,26 +11,26 @@ import { fetchUser } from "../api/user";
 import { List, WindowScroller, AutoSizer } from "react-virtualized";
 import { isMobile } from "react-device-detect";
 import { sendAmplitudeData } from "../util/amplitude";
-import { DropdownButton, Dropdown } from "react-bootstrap";
+import Select from "react-select";
 
 const sortFunc = (a, b) => {
   return a.votes > b.votes ? -1 : 1;
 };
 
-const Residential = [
-  "Benjamin Franklin",
-  "Branford",
-  "Ezra Stiles",
-  "Jonathan Edwards",
-  "Pauli Murray",
-  "Saybrook",
-  "Timothy Dwight",
-  "Berkeley",
-  "Davenport",
-  "Grace Hopper",
-  "Pierson",
-  "Silliman",
-  "Trumbull",
+const colleges = [
+  { label: "Benjamin Franklin", value: "Benjamin Franklin" },
+  { label: "Branford", value: "Branford" },
+  { label: "Ezra Stiles", value: "Ezra Stiles" },
+  { label: "Jonathan Edwards", value: "Jonathan Edwards" },
+  { label: "Pauli Murray", value: "Pauli Murray" },
+  { label: "Saybrook", value: "Saybrook" },
+  { label: "Timothy Dwight", value: "Timothy Dwight" },
+  { label: "Berkeley", value: "Berkeley" },
+  { label: "Davenport", value: "Davenport" },
+  { label: "Grace Hopper", value: "Grace Hopper" },
+  { label: "Pierson", value: "Pierson" },
+  { label: "Silliman", value: "Silliman" },
+  { label: "Trumbull", value: "Benjamin Franklin" },
 ];
 
 const Leaderboard = () => {
@@ -43,7 +43,7 @@ const Leaderboard = () => {
   const [userVotes, setUserVotes] = useState([]);
   const [shipInfo, setShipInfo] = useState([]);
   const [filteredShips, setFilteredShips] = useState(ships);
-  const [selectedCollege, setSelectedCollege] = useState("");
+  const [selectedCollege, setSelectedCollege] = useState();
 
   const handleVote = useCallback(
     (id) => {
@@ -94,10 +94,14 @@ const Leaderboard = () => {
           ship.userNames[1].toLowerCase().includes(searchText)) &&
         (ship.userNames[0]
           .toLowerCase()
-          .includes(selectedCollege.toLowerCase()) ||
+          .includes(
+            selectedCollege ? selectedCollege.label.toLowerCase() : ""
+          ) ||
           ship.userNames[1]
             .toLowerCase()
-            .includes(selectedCollege.toLowerCase()))
+            .includes(
+              selectedCollege ? selectedCollege.label.toLowerCase() : ""
+            ))
       );
     });
 
@@ -150,7 +154,7 @@ const Leaderboard = () => {
         <Spinner />
       ) : (
         <div>
-          <Row className="mx-auto mt-3 mb-4 justify-content-center">
+          <Row className="mx-auto mt-3 justify-content-center">
             <MainInput
               placeholder="Search friends' names, etc..."
               onChange={(e) => {
@@ -159,21 +163,18 @@ const Leaderboard = () => {
               onClick={() => sendAmplitudeData("click_filter")}
             />
           </Row>
-          <div className="d-flex flex-column align-items-center">
-            <div style={{ maxWidth: "400px" }}>
-              <DropdownButton
-                id="dropdown-basic-button"
-                title={selectedCollege || "Filter with college"}
-                variant="outline-secondary"
-              >
-                {Residential.map((college) => (
-                  <Dropdown.Item onClick={() => setSelectedCollege(college)}>
-                    {college}
-                  </Dropdown.Item>
-                ))}
-              </DropdownButton>
+          <Row className="mx-auto my-4 justify-content-center">
+            <div style={{ width: "250px", maxWidth: "250px" }}>
+              <Select
+                options={colleges}
+                isClearable={true}
+                value={selectedCollege}
+                onChange={(college) => {
+                  setSelectedCollege(college);
+                }}
+              />
             </div>
-          </div>
+          </Row>
           <WindowScroller>
             {({ height, isScrolling, onChildScroll, scrollTop }) => (
               // Make infinite list take up 100% of its container
