@@ -20,6 +20,7 @@ const Leaderboard = () => {
   sendAmplitudeData("visit_leaderboard");
   const dispatch = useDispatch();
   const ships = useSelector((state) => state.state.ships);
+  const [userEmail, setUserEmail] = useState("");
   const [searchText, setSearchText] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [userVotes, setUserVotes] = useState([]);
@@ -61,6 +62,7 @@ const Leaderboard = () => {
 
       // Fetch user info
       let fetchedUser = await fetchUser();
+      setUserEmail(fetchedUser.email);
       setUserVotes(fetchedUser.votes);
       setIsLoading(false);
     };
@@ -101,6 +103,7 @@ const Leaderboard = () => {
             key={ship._id}
             indx={j}
             disabled={false}
+            userEmail={userEmail}
           />
         );
       }
@@ -113,17 +116,17 @@ const Leaderboard = () => {
     [filteredShips, handleVote, updateShip, userVotes]
   );
 
-  // CHANGE LAUNCH DATE
-  let launchDateStr = "01-Jan-2021";
-  var launchDate = new Date(Date.parse(launchDateStr.replace(/-/g, " ")));
+  // // CHANGE LAUNCH DATE
+  // let launchDateStr = "01-Jan-2021";
+  // var launchDate = new Date(Date.parse(launchDateStr.replace(/-/g, " ")));
 
-  if (launchDate >= new Date()) {
-    return (
-      <div className="w-100 d-flex flex-column align-items-center mt-lg-5 mt-3">
-        <Header1>Coming soon ✌️</Header1>
-      </div>
-    );
-  }
+  // if (launchDate >= new Date()) {
+  //   return (
+  //     <div className="w-100 d-flex flex-column align-items-center mt-lg-5 mt-3">
+  //       <Header1>Coming soon ✌️</Header1>
+  //     </div>
+  //   );
+  // }
 
   return (
     <Col className="p-0 fade-in w-100">

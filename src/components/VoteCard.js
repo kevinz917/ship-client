@@ -14,6 +14,7 @@ const VoteCard = ({
   updateShip,
   indx,
   disabled,
+  userEmail,
 }) => {
   const [isVoting, setIsVoting] = useState(false);
 
@@ -38,7 +39,7 @@ const VoteCard = ({
   }
 
   return (
-    <StyledShipBox>
+    <StyledShipBox mine={ship.emails.includes(userEmail)}>
       <Row className="mx-auto">
         <Col className="p-0">
           <Row className="mx-auto">
@@ -46,13 +47,13 @@ const VoteCard = ({
             <StyledProfilePic />
           </Row>
           <Row className="mx-auto mt-2">
-            <Body>{ship.userNames[0]}</Body>
+            <Body>{ship.userNames[0].split(" ").slice(0, 2).join(" ")}</Body>
           </Row>
           <Row className="mx-auto">
             <SubtitleMain>and</SubtitleMain>
           </Row>
           <Row className="mx-auto">
-            <Body>{ship.userNames[1]}</Body>
+            <Body>{ship.userNames[1].split(" ").slice(0, 2).join(" ")}</Body>
           </Row>
           {disabled && (
             <div>

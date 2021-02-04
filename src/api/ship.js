@@ -1,4 +1,3 @@
-import api from "./index";
 import axios from "axios";
 import { Base } from "../util/base";
 
@@ -15,6 +14,7 @@ export const addShip = async (student1, student2) => {
 };
 
 export const saveShips = async (shipList) => {
+  console.log(shipList);
   let newShips = await axios.post(`${Base}/ship/addMultiple`, {
     shipList,
   });

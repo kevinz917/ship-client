@@ -80,6 +80,7 @@ const NewShip = () => {
   const setName = (idx1, idx2, value) => {
     let copy = [...masterList];
     copy[idx1][idx2] = value;
+    console.log(copy);
     setMasterList(copy);
   };
 
