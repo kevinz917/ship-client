@@ -24,7 +24,7 @@ const Residential = [
   "Jonathan Edwards",
   "Pauli Murray",
   "Saybrook",
-  "Timonthy Dwight",
+  "Timothy Dwight",
   "Berkeley",
   "Davenport",
   "Grace Hopper",
