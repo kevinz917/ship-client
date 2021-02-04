@@ -11,10 +11,27 @@ import { fetchUser } from "../api/user";
 import { List, WindowScroller, AutoSizer } from "react-virtualized";
 import { isMobile } from "react-device-detect";
 import { sendAmplitudeData } from "../util/amplitude";
+import { DropdownButton, Dropdown } from "react-bootstrap";
 
 const sortFunc = (a, b) => {
   return a.votes > b.votes ? -1 : 1;
 };
+
+const Residential = [
+  "Benjamin Franklin",
+  "Branford",
+  "Ezra Stiles",
+  "Jonathan Edwards",
+  "Pauli Murray",
+  "Saybrook",
+  "Timonthy Dwight",
+  "Berkeley",
+  "Davenport",
+  "Grace Hopper",
+  "Pierson",
+  "Silliman",
+  "Trumbull",
+];
 
 const Leaderboard = () => {
   sendAmplitudeData("visit_leaderboard");
@@ -26,6 +43,7 @@ const Leaderboard = () => {
   const [userVotes, setUserVotes] = useState([]);
   const [shipInfo, setShipInfo] = useState([]);
   const [filteredShips, setFilteredShips] = useState(ships);
+  const [selectedCollege, setSelectedCollege] = useState("");
 
   const handleVote = useCallback(
     (id) => {
@@ -72,12 +90,19 @@ const Leaderboard = () => {
   useEffect(() => {
     const filtered = shipInfo.filter((ship) => {
       return (
-        ship.userNames[0].toLowerCase().includes(searchText) ||
-        ship.userNames[1].toLowerCase().includes(searchText)
+        (ship.userNames[0].toLowerCase().includes(searchText) ||
+          ship.userNames[1].toLowerCase().includes(searchText)) &&
+        (ship.userNames[0]
+          .toLowerCase()
+          .includes(selectedCollege.toLowerCase()) ||
+          ship.userNames[1]
+            .toLowerCase()
+            .includes(selectedCollege.toLowerCase()))
       );
     });
+
     setFilteredShips(filtered);
-  }, [searchText, shipInfo]);
+  }, [searchText, shipInfo, selectedCollege]);
 
   let ncol = 2;
 
@@ -116,18 +141,6 @@ const Leaderboard = () => {
     [filteredShips, handleVote, updateShip, userVotes, ncol]
   );
 
-  // // CHANGE LAUNCH DATE
-  // let launchDateStr = "01-Jan-2021";
-  // var launchDate = new Date(Date.parse(launchDateStr.replace(/-/g, " ")));
-
-  // if (launchDate >= new Date()) {
-  //   return (
-  //     <div className="w-100 d-flex flex-column align-items-center mt-lg-5 mt-3">
-  //       <Header1>Coming soon ✌️</Header1>
-  //     </div>
-  //   );
-  // }
-
   return (
     <Col className="p-0 fade-in w-100">
       <Row className="mx-auto justify-content-center mt-lg-5 mt-3">
@@ -146,6 +159,21 @@ const Leaderboard = () => {
               onClick={() => sendAmplitudeData("click_filter")}
             />
           </Row>
+          <div className="d-flex flex-column align-items-center">
+            <div style={{ maxWidth: "400px" }}>
+              <DropdownButton
+                id="dropdown-basic-button"
+                title={selectedCollege || "Filter with college"}
+                variant="outline-secondary"
+              >
+                {Residential.map((college) => (
+                  <Dropdown.Item onClick={() => setSelectedCollege(college)}>
+                    {college}
+                  </Dropdown.Item>
+                ))}
+              </DropdownButton>
+            </div>
+          </div>
           <WindowScroller>
             {({ height, isScrolling, onChildScroll, scrollTop }) => (
               // Make infinite list take up 100% of its container
@@ -175,3 +203,15 @@ const Leaderboard = () => {
 };
 
 export default Leaderboard;
+
+// // CHANGE LAUNCH DATE
+// let launchDateStr = "01-Jan-2021";
+// var launchDate = new Date(Date.parse(launchDateStr.replace(/-/g, " ")));
+
+// if (launchDate >= new Date()) {
+//   return (
+//     <div className="w-100 d-flex flex-column align-items-center mt-lg-5 mt-3">
+//       <Header1>Coming soon ✌️</Header1>
+//     </div>
+//   );
+// }
