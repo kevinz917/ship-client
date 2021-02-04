@@ -93,12 +93,12 @@ const Leaderboard = () => {
       return (
         (ship.userNames[0].toLowerCase().includes(searchText) ||
           ship.userNames[1].toLowerCase().includes(searchText)) &&
-        (ship.userNames[0]
+        (ship.userLabels[0]
           .toLowerCase()
           .includes(
             selectedCollege ? selectedCollege.label.toLowerCase() : ""
           ) ||
-          ship.userNames[1]
+          ship.userLabels[1]
             .toLowerCase()
             .includes(
               selectedCollege ? selectedCollege.label.toLowerCase() : ""

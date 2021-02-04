@@ -47,13 +47,13 @@ const VoteCard = ({
             <StyledProfilePic />
           </Row>
           <Row className="mx-auto mt-2">
-            <Body>{ship.userNames[0].split(" ").slice(0, 2).join(" ")}</Body>
+            <Body>{ship.userNames[0]}</Body>
           </Row>
           <Row className="mx-auto">
             <SubtitleMain>and</SubtitleMain>
           </Row>
           <Row className="mx-auto">
-            <Body>{ship.userNames[1].split(" ").slice(0, 2).join(" ")}</Body>
+            <Body>{ship.userNames[1]}</Body>
           </Row>
           {disabled && (
             <div>
