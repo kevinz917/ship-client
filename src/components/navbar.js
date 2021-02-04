@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { Navbar, Nav } from "react-bootstrap";
 import styled from "styled-components";
 import { FiUser } from "react-icons/fi";
 
@@ -23,13 +24,16 @@ const StyledNavLink = styled(NavLink)`
 
 const ShipNavbar = () => {
   return (
-    <div expand="md" className="shadow-sm p-lg-3 p-1">
-      <div className="d-flex justify-content-end">
-        <StyledNavLink to="/leaderboard">Leaderboard 🔥 </StyledNavLink>
-        <StyledNavLink to="/ship">Ship!</StyledNavLink>
-        <StyledNavLink to="/profile">My ships</StyledNavLink>
-      </div>
-    </div>
+    <Navbar bg="white" expand="lg" className="shadow-sm" sticky="top">
+      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <Navbar.Collapse id="basic-navbar-nav">
+        <Nav className="ml-auto">
+          <StyledNavLink to="/leaderboard">Leaderboard 🔥 </StyledNavLink>
+          <StyledNavLink to="/ship">Ship!</StyledNavLink>
+          <StyledNavLink to="/profile">My ships</StyledNavLink>
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
   );
 };
 

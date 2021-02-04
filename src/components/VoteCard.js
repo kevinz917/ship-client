@@ -58,7 +58,9 @@ const VoteCard = ({
           {disabled && (
             <div>
               <hr />
-              <Row className="mx-auto">Contacts</Row>
+              <Row className="mx-auto">
+                <strong>Contacts</strong>
+              </Row>
               <Row className="mx-auto">{ship.emails[0]}</Row>
               <Row className="mx-auto">{ship.emails[1]}</Row>
             </div>
