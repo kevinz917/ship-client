@@ -35,6 +35,7 @@ export const StyledSelect = {
   control: (base) => ({
     ...base,
     cursor: "text",
+    height: "34px",
     minHeight: "none",
     boxShadow: "none",
     borderRadius: "0px",

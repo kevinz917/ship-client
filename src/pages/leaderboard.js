@@ -12,6 +12,7 @@ import { List, WindowScroller, AutoSizer } from "react-virtualized";
 import { isMobile } from "react-device-detect";
 import { sendAmplitudeData } from "../util/amplitude";
 import Select from "react-select";
+import { StyledSelect } from "../global_styles/select";
 
 const sortFunc = (a, b) => {
   return a.votes > b.votes ? -1 : 1;
@@ -34,6 +35,13 @@ const colleges = [
   { label: "Trumbull", value: "Late lunches ftw" },
 ];
 
+const years = [
+  { label: "2021", value: "old ppl" },
+  { label: "2022", value: "juniors r cool" },
+  { label: "2023", value: "kool kids" },
+  { label: "2024", value: "scum freshman and '23 traitors" },
+];
+
 const Leaderboard = () => {
   sendAmplitudeData("visit_leaderboard");
   const dispatch = useDispatch();
@@ -45,6 +53,7 @@ const Leaderboard = () => {
   const [shipInfo, setShipInfo] = useState([]);
   const [filteredShips, setFilteredShips] = useState(ships);
   const [selectedCollege, setSelectedCollege] = useState();
+  const [selectedYear, setSelectedYear] = useState();
 
   const handleVote = useCallback(
     (id) => {
@@ -102,12 +111,18 @@ const Leaderboard = () => {
             .toLowerCase()
             .includes(
               selectedCollege ? selectedCollege.label.toLowerCase() : ""
-            ))
+            )) &&
+        (ship.userLabels[0].includes(
+          selectedYear ? selectedYear.label.slice(-2) : ""
+        ) ||
+          ship.userLabels[1].includes(
+            selectedYear ? selectedYear.label.slice(-2) : ""
+          ))
       );
     });
 
     setFilteredShips(filtered);
-  }, [searchText, shipInfo, selectedCollege]);
+  }, [searchText, shipInfo, selectedCollege, selectedYear]);
 
   let ncol = 2;
 
@@ -165,7 +180,7 @@ const Leaderboard = () => {
             />
           </Row>
           <Row className="mx-auto my-4 justify-content-center">
-            <div style={{ width: "250px", maxWidth: "250px" }}>
+            <div style={{ width: "200px", maxWidth: "200px" }} className="mr-2">
               <Select
                 options={colleges}
                 isClearable={true}
@@ -173,7 +188,20 @@ const Leaderboard = () => {
                 onChange={(college) => {
                   setSelectedCollege(college);
                 }}
-                placeholder="Select a res college..."
+                placeholder="Res College..."
+                styles={StyledSelect}
+              />
+            </div>
+            <div style={{ width: "100px", maxWidth: "100px" }}>
+              <Select
+                options={years}
+                isClearable={true}
+                value={selectedYear}
+                onChange={(year) => {
+                  setSelectedYear(year);
+                }}
+                placeholder="Grad Year..."
+                styles={StyledSelect}
               />
             </div>
           </Row>
