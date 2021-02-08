@@ -45,3 +45,10 @@ export const fetchMyShips = async () => {
     return res.data.ships;
   }
 };
+
+export const removeShip = async (shipId) => {
+  let res = await axios.post(`${Base}/ship/removeShip`, { shipId });
+  if (res) {
+    return res;
+  }
+};
