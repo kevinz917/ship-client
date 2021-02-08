@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Dropdown } from "react-bootstrap";
 import { HiArrowUp } from "react-icons/hi";
 import { Body, SubtitleMain } from "../global_styles/typography";
-import { toggleVote } from "../api/ship";
+import { toggleVote, removeShip } from "../api/ship";
 import { VotingBtn } from "../global_styles/button";
 import { StyledProfilePic, StyledShipBox } from "../global_styles/other";
 import { VscLoading } from "react-icons/vsc";
+import CustomToggle from "./customToggle";
 
 const VoteCard = ({
   ship,
@@ -15,6 +16,7 @@ const VoteCard = ({
   indx,
   disabled,
   userEmail,
+  deleteShip,
 }) => {
   const [isVoting, setIsVoting] = useState(false);
 
@@ -90,6 +92,21 @@ const VoteCard = ({
               {ship.votes + 10 * ((ship.shippers ? ship.shippers : 1) - 1)}
             </SubtitleMain>
           </Row>
+          {ship.emails.includes(userEmail) && (
+            <Row className="mx-auto mt-1 justify-content-center">
+              <Dropdown>
+                <Dropdown.Toggle
+                  as={CustomToggle}
+                  id="dropdown-custom-components"
+                ></Dropdown.Toggle>
+                <Dropdown.Menu>
+                  <Dropdown.Item onClick={() => deleteShip(ship._id, indx)}>
+                    Delete
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+            </Row>
+          )}
         </Col>
       </Row>
     </StyledShipBox>

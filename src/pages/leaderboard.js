@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from "react";
 import { Row, Col } from "react-bootstrap";
 import { Header1 } from "../global_styles/typography";
 import { MainInput } from "../global_styles/other";
-import { fetchShips } from "../api/ship";
+import { fetchShips, removeShip } from "../api/ship";
 import VoteCard from "../components/VoteCard";
 import { Spinner } from "../components/LoadingSpinner";
 import { SET_VAL } from "../redux/masterReducer";
@@ -78,6 +78,17 @@ const Leaderboard = () => {
     [dispatch, shipInfo]
   );
 
+  const deleteShip = async (shipId, indx) => {
+    // remove from shipList
+    let temp = [...shipInfo];
+    temp.splice(indx, 1);
+    temp.sort(sortFunc);
+    setShipInfo(temp);
+    dispatch(SET_VAL("ships", temp));
+
+    let res = await removeShip(shipId);
+  };
+
   useEffect(() => {
     const onMount = async () => {
       setIsLoading(true);
@@ -149,6 +160,7 @@ const Leaderboard = () => {
             indx={j}
             disabled={false}
             userEmail={userEmail}
+            deleteShip={deleteShip}
           />
         );
       }
