@@ -132,6 +132,8 @@ const Leaderboard = () => {
       );
     });
 
+    filtered.sort((a, b) => (a.votes >= b.votes ? -1 : 1));
+
     setFilteredShips(filtered);
   }, [searchText, shipInfo, selectedCollege, selectedYear]);
 
