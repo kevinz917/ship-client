@@ -30,7 +30,6 @@ const Profile = () => {
 
       let fetchedShips = await fetchMyShips();
       setMyShips(fetchedShips);
-      console.log(fetchedShips);
 
       setIsloading(false);
     };

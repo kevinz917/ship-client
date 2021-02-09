@@ -36,7 +36,6 @@ function App() {
   useEffect(() => {
     const onMount = async () => {
       const auth = await casCheck();
-      // console.log(auth);
       if (
         !auth ||
         !auth.data.auth ||
