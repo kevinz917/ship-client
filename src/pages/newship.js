@@ -13,6 +13,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { SET_VAL } from "../redux/masterReducer";
 import { TogglePrivacy } from "../api/user";
 import { sendAmplitudeData } from "../util/amplitude";
+import { Alert } from "react-bootstrap";
+
+const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
 const NewShip = () => {
   sendAmplitudeData("visit_shipping");
@@ -23,6 +26,7 @@ const NewShip = () => {
   const [isSaving, setIsSaving] = useState(false);
   const [ready, setReady] = useState(false);
   const [userInfo, setUserInfo] = useState(null);
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
     const onMount = async () => {
@@ -89,6 +93,9 @@ const NewShip = () => {
     setIsSaving(true);
     await saveShips(masterList);
     setIsSaving(false);
+    setShow(true);
+    await delay(1500);
+    setShow(false);
   };
 
   return (
@@ -144,6 +151,9 @@ const NewShip = () => {
               )}
             </MainBtn>
           )}
+          <div className="d-flex flex-row align-items-center justify-content-center">
+            {show && <div style={{ color: "green" }}>Saved ✔</div>}
+          </div>
         </NewshipContainer>
       )}
     </div>
