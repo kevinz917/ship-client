@@ -15,7 +15,9 @@ import Select from "react-select";
 import { StyledSelect } from "../global_styles/select";
 
 const sortFunc = (a, b) => {
-  return a.votes > b.votes ? -1 : 1;
+  const a_votes = a.votes + 10 * ((a.shippers ? a.shippers : 1) - 1);
+  const b_votes = b.votes + 10 * ((b.shippers ? b.shippers : 1) - 1);
+  return a_votes > b_votes ? -1 : 1;
 };
 
 const colleges = [
@@ -131,8 +133,6 @@ const Leaderboard = () => {
           ))
       );
     });
-
-    filtered.sort((a, b) => (a.votes >= b.votes ? -1 : 1));
 
     setFilteredShips(filtered);
   }, [searchText, shipInfo, selectedCollege, selectedYear]);
