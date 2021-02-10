@@ -50,8 +50,10 @@ export const StyledShipBox = styled.div`
   padding: 16px;
   margin: 10px;
 
-  box-shadow: ${(props) => (props.mine ? "0px 0px 20px #D6D6FF" : null)};
-  border: ${(props) => (props.mine ? "2.5px solid #8C8CFF" : null)};
+  box-shadow: ${(props) =>
+    props.mine ? `0px 0px 10px ${props.theme.orange}` : null};
+  border: ${(props) =>
+    props.mine ? `2.5px solid ${props.theme.orange}` : null};
 
   @media (max-width: 450px) {
     width: 100%;
