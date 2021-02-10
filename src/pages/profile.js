@@ -65,7 +65,7 @@ const Profile = () => {
     console.log(COOKIE_DOMAIN);
     document.cookie = `connect.sid=; expires=${new Date().toUTCString()}; domain=${COOKIE_DOMAIN}; path=/`;
     // Redirect to home page and refresh as well
-    window.location.pathname = "/";
+    // window.location.pathname = "/";
   };
 
   if (isLoading) {
