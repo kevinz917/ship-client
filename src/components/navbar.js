@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { Navbar, Nav } from "react-bootstrap";
 import styled from "styled-components";
-import { FiUser } from "react-icons/fi";
+// import { FiUser } from "react-icons/fi";
 
 const StyledNavLink = styled(NavLink)`
   padding: 0.5rem 3rem 0.5rem 0rem;
@@ -24,7 +24,12 @@ const StyledNavLink = styled(NavLink)`
 
 const ShipNavbar = () => {
   return (
-    <Navbar bg="white" expand="lg" className="shadow-sm" sticky="top">
+    <Navbar
+      bg="white"
+      expand="lg"
+      sticky="top"
+      style={{ borderBottom: "2.5px solid black" }}
+    >
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto">

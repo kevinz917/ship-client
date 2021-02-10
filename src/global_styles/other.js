@@ -7,7 +7,6 @@ export const MainInput = styled.input`
   color: ${({ theme }) => theme.text[0]};
   background-color: #f0f0f0;
   padding: 10px 12px;
-  border-radius: 8px;
   font-size: 17px;
 
   &:active,
@@ -32,7 +31,6 @@ export const DeleteMarker = styled.div`
 export const HeaderBlock = styled.div`
   width: 100%;
   height: 100px;
-  border-radius: 8px;
   background-color: #f3f2ff;
 `;
 
@@ -47,14 +45,13 @@ export const StyledProfilePic = styled.span`
 export const StyledShipBox = styled.div`
   width: 275px;
   background-color: ${({ theme }) => theme.surface[1]};
-  border-radius: 2px;
+  border: 2.5px solid black;
 
-  border-radius: 8px;
   padding: 16px;
   margin: 10px;
 
   box-shadow: ${(props) => (props.mine ? "0px 0px 20px #D6D6FF" : null)};
-  border: ${(props) => (props.mine ? "1px solid #8C8CFF" : null)};
+  border: ${(props) => (props.mine ? "2.5px solid #8C8CFF" : null)};
 
   @media (max-width: 450px) {
     width: 100%;

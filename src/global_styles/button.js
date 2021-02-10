@@ -10,13 +10,12 @@ export const MainBtn = styled.button`
       : null};
 
   color: ${(props) =>
-    props.primary ? "white" : props.secondary ? "#8D8D8D" : null};
+    props.primary ? "white" : props.secondary ? "black" : null};
 
   font-size: 17px;
   font-weight: 600;
   padding: 8px 14px;
-  border-radius: 8px;
-  border: none;
+  border: 2.5px solid black;
   transition: 0.1s;
   margin: 4px 0;
   width: ${(props) => props.width};
@@ -28,6 +27,10 @@ export const MainBtn = styled.button`
         : props.secondary
         ? ({ theme }) => theme.secondaryDark
         : null};
+  }
+
+  &:active {
+    transform: scale(0.95);
   }
 `;
 
@@ -41,16 +44,12 @@ export const VotingBtn = styled.div`
   color: ${(props) => (props.clicked ? ({ theme }) => "#FFFFFF" : "#000000")};
 
   padding: 7px;
-  border-radius: 8px;
   cursor: pointer;
   transition: 0.05s transform;
 
-  &:hover {
-    transform: scale(1.1);
-  }
-
-  &.active {
+  &:active {
     background-color: ${({ theme }) => theme.primary};
     color: white;
+    transform: scale(0.9);
   }
 `;

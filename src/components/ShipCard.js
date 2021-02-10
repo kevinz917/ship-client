@@ -15,7 +15,7 @@ const BlackHeader = styled.span`
 const StyledShipBox = styled.div`
   width: 100%;
   background-color: ${({ theme }) => theme.surface[1]};
-  border-radius: 8px;
+  border: 2.5px solid black;
   padding: 20px;
   margin: 6px 0px;
 `;
