@@ -4,6 +4,7 @@ import { Row } from "react-bootstrap";
 import { fetchUser } from "../api/user";
 import { fetchMyShips } from "../api/ship";
 import { MainBtn } from "../global_styles/button";
+import "../global_styles/animation.css";
 import { Base } from "../util/base";
 import { sendAmplitudeData } from "../util/amplitude";
 
@@ -57,10 +58,12 @@ const randNum = (a, b) => {
 
 const placeShip = (x, y) => {
   const newDiv = document.createElement("div");
+  const size = randNum(10, 100);
   newDiv.style.position = `absolute`;
-  newDiv.style.left = `${x - 25}px`;
-  newDiv.style.top = `${y - 25}px`;
-  newDiv.style.fontSize = `${randNum(10, 100)}px`;
+  newDiv.style.left = `${x - size / 2}px`;
+  newDiv.style.top = `${y - size / 2}px`;
+  newDiv.style.fontSize = `${size}px`;
+  newDiv.className = "rock";
   // newDiv.style.zIndex = 10;
   newDiv.style.opacity = Math.random();
   const newContent = document.createTextNode("🚢");

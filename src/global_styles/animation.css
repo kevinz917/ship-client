@@ -59,3 +59,17 @@
     transform: rotate(359deg);
   }
 }
+
+.rock {
+  animation: swing 2s infinite ease-in-out;
+}
+
+@keyframes swing {
+  0%,
+  100% {
+    transform: rotate(-10deg);
+  }
+  50% {
+    transform: rotate(10deg);
+  }
+}
