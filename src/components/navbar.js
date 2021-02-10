@@ -30,7 +30,7 @@ const ShipNavbar = () => {
         <Nav className="ml-auto">
           <StyledNavLink to="/leaderboard">Leaderboard 🔥 </StyledNavLink>
           <StyledNavLink to="/ship">Ship!</StyledNavLink>
-          <StyledNavLink to="/profile">My ships</StyledNavLink>
+          <StyledNavLink to="/profile">My Ships</StyledNavLink>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
