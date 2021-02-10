@@ -8,3 +8,9 @@ export const Theme = {
   secondary: "#D9B6F7",
   secondaryDark: "#9569BB",
 };
+
+export const GlobalStyle = createGlobalStyle`
+  body {
+    font-family: 'Nunito', sans-serif;
+  }
+`;

@@ -51,3 +51,11 @@ export const removeShip = async (shipId) => {
     return res;
   }
 };
+
+// Count ships
+export const countShips = async () => {
+  let res = await axios.post(`${Base}/ship/count`);
+  if (res) {
+    return res.data.count;
+  }
+};

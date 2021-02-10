@@ -5,7 +5,7 @@ import {
   Switch,
   Redirect,
 } from "react-router-dom";
-import { Theme } from "./global_styles/themes";
+import { Theme, GlobalStyle } from "./global_styles/themes";
 import { ThemeProvider } from "styled-components";
 import axios from "axios";
 import { casCheck } from "./api/user";
@@ -55,20 +55,23 @@ function App() {
     <TempLanding />
   ) : (
     <ThemeProvider theme={Theme}>
-      <Router>
-        <ShipNavbar />
-        {auth !== -1 && (
-          <Switch>
-            <PrivateRoute exact path="/leaderboard" component={Leaderboard} />
-            <PrivateRoute exact path="/ship" component={NewShip} />
-            <PrivateRoute exact path="/profile" component={Profile} />
-            <Route exact path="/">
-              {auth ? <Redirect to="/ship" /> : <Landing />}
-            </Route>
-            <Route exact={false} component={NotFound} />
-          </Switch>
-        )}
-      </Router>
+      <div style={{ width: "100%", height: "100%" }}>
+        <Router>
+          <GlobalStyle />
+          <ShipNavbar />
+          {auth !== -1 && (
+            <Switch>
+              <PrivateRoute exact path="/leaderboard" component={Leaderboard} />
+              <PrivateRoute exact path="/ship" component={NewShip} />
+              <PrivateRoute exact path="/profile" component={Profile} />
+              <Route exact path="/">
+                {auth ? <Redirect to="/ship" /> : <Landing />}
+              </Route>
+              <Route exact={false} component={NotFound} />
+            </Switch>
+          )}
+        </Router>
+      </div>
     </ThemeProvider>
   );
 }
