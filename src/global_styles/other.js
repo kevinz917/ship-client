@@ -4,9 +4,10 @@ export const MainInput = styled.input`
   width: 350px;
   max-width: 400px;
   border: none;
+  border-bottom: 2px solid ${({ theme }) => theme.primary};
   color: ${({ theme }) => theme.text[0]};
-  background-color: #f0f0f0;
-  padding: 10px 12px;
+  background-color: transparent;
+  // padding: 10px 12px;
   font-size: 17px;
 
   &:active,
@@ -44,8 +45,7 @@ export const StyledProfilePic = styled.span`
 
 export const StyledShipBox = styled.div`
   width: 275px;
-  background-color: ${({ theme }) => theme.surface[1]};
-  border: 2.5px solid black;
+  border: 2.5px solid ${({ theme }) => theme.primary};
 
   padding: 16px;
   margin: 10px;

@@ -15,7 +15,7 @@ import { PROD } from "./util/base";
 import { setAmplitudeUserId } from "./util/amplitude";
 
 // pages
-import Landing from "./pages/landing";
+import Landing from "./pages/newlanding";
 import Leaderboard from "./pages/leaderboard";
 import NewShip from "./pages/newship";
 import Profile from "./pages/profile";
@@ -55,7 +55,7 @@ function App() {
     <TempLanding />
   ) : (
     <ThemeProvider theme={Theme}>
-      <div style={{ width: "100%", height: "100%" }}>
+      <div style={{ width: "100vw", height: "100vh" }}>
         <Router>
           <GlobalStyle />
           <ShipNavbar />

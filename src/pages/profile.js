@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Row } from "react-bootstrap";
-import { Header3 } from "../global_styles/typography";
+import { Header2 } from "../global_styles/typography";
 import { MainBtn } from "../global_styles/button";
 import { fetchUser, TogglePrivacy } from "../api/user";
 import { fetchMyShips } from "../api/ship";
@@ -75,14 +75,13 @@ const Profile = () => {
   return (
     <>
       <div style={{ maxWidth: "500px" }} className="ml-auto mr-auto fade-in">
-        <br />
         <div style={{ padding: "10px" }} className="w-100">
-          <Header3 className="mb-2">My profile</Header3>
+          <Header2 className="mb-2">My profile</Header2>
           <Body>Privacy setting: {info[userInfo.privacy]}</Body>
           {isChanging ? (
             <Spinner />
           ) : (
-            <MainBtn secondary onClick={() => togglePrivacy()}>
+            <MainBtn secondary onClick={() => togglePrivacy()} className="mt-2">
               {userInfo.privacy === "public"
                 ? "Toggle to private"
                 : userInfo.privacy === "private"
@@ -98,7 +97,7 @@ const Profile = () => {
         className="ml-auto mr-auto mt-4 fade-in"
       >
         <div style={{ padding: "10px" }} className="w-100">
-          <Header3 className="mb-2">My ships</Header3>
+          <Header2 className="mb-2">My ships</Header2>
         </div>
       </div>
       <Row className="mx-auto justify-content-center">

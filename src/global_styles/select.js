@@ -6,11 +6,13 @@ export const StyledSelect = {
   }),
   singleValue: (base) => ({
     ...base,
-    color: "black",
+    color: "#3623A9",
+    fontWeight: 500,
   }),
   input: (base) => ({
     ...base,
-    color: "black",
+    color: "#3623A9",
+    fontWeight: 500,
   }),
   placeholder: (base) => ({
     ...base,
@@ -41,10 +43,10 @@ export const StyledSelect = {
     borderRadius: "0px",
     border: "none",
     backgroundColor: "transparent",
-    borderBottom: "2px solid #D6D6D6",
+    borderBottom: "2px solid #3623A9",
     ":hover": {
       border: "none",
-      borderBottom: "2px solid black",
+      borderBottom: "2px solid #1F1267",
     },
   }),
 };

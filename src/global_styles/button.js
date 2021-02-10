@@ -1,37 +1,29 @@
 import styled from "styled-components";
 
 export const MainBtn = styled.button`
-  /* Adapt the colors based on primary prop */
-  background: ${(props) =>
-    props.primary
-      ? ({ theme }) => theme.primary
-      : props.secondary
-      ? ({ theme }) => theme.secondary
-      : null};
-
-  color: ${(props) =>
-    props.primary ? "white" : props.secondary ? "black" : null};
-
+  border-radius: 0;
+  box-shadow: -6px 6px 0 0
+    ${({ theme, primary }) => (primary ? theme.secondary : theme.primary)};
+  transition: 0.3s;
   font-size: 17px;
   font-weight: 600;
   padding: 8px 14px;
-  border: 2.5px solid black;
-  transition: 0.1s;
-  margin: 4px 0;
+  background-color: ${({ theme, primary, secondary }) =>
+    primary ? theme.primary : secondary ? theme.secondary : theme.orange};
+  color: ${({ theme, primary }) => (primary ? theme.secondary : theme.primary)};
+  border: 2.5px solid
+    ${({ theme, primary }) => (primary ? theme.secondary : theme.primary)};
+
   width: ${(props) => props.width};
 
   &:hover {
-    background: ${(props) =>
-      props.primary
-        ? ({ theme }) => theme.primaryDark
-        : props.secondary
-        ? ({ theme }) => theme.secondaryDark
-        : null};
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25);
-  }
-
-  &:active {
-    transform: scale(0.95);
+    background: transparent;
+    box-shadow: 0 0 0 0
+        ${({ theme, primary }) => (primary ? theme.secondary : theme.primary)},
+      inset 108px 72px 0 0
+        ${({ theme, primary }) => (primary ? theme.secondary : theme.primary)};
+    color: ${({ theme, primary }) =>
+      primary ? theme.primary : theme.secondary};
   }
 `;
 
@@ -47,6 +39,13 @@ export const VotingBtn = styled.div`
   padding: 7px;
   cursor: pointer;
   transition: 0.05s transform;
+
+  &:hover {
+    background-color: ${(props) =>
+      props.clicked
+        ? ({ theme }) => theme.primaryDark
+        : ({ theme }) => theme.surface[3]};
+  }
 
   &:active {
     background-color: ${({ theme }) => theme.primary};

@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { Row, Col } from "react-bootstrap";
-import { Header1 } from "../global_styles/typography";
+import { Header2 } from "../global_styles/typography";
 import { MainInput } from "../global_styles/other";
 import { fetchShips, removeShip } from "../api/ship";
 import VoteCard from "../components/VoteCard";
@@ -80,16 +80,19 @@ const Leaderboard = () => {
     [dispatch, shipInfo]
   );
 
-  const deleteShip = async (shipId, indx) => {
-    // remove from shipList
-    let temp = [...shipInfo];
-    temp.splice(indx, 1);
-    temp.sort(sortFunc);
-    setShipInfo(temp);
-    dispatch(SET_VAL("ships", temp));
+  const deleteShip = useCallback(
+    async (shipId, indx) => {
+      // remove from shipList
+      let temp = [...shipInfo];
+      temp.splice(indx, 1);
+      temp.sort(sortFunc);
+      setShipInfo(temp);
+      dispatch(SET_VAL("ships", temp));
 
-    let res = await removeShip(shipId);
-  };
+      let res = await removeShip(shipId);
+    },
+    [dispatch, shipInfo]
+  );
 
   useEffect(() => {
     const onMount = async () => {
@@ -173,13 +176,21 @@ const Leaderboard = () => {
         </div>
       );
     },
-    [filteredShips, handleVote, updateShip, userVotes, ncol, userEmail]
+    [
+      filteredShips,
+      handleVote,
+      updateShip,
+      userVotes,
+      ncol,
+      userEmail,
+      deleteShip,
+    ]
   );
 
   return (
-    <Col className="p-0 fade-in w-100">
-      <Row className="mx-auto justify-content-center mt-lg-5 mt-3">
-        <Header1>Leaderboard ✌️</Header1>
+    <Col className="fade-in w-100" style={{ padding: "10px" }}>
+      <Row className="mx-auto justify-content-center">
+        <Header2>Leaderboard ✌️</Header2>
       </Row>
       {isLoading ? (
         <Spinner />
@@ -233,7 +244,7 @@ const Leaderboard = () => {
                     onScroll={onChildScroll}
                     scrollTop={scrollTop}
                     rowCount={Math.ceil(filteredShips.length / ncol)}
-                    rowHeight={156}
+                    rowHeight={169}
                     rowRenderer={renderRow}
                     style={{ outline: "none" }}
                   />

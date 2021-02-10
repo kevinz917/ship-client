@@ -8,14 +8,13 @@ import { VscLoading } from "react-icons/vsc";
 
 const BlackHeader = styled.span`
   font-weight: 500;
-  color: ${({ theme }) => theme.text[0]};
+  color: ${({ theme }) => theme.primary};
   font-size: 24px;
 `;
 
 const StyledShipBox = styled.div`
   width: 100%;
-  background-color: ${({ theme }) => theme.surface[1]};
-  border: 2.5px solid black;
+  border: 2.5px solid ${({ theme }) => theme.primary};
   padding: 20px;
   margin: 6px 0px;
 `;

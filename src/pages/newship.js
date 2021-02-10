@@ -7,7 +7,6 @@ import { saveShips } from "../api/ship";
 import Shipcard from "../components/ShipCard";
 import { Spinner } from "../components/LoadingSpinner";
 import { NewshipContainer } from "../global_styles/other";
-import Shipbanner from "../assets/shipbanner.png";
 import { VscLoading } from "react-icons/vsc";
 import { useSelector, useDispatch } from "react-redux";
 import { SET_VAL } from "../redux/masterReducer";
@@ -101,10 +100,9 @@ const NewShip = () => {
   return (
     <div
       style={{ maxWidth: "700px", padding: "10px" }}
-      className="ml-auto mr-auto mt-lg-4 mt-1 fade-in"
+      className="mx-auto fade-in"
     >
-      <img src={Shipbanner} alt="Ship banner" style={{ maxWidth: "100%" }} />
-      <div className="ml-auto mr-auto mt-lg-4 mt-2 text-center">
+      <div className="mx-auto text-center">
         <Header2>Create your ships </Header2>
         <SubtitleMain>Up to 3 pairs</SubtitleMain>
       </div>
@@ -135,11 +133,11 @@ const NewShip = () => {
             ))}
           </Row>
           <br />
-          <MainBtn secondary width="100%" onClick={addShip}>
+          <MainBtn secondary width="100%" onClick={addShip} className="mb-3">
             Add new ship
           </MainBtn>
-          {ready && (
-            <MainBtn primary width="100%" onClick={submitShip}>
+          {ready && masterList.length > 0 && (
+            <MainBtn orange width="100%" onClick={submitShip} className="mb-3">
               {isSaving ? (
                 <VscLoading
                   size={20}
@@ -147,7 +145,7 @@ const NewShip = () => {
                   style={{ color: "white" }}
                 />
               ) : (
-                "Save"
+                "Submit"
               )}
             </MainBtn>
           )}

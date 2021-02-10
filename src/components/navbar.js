@@ -1,21 +1,23 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { Navbar, Nav } from "react-bootstrap";
 import styled from "styled-components";
+import Logo from "../assets/logo.svg";
+import { useLocation } from "react-router-dom";
 // import { FiUser } from "react-icons/fi";
 
 const StyledNavLink = styled(NavLink)`
   padding: 0.5rem 3rem 0.5rem 0rem;
   transition: 0.1s;
-  font-size: 17px;
-  color: ${({ theme }) => theme.text[1]};
+  font-size: 28px;
+  color: ${({ theme }) => theme.primaryDark};
   font-weight: 500;
   &:hover {
     text-decoration: none !important;
-    color: ${({ theme }) => theme.text[0]};
+    color: ${({ theme }) => theme.orange};
   }
   &.active {
-    color: ${({ theme }) => theme.primary};
+    color: ${({ theme }) => theme.orange};
   }
 
   @media (max-width: 450px) {
@@ -24,19 +26,28 @@ const StyledNavLink = styled(NavLink)`
 `;
 
 const ShipNavbar = () => {
+  const location = useLocation();
+
   return (
     <Navbar
-      bg="white"
       expand="lg"
-      sticky="top"
-      style={{ borderBottom: "2.5px solid black" }}
+      fixed={location.pathname === "/" ? "top" : null}
+      sticky={location.pathname === "/" ? null : "top"}
+      style={{
+        zIndex: 69,
+        padding: "1.5rem 0",
+        backgroundColor: location.pathname === "/" ? "transparent" : "#F6EBFF",
+      }}
     >
+      <Navbar.Brand as={Link} to="/" style={{ marginLeft: "3rem" }}>
+        <img src={Logo} height={40} />
+      </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto">
-          <StyledNavLink to="/leaderboard">Leaderboard 🔥</StyledNavLink>
-          <StyledNavLink to="/ship">Ship!</StyledNavLink>
-          <StyledNavLink to="/profile">My Ships</StyledNavLink>
+          <StyledNavLink to="/leaderboard">leaderboard</StyledNavLink>
+          <StyledNavLink to="/ship">ship!</StyledNavLink>
+          <StyledNavLink to="/profile">my ships</StyledNavLink>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
