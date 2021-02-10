@@ -8,6 +8,7 @@ import { Body } from "../global_styles/typography";
 import { Spinner } from "../components/LoadingSpinner";
 import Votecard from "../components/VoteCard";
 import { sendAmplitudeData } from "../util/amplitude";
+import { COOKIE_DOMAIN } from "../util/base";
 
 const sortFunc = (a, b) => {
   const a_votes = a.votes + 10 * ((a.shippers ? a.shippers : 1) - 1);
@@ -61,11 +62,7 @@ const Profile = () => {
   const Logout = () => {
     sendAmplitudeData("log_out");
     // Clear cookies
-    document.cookie.split(";").forEach((c) => {
-      document.cookie = c
-        .replace(/^ +/, "")
-        .replace(/=.*/, `=;expires=${new Date().toUTCString()};path=/`);
-    });
+    document.cookie = `connect.sid=; expires=${new Date().toUTCString()}; domain=${COOKIE_DOMAIN}; path=/`;
     // Redirect to home page and refresh as well
     window.location.pathname = "/";
   };
