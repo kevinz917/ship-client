@@ -104,7 +104,7 @@ const NewShip = () => {
     >
       <div className="mx-auto text-center">
         <Header2>Create your ships </Header2>
-        <SubtitleMain>Up to 3 pairs</SubtitleMain>
+        <SubtitleMain>Up to 3 ships</SubtitleMain>
       </div>
       {isLoading ? (
         <Spinner />
@@ -133,9 +133,11 @@ const NewShip = () => {
             ))}
           </Row>
           <br />
-          <MainBtn secondary width="100%" onClick={addShip} className="mb-3">
-            Add new ship
-          </MainBtn>
+          {masterList.length < 3 && (
+            <MainBtn secondary width="100%" onClick={addShip} className="mb-3">
+              Add new ship
+            </MainBtn>
+          )}
           {ready && masterList.length > 0 && (
             <MainBtn orange width="100%" onClick={submitShip} className="mb-3">
               {isSaving ? (
