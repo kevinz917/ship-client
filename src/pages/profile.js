@@ -59,14 +59,14 @@ const Profile = () => {
     setIsChanging(false);
   };
 
-  const Logout = () => {
-    sendAmplitudeData("log_out");
-    // Clear cookies
-    console.log(COOKIE_DOMAIN);
-    document.cookie = `connect.sid=; expires=${new Date().toUTCString()}; domain=${COOKIE_DOMAIN}; path=/`;
-    // Redirect to home page and refresh as well
-    // window.location.pathname = "/";
-  };
+  // const Logout = () => {
+  //   sendAmplitudeData("log_out");
+  //   // Clear cookies
+  //   console.log(COOKIE_DOMAIN);
+  //   document.cookie = `connect.sid=; expires=${new Date().toUTCString()}; domain=${COOKIE_DOMAIN}; path=/`;
+  //   // Redirect to home page and refresh as well
+  //   // window.location.pathname = "/";
+  // };
 
   if (isLoading) {
     return <Spinner />;
@@ -74,6 +74,25 @@ const Profile = () => {
 
   return (
     <>
+      <div style={{ maxWidth: "500px" }} className="ml-auto mr-auto fade-in">
+        <br />
+        <div style={{ padding: "10px" }} className="w-100">
+          <Header3 className="mb-2">My profile</Header3>
+          <Body>Privacy setting: {info[userInfo.privacy]}</Body>
+          {isChanging ? (
+            <Spinner />
+          ) : (
+            <MainBtn secondary onClick={() => togglePrivacy()}>
+              {userInfo.privacy === "public"
+                ? "Toggle to private"
+                : userInfo.privacy === "private"
+                ? "Toggle to public"
+                : null}
+            </MainBtn>
+          )}
+          <br />
+        </div>
+      </div>
       <div
         style={{ maxWidth: "500px" }}
         className="ml-auto mr-auto mt-4 fade-in"
@@ -91,28 +110,6 @@ const Profile = () => {
           </Row>
         </div>
       </Row>
-      <div style={{ maxWidth: "500px" }} className="ml-auto mr-auto fade-in">
-        <div style={{ padding: "10px" }} className="w-100">
-          <hr />
-          <Header3 className="mb-2">My profile</Header3>
-          <Body>Privacy setting: {info[userInfo.privacy]}</Body>
-          {isChanging ? (
-            <Spinner />
-          ) : (
-            <MainBtn secondary onClick={() => togglePrivacy()}>
-              {userInfo.privacy === "public"
-                ? "Toggle to private"
-                : userInfo.privacy === "private"
-                ? "Toggle to public"
-                : null}
-            </MainBtn>
-          )}
-          <br />
-          <MainBtn primary onClick={Logout}>
-            Log out
-          </MainBtn>
-        </div>
-      </div>
     </>
   );
 };
