@@ -62,6 +62,7 @@ const Profile = () => {
   const Logout = () => {
     sendAmplitudeData("log_out");
     // Clear cookies
+    console.log(COOKIE_DOMAIN);
     document.cookie = `connect.sid=; expires=${new Date().toUTCString()}; domain=${COOKIE_DOMAIN}; path=/`;
     // Redirect to home page and refresh as well
     window.location.pathname = "/";
