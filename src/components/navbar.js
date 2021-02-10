@@ -7,6 +7,7 @@ import styled from "styled-components";
 const StyledNavLink = styled(NavLink)`
   padding: 0.5rem 3rem 0.5rem 0rem;
   transition: 0.1s;
+  font-size: 17px;
   color: ${({ theme }) => theme.text[1]};
   font-weight: 500;
   &:hover {
@@ -33,7 +34,7 @@ const ShipNavbar = () => {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto">
-          <StyledNavLink to="/leaderboard">Leaderboard 🔥 </StyledNavLink>
+          <StyledNavLink to="/leaderboard">Leaderboard 🔥</StyledNavLink>
           <StyledNavLink to="/ship">Ship!</StyledNavLink>
           <StyledNavLink to="/profile">My Ships</StyledNavLink>
         </Nav>

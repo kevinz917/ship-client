@@ -26,7 +26,7 @@ import TempLanding from "./pages/tempLanding";
 //components
 import ShipNavbar from "./components/navbar";
 
-const dotenv = require("dotenv");
+// const dotenv = require("dotenv");
 
 function App() {
   const dispatch = useDispatch();
