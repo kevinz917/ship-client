@@ -9,6 +9,12 @@ import { Spinner } from "../components/LoadingSpinner";
 import Votecard from "../components/VoteCard";
 import { sendAmplitudeData } from "../util/amplitude";
 
+const sortFunc = (a, b) => {
+  const a_votes = a.votes + 10 * ((a.shippers ? a.shippers : 1) - 1);
+  const b_votes = b.votes + 10 * ((b.shippers ? b.shippers : 1) - 1);
+  return a_votes > b_votes ? -1 : 1;
+};
+
 const Profile = () => {
   sendAmplitudeData("visit_profile");
 
@@ -29,6 +35,7 @@ const Profile = () => {
       setUserInfo(fetchedUser);
 
       let fetchedShips = await fetchMyShips();
+      fetchedShips.sort(sortFunc);
       setMyShips(fetchedShips);
 
       setIsloading(false);
