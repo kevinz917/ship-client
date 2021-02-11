@@ -89,7 +89,8 @@ const VoteCard = ({
           )}
           <Row className="mx-auto mt-1 justify-content-center">
             <SubtitleMain>
-              {ship.votes + 10 * ((ship.shippers ? ship.shippers : 1) - 1)}
+              {ship.votes + 10 * ((ship.shippers ? ship.shippers : 1) - 1)}{" "}
+              {disabled && "votes"}
             </SubtitleMain>
           </Row>
           {ship.emails.includes(userEmail) && (
