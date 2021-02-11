@@ -7,6 +7,7 @@ import { MainBtn } from "../global_styles/button";
 import "../global_styles/animation.css";
 import { Base } from "../util/base";
 import { sendAmplitudeData } from "../util/amplitude";
+import Hero from "../assets/hero.png";
 
 const StyledBackground = styled.div`
   width: 100vw;
@@ -26,6 +27,9 @@ const StyledTitleBackground = styled.div`
     rgba(255, 207, 181, 0) 60%
   );
   display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
   color: ${({ theme }) => theme.primary};
   padding: 50px;
 
@@ -46,6 +50,19 @@ const StyledTitleBackground = styled.div`
   }
 `;
 
+const Container = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  max-width: 1000px;
+  margin: 0 auto;
+
+  @media (max-width: 450px) {
+    flex-direction: column;
+    max-width: 100%;
+  }
+`;
+
 const StyledTitle = styled.span`
   font-size: 60px;
   font-weight: 700;
@@ -54,6 +71,22 @@ const StyledTitle = styled.span`
   @media (max-width: 450px) {
     font-size: 40px;
     font-weight: 700;
+  }
+`;
+
+const HeroContainer = styled.div`
+  margin-left: 50px;
+  @media (max-width: 450px) {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 30px;
+  }
+`;
+
+const HeroImage = styled.img`
+  width: 450px;
+  @media (max-width: 450px) {
+    width: 100%;
   }
 `;
 
@@ -89,18 +122,6 @@ const placeShip = (x, y) => {
   document.body.insertBefore(newDiv, currentDiv);
 };
 
-// Place ships randomly
-// const initialPlacement = () => {
-//   const { innerWidth: width, innerHeight: height } = window;
-//   for (let i = 0; i < 10; i++) {
-//     let w = randNum(0, width);
-//     let h = randNum(0, height);
-//     placeShip(w, h);
-//   }
-// };
-
-// initialPlacement();
-
 const Landing = () => {
   const [name, setName] = useState("");
   const [shipCnt, setShipCnt] = useState(0);
@@ -132,31 +153,36 @@ const Landing = () => {
       onClick={(e) => setCoordinates(e.clientX, e.clientY)}
     >
       <StyledTitleBackground>
-        <div className={"my-auto fade-in"}>
-          <Row className="mx-auto">
-            <StyledTitle>
-              Ship friends.
-              <br />
-              Vote couples.
-            </StyledTitle>
-          </Row>
-          <Row className="mx-auto mt-4 mb-5">
-            <StyledDescription style={{ maxWidth: "500px" }}>
-              <div className="mb-3">Hey Yalies ~</div>
-              The creators of YPost are back with Ship, a fun way to set up your
-              friends this Valentine's day :)
-            </StyledDescription>
-          </Row>
-          <MainBtn
-            width="100%"
-            onClick={() => {
-              sendAmplitudeData("login");
-              window.location.href = `${Base}/auth/cas`;
-            }}
-          >
-            Log in with CAS
-          </MainBtn>
-        </div>
+        <Container>
+          <div className={"my-auto fade-in"} style={{ maxWidth: "400px" }}>
+            <Row className="mx-auto">
+              <StyledTitle>
+                Ship friends,
+                <br />
+                Vote couples.
+              </StyledTitle>
+            </Row>
+            <Row className="mx-auto mt-4 mb-5">
+              <StyledDescription style={{ maxWidth: "500px" }}>
+                <div className="mb-3">Hey Yalies ~</div>
+                The creators of YPost are back with Ship, a fun way to set up
+                your friends this Valentine's day :)
+              </StyledDescription>
+            </Row>
+            <MainBtn
+              width="100%"
+              onClick={() => {
+                sendAmplitudeData("login");
+                window.location.href = `${Base}/auth/cas`;
+              }}
+            >
+              Log in with CAS
+            </MainBtn>
+          </div>
+          <HeroContainer className="fade-in rock-slow">
+            <HeroImage src={Hero} alt="hero" />
+          </HeroContainer>
+        </Container>
       </StyledTitleBackground>
     </StyledBackground>
   );
