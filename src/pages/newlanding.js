@@ -17,7 +17,6 @@ const StyledBackground = styled.div`
 
 const StyledTitleBackground = styled.div`
   width: 100vw;
-  margin-right: auto;
   height: 100vh;
   background-image: radial-gradient(
     circle at 10% 20%,
@@ -28,6 +27,13 @@ const StyledTitleBackground = styled.div`
   );
   display: flex;
   color: ${({ theme }) => theme.primary};
+  padding: 50px;
+
+  @media (max-width: 450px) {
+    font-size: 40px;
+    font-weight: 700;
+    padding: 20px;
+  }
 
   .loading {
     opacity: 0;
@@ -44,6 +50,11 @@ const StyledTitle = styled.span`
   font-size: 60px;
   font-weight: 700;
   line-height: 1.2;
+
+  @media (max-width: 450px) {
+    font-size: 40px;
+    font-weight: 700;
+  }
 `;
 
 const StyledDescription = styled.span`
@@ -72,6 +83,18 @@ const placeShip = (x, y) => {
   const currentDiv = document.getElementById("root");
   document.body.insertBefore(newDiv, currentDiv);
 };
+
+// Place ships randomly
+// const initialPlacement = () => {
+//   const { innerWidth: width, innerHeight: height } = window;
+//   for (let i = 0; i < 10; i++) {
+//     let w = randNum(0, width);
+//     let h = randNum(0, height);
+//     placeShip(w, h);
+//   }
+// };
+
+// initialPlacement();
 
 const Landing = () => {
   const [name, setName] = useState("");
@@ -104,15 +127,7 @@ const Landing = () => {
       onClick={(e) => setCoordinates(e.clientX, e.clientY)}
     >
       <StyledTitleBackground>
-        <div className={"my-auto fade-in"} style={{ marginLeft: "5rem" }}>
-          {/* <Row className="mx-auto">
-            <StyledTitle>{"Hello, " + name}</StyledTitle>
-          </Row>
-          <Row className="mx-auto">
-            <StyledDescription>{`You have ${shipCnt} ship${
-              shipCnt === 1 ? "" : "s"
-            }`}</StyledDescription>
-          </Row> */}
+        <div className={"my-auto fade-in"}>
           <Row className="mx-auto">
             <StyledTitle>
               Ship friends.
