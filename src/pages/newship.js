@@ -145,7 +145,7 @@ const NewShip = () => {
               Add new ship
             </MainBtn>
           )}
-          {ready && masterList.length > 0 && (
+          {ready && (
             <MainBtn orange width="100%" onClick={submitShip} className="mb-3">
               {isSaving ? (
                 <VscLoading
