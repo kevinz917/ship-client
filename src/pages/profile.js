@@ -78,7 +78,12 @@ const Profile = () => {
         style={{ overflow: "scroll", maxHeight: "400px" }}
       >
         {myShips.map((ship, idx) => (
-          <Votecard ship={ship} disabled={true} userEmail={userInfo.email} />
+          <Votecard
+            ship={ship}
+            disabled={true}
+            userEmail={userInfo.email}
+            userName={userInfo.name}
+          />
         ))}
       </div>
       <br />
@@ -91,9 +96,10 @@ const Profile = () => {
       {userInfo.answers && (
         <Formik
           initialValues={{
-            restaurant: userInfo.answers[0],
-            study: userInfo.answers[1],
-            cereal: userInfo.answers[2],
+            contact: userInfo.answers[0],
+            restaurant: userInfo.answers[1],
+            study: userInfo.answers[2],
+            cereal: userInfo.answers[3],
           }}
           onSubmit={async (values, { setSubmitting }) => {
             await SaveAnswers(values);
@@ -102,6 +108,11 @@ const Profile = () => {
         >
           {({ errors, isSubmitting, handleSubmit }) => (
             <Form onSubmit={handleSubmit}>
+              <div>
+                <Body className="mb-1">How should people contact you?</Body>
+                <Field name="contact" className="otherField" />
+              </div>
+              <br />
               <div>
                 <Body className="mb-1">Favorite New Haven restaurant?</Body>
                 <Field name="restaurant" className="otherField" />

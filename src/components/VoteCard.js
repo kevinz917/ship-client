@@ -22,6 +22,7 @@ const VoteCard = ({
   indx,
   disabled,
   userEmail,
+  userName,
   deleteShip,
 }) => {
   const [isVoting, setIsVoting] = useState(false);
@@ -59,6 +60,7 @@ const VoteCard = ({
   }
 
   const questions = [
+    "How should people contact you?",
     "Favorite New Haven Restaurant?",
     "Favorite study spot?",
     "Is cereal a soup?",
@@ -70,15 +72,25 @@ const VoteCard = ({
     <StyledShipBox mine={ship.emails.includes(userEmail)} disabled={disabled}>
       <Row className="mx-auto">
         <Col className="p-0">
-          <Row className="mx-auto mt-2">
-            <Header4>{ship.userNames[0]}</Header4>
-          </Row>
-          <Row className="mx-auto">
-            <SmallSubtitle>and</SmallSubtitle>
-          </Row>
-          <Row className="mx-auto">
-            <Header4>{ship.userNames[1]}</Header4>
-          </Row>
+          {disabled ? (
+            <Row className="mx-auto mt-2">
+              <Header4>
+                {ship.userNames[1 - ship.userNames.indexOf(userName)]}
+              </Header4>
+            </Row>
+          ) : (
+            <>
+              <Row className="mx-auto mt-2">
+                <Header4>{ship.userNames[0]}</Header4>
+              </Row>
+              <Row className="mx-auto">
+                <SmallSubtitle>and</SmallSubtitle>
+              </Row>
+              <Row className="mx-auto">
+                <Header4>{ship.userNames[1]}</Header4>
+              </Row>
+            </>
+          )}
           {disabled && answers.length > 0 ? (
             <div>
               <hr />
@@ -89,13 +101,9 @@ const VoteCard = ({
                     <Body>{answers[idx]}</Body>
                     <div style={{ height: "8px" }} />
                   </div>
-                ) : (
-                  <div />
-                )
+                ) : // <div />
+                null
               )}
-              {/*<hr />
-              <Row className="mx-auto">{ship.emails[0]}</Row>
-              <Row className="mx-auto">{ship.emails[1]}</Row>*/}
             </div>
           ) : null}
         </Col>
