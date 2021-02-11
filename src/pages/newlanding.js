@@ -167,9 +167,7 @@ const Landing = () => {
                 The creators of YPost are back with Ship, a fun way to set up
                 your friends this Valentine's day :)
               </StyledDescription>
-            </Row>
-            <Row className="mx-auto">
-              <Body>
+              <Body className="mt-4">
                 Total ships: {shipCnt === -1 ? "Loading..." : shipCnt}
               </Body>
             </Row>

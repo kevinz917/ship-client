@@ -36,10 +36,10 @@ const NewShip = () => {
       if (fetchedInfo.privacy !== "private") {
         let fetchedShips = await fetchShips();
         setMasterList(fetchedShips);
-        // add a ship if empty
-        if (fetchedShips.length === 0) {
-          setMasterList([...masterList, [null, null]]);
-        }
+        // // add a ship if empty
+        // if (fetchedShips.length === 0) {
+        //   setMasterList([...masterList, [null, null]]);
+        // }
       }
 
       if (studentList.length === 0) {
