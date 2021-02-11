@@ -75,13 +75,17 @@ const Profile = () => {
       className="ml-auto mr-auto fade-in"
     >
       <Header2 className="mb-2">My ships</Header2>
-      <Body>Click on a card to see more details</Body>
-      <br />
-      <div className="d-flex flex-row" style={{ overflow: "scroll" }}>
+      <div
+        className="d-flex flex-column"
+        style={{ overflow: "scroll", maxHeight: "400px" }}
+      >
         {myShips.map((ship, idx) => (
-          <div style={{ width: "400px" }}>
-            <Votecard ship={ship} disabled={true} />
-          </div>
+          <Votecard
+            ship={ship}
+            disabled={true}
+            style={{ width: "100%" }}
+            userEmail={userInfo.email}
+          />
         ))}
       </div>
       <br />

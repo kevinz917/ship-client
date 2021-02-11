@@ -41,3 +41,9 @@ export const SubtitleMain = styled.div`
   font-weight: 500;
   font-size: 20px;
 `;
+
+export const SmallSubtitle = styled.div`
+  color: ${({ theme }) => theme.text[1]};
+  font-weight: 500;
+  font-size: 14px;
+`;

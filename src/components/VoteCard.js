@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Row, Col, Dropdown } from "react-bootstrap";
 import { HiArrowUp } from "react-icons/hi";
-import { Body, SubtitleMain } from "../global_styles/typography";
+import { Body, SubtitleMain, SmallSubtitle } from "../global_styles/typography";
 import { toggleVote, removeShip } from "../api/ship";
 import { VotingBtn } from "../global_styles/button";
 import { StyledProfilePic, StyledShipBox } from "../global_styles/other";
 import { VscLoading } from "react-icons/vsc";
 import CustomToggle from "./customToggle";
+import { fetchUserAnswers } from "../api/user";
 
 const VoteCard = ({
   ship,
@@ -19,6 +20,18 @@ const VoteCard = ({
   deleteShip,
 }) => {
   const [isVoting, setIsVoting] = useState(false);
+  const [answers, setAnswers] = useState([]);
+
+  useEffect(() => {
+    const onMount = async () => {
+      if (disabled) {
+        // Fetch ship partner's answers
+        let res = await fetchUserAnswers(userEmail, ship._id);
+        setAnswers(res);
+      }
+    };
+    onMount();
+  }, []);
 
   let voteToggle = null;
   let toggle = null;
@@ -40,14 +53,16 @@ const VoteCard = ({
     };
   }
 
+  const questions = [
+    "Favorite New Haven Restaurant?",
+    "Fav study spot?",
+    "Is cereal a soup?",
+  ];
+
   return (
-    <StyledShipBox mine={ship.emails.includes(userEmail)}>
+    <StyledShipBox mine={ship.emails.includes(userEmail)} disabled={disabled}>
       <Row className="mx-auto">
         <Col className="p-0">
-          <Row className="mx-auto">
-            <StyledProfilePic />
-            <StyledProfilePic />
-          </Row>
           <Row className="mx-auto mt-2">
             <Body>{ship.userNames[0]}</Body>
           </Row>
@@ -57,16 +72,21 @@ const VoteCard = ({
           <Row className="mx-auto">
             <Body>{ship.userNames[1]}</Body>
           </Row>
-          {disabled && (
+          {disabled && answers.length > 0 ? (
             <div>
               <hr />
-              <Row className="mx-auto">
-                <strong>Contacts</strong>
-              </Row>
+              {questions.map((question, idx) => (
+                <div>
+                  <SmallSubtitle>{question}</SmallSubtitle>
+                  <Body>{answers[idx]}</Body>
+                  <div style={{ height: "8px" }} />
+                </div>
+              ))}
+              <hr />
               <Row className="mx-auto">{ship.emails[0]}</Row>
               <Row className="mx-auto">{ship.emails[1]}</Row>
             </div>
-          )}
+          ) : null}
         </Col>
         <Col xs="auto" className="p-0">
           {!disabled && (
@@ -93,7 +113,7 @@ const VoteCard = ({
               {disabled && "votes"}
             </SubtitleMain>
           </Row>
-          {ship.emails.includes(userEmail) && (
+          {ship.emails.includes(userEmail) && !disabled ? (
             <Row className="mx-auto mt-1 justify-content-center">
               <Dropdown>
                 <Dropdown.Toggle
@@ -107,7 +127,7 @@ const VoteCard = ({
                 </Dropdown.Menu>
               </Dropdown>
             </Row>
-          )}
+          ) : null}
         </Col>
       </Row>
     </StyledShipBox>
