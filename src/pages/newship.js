@@ -12,7 +12,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { SET_VAL } from "../redux/masterReducer";
 import { TogglePrivacy } from "../api/user";
 import { sendAmplitudeData } from "../util/amplitude";
-import { Alert } from "react-bootstrap";
 
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
@@ -36,7 +35,15 @@ const NewShip = () => {
 
       if (fetchedInfo.privacy !== "private") {
         let fetchedShips = await fetchShips();
-        setMasterList(fetchedShips);
+
+        if (fetchedShips.length !== 0) {
+          setMasterList(fetchedShips);
+        }
+
+        // // add a ship if empty
+        // if (fetchedShips.length === 0) {
+        //   setMasterList([...masterList, [null, null]]);
+        // }
       }
 
       if (studentList.length === 0) {

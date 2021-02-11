@@ -65,15 +65,15 @@
 }
 
 .rock-slow {
-  animation: swing 4s infinite ease-in-out;
+  animation: swing 1.2s infinite ease-in-out;
 }
 
 @keyframes swing {
   0%,
   100% {
-    transform: rotate(-10deg);
+    transform: rotate(-5deg);
   }
   50% {
-    transform: rotate(10deg);
+    transform: rotate(5deg);
   }
 }

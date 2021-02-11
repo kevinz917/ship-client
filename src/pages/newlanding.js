@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Row } from "react-bootstrap";
-import { fetchUser } from "../api/user";
-import { fetchMyShips } from "../api/ship";
+import { countShips } from "../api/ship";
 import { MainBtn } from "../global_styles/button";
+import { Body } from "../global_styles/typography";
 import "../global_styles/animation.css";
 import { Base } from "../util/base";
 import { sendAmplitudeData } from "../util/amplitude";
@@ -58,6 +58,7 @@ const Container = styled.div`
   margin: 0 auto;
 
   @media (max-width: 450px) {
+    margin-top: 60px;
     flex-direction: column;
     max-width: 100%;
   }
@@ -91,15 +92,16 @@ const HeroImage = styled.img`
 `;
 
 const StyledDescription = styled.span`
-  font-size: 26px;
+  font-size: 20px;
   font-weight: 500;
-  line-height: 1.2;
   opacity: 0.8;
 
-  @media (max-width: 450px) {
+  /* @media (max-width: 450px) {
     font-size: 20px;
-  }
+  } */
 `;
+
+sendAmplitudeData("visit_landing");
 
 const randNum = (a, b) => {
   return Math.random() * (b - a) + a;
@@ -113,7 +115,6 @@ const placeShip = (x, y) => {
   newDiv.style.top = `${y - size / 2}px`;
   newDiv.style.fontSize = `${size}px`;
   newDiv.className = "rock";
-  // newDiv.style.zIndex = 10;
   newDiv.style.opacity = Math.random();
   const newContent = document.createTextNode("🚢");
   newDiv.appendChild(newContent);
@@ -123,18 +124,16 @@ const placeShip = (x, y) => {
 };
 
 const Landing = () => {
-  const [name, setName] = useState("");
-  const [shipCnt, setShipCnt] = useState(0);
+  const [shipCnt, setShipCnt] = useState(-1);
   const [loading, setLoading] = useState(1);
 
   useEffect(() => {
     const onMount = async () => {
       setLoading(true);
       // Fetch user info
-      let fetchedUser = await fetchUser();
-      setName(fetchedUser.name.split(" ")[0]);
-      let fetchedShips = await fetchMyShips();
-      setShipCnt(fetchedShips.length);
+      let count = await countShips();
+      console.log(count);
+      setShipCnt(count);
       setLoading(false);
     };
     onMount();
@@ -168,6 +167,9 @@ const Landing = () => {
                 The creators of YPost are back with Ship, a fun way to set up
                 your friends this Valentine's day :)
               </StyledDescription>
+              <Body className="mt-4">
+                Total ships: {shipCnt === -1 ? "Loading..." : shipCnt}
+              </Body>
             </Row>
             <MainBtn
               width="100%"

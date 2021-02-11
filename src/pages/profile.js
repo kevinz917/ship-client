@@ -9,10 +9,9 @@ import { Spinner } from "../components/LoadingSpinner";
 import Votecard from "../components/VoteCard";
 import { sendAmplitudeData } from "../util/amplitude";
 import { Formik, Field, Form } from "formik";
-import { MainInput } from "../global_styles/other";
 import { SaveAnswers } from "../api/user";
-import "../global_styles/other.css";
 
+import "../global_styles/other.css";
 // import { COOKIE_DOMAIN } from "../util/base";
 
 const sortFunc = (a, b) => {
@@ -38,7 +37,6 @@ const Profile = () => {
     const onMount = async () => {
       setIsloading(true);
       let fetchedUser = await fetchUser();
-      console.log(fetchedUser);
       setUserInfo(fetchedUser);
 
       let fetchedShips = await fetchMyShips();
@@ -74,18 +72,13 @@ const Profile = () => {
       style={{ maxWidth: "600px", padding: "20px" }}
       className="ml-auto mr-auto fade-in"
     >
-      <Header2 className="mb-2">My ships</Header2>
+      <Header2 className="mb-2">My matches</Header2>
       <div
         className="d-flex flex-column"
         style={{ overflow: "scroll", maxHeight: "400px" }}
       >
         {myShips.map((ship, idx) => (
-          <Votecard
-            ship={ship}
-            disabled={true}
-            style={{ width: "100%" }}
-            userEmail={userInfo.email}
-          />
+          <Votecard ship={ship} disabled={true} userEmail={userInfo.email} />
         ))}
       </div>
       <br />
@@ -103,7 +96,6 @@ const Profile = () => {
             cereal: userInfo.answers[2],
           }}
           onSubmit={async (values, { setSubmitting }) => {
-            console.log(values);
             await SaveAnswers(values);
             setSubmitting(false);
           }}
@@ -126,7 +118,7 @@ const Profile = () => {
               </div>
               <br />
               <div>
-                <MainBtn primary type="submit" disabled={isSubmitting}>
+                <MainBtn secondary type="submit" disabled={isSubmitting}>
                   Save
                 </MainBtn>
               </div>
@@ -158,7 +150,6 @@ export default Profile;
 // const Logout = () => {
 //   sendAmplitudeData("log_out");
 //   // Clear cookies
-//   console.log(COOKIE_DOMAIN);
 //   document.cookie = `connect.sid=; expires=${new Date().toUTCString()}; domain=${COOKIE_DOMAIN}; path=/`;
 //   // Redirect to home page and refresh as well
 //   // window.location.pathname = "/";
