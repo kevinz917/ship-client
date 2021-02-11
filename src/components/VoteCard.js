@@ -60,9 +60,11 @@ const VoteCard = ({
 
   const questions = [
     "Favorite New Haven Restaurant?",
-    "Fav study spot?",
+    "Favorite study spot?",
     "Is cereal a soup?",
   ];
+
+  const vote_cnt = ship.votes + 10 * ((ship.shippers ? ship.shippers : 1) - 1);
 
   return (
     <StyledShipBox mine={ship.emails.includes(userEmail)} disabled={disabled}>
@@ -80,13 +82,17 @@ const VoteCard = ({
           {disabled && answers.length > 0 ? (
             <div>
               <hr />
-              {questions.map((question, idx) => (
-                <div>
-                  <SmallSubtitle>{question}</SmallSubtitle>
-                  <Body>{answers[idx]}</Body>
-                  <div style={{ height: "8px" }} />
-                </div>
-              ))}
+              {questions.map((question, idx) =>
+                answers[idx] && answers[idx].length > 0 ? (
+                  <div>
+                    <SmallSubtitle>{question}</SmallSubtitle>
+                    <Body>{answers[idx]}</Body>
+                    <div style={{ height: "8px" }} />
+                  </div>
+                ) : (
+                  <div />
+                )
+              )}
               {/*<hr />
               <Row className="mx-auto">{ship.emails[0]}</Row>
               <Row className="mx-auto">{ship.emails[1]}</Row>*/}
@@ -114,8 +120,7 @@ const VoteCard = ({
           )}
           <Row className="mx-auto mt-1 justify-content-center">
             <SubtitleMain>
-              {ship.votes + 10 * ((ship.shippers ? ship.shippers : 1) - 1)}{" "}
-              {disabled && "votes"}
+              {vote_cnt} {disabled && (vote_cnt === 1 ? "vote" : "votes")}
             </SubtitleMain>
           </Row>
           {ship.emails.includes(userEmail) && !disabled ? (
