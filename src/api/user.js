@@ -41,3 +41,20 @@ export const TogglePrivacy = async (privacy) => {
   let toggled = await axios.post(`${Base}/user/togglePrivacy`, { privacy });
   return toggled;
 };
+
+// Save answers
+export const SaveAnswers = async (answerObj) => {
+  let res = await axios.post(`${Base}/user/saveAnswers`, { answerObj });
+  return res;
+};
+
+// fetchUserAnswers
+export const fetchUserAnswers = async (userEmail, shipId) => {
+  let res = await axios.post(`${Base}/user/fetchUserAnswers`, {
+    userEmail,
+    shipId,
+  });
+  if (res) {
+    return res.data.answers;
+  }
+};

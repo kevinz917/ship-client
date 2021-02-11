@@ -8,7 +8,12 @@ import { Body } from "../global_styles/typography";
 import { Spinner } from "../components/LoadingSpinner";
 import Votecard from "../components/VoteCard";
 import { sendAmplitudeData } from "../util/amplitude";
-import { COOKIE_DOMAIN } from "../util/base";
+import { Formik, Field, Form } from "formik";
+import { MainInput } from "../global_styles/other";
+import { SaveAnswers } from "../api/user";
+import "../global_styles/other.css";
+
+// import { COOKIE_DOMAIN } from "../util/base";
 
 const sortFunc = (a, b) => {
   const a_votes = a.votes + 10 * ((a.shippers ? a.shippers : 1) - 1);
@@ -33,6 +38,7 @@ const Profile = () => {
     const onMount = async () => {
       setIsloading(true);
       let fetchedUser = await fetchUser();
+      console.log(fetchedUser);
       setUserInfo(fetchedUser);
 
       let fetchedShips = await fetchMyShips();
@@ -59,58 +65,101 @@ const Profile = () => {
     setIsChanging(false);
   };
 
-  // const Logout = () => {
-  //   sendAmplitudeData("log_out");
-  //   // Clear cookies
-  //   console.log(COOKIE_DOMAIN);
-  //   document.cookie = `connect.sid=; expires=${new Date().toUTCString()}; domain=${COOKIE_DOMAIN}; path=/`;
-  //   // Redirect to home page and refresh as well
-  //   // window.location.pathname = "/";
-  // };
-
   if (isLoading) {
     return <Spinner />;
   }
 
   return (
-    <>
-      <div style={{ maxWidth: "500px" }} className="ml-auto mr-auto fade-in">
-        <div style={{ padding: "10px" }} className="w-100">
-          <Header2 className="mb-2">My profile</Header2>
-          <Body>Privacy setting: {info[userInfo.privacy]}</Body>
-          {isChanging ? (
-            <Spinner />
-          ) : (
-            <MainBtn secondary onClick={() => togglePrivacy()} className="mt-2">
-              {userInfo.privacy === "public"
-                ? "Toggle to private"
-                : userInfo.privacy === "private"
-                ? "Toggle to public"
-                : null}
-            </MainBtn>
-          )}
-          <br />
-        </div>
-      </div>
+    <div
+      style={{ maxWidth: "600px", padding: "20px" }}
+      className="ml-auto mr-auto fade-in"
+    >
+      <Header2 className="mb-2">My ships</Header2>
       <div
-        style={{ maxWidth: "500px" }}
-        className="ml-auto mr-auto mt-4 fade-in"
+        className="d-flex flex-column"
+        style={{ overflow: "scroll", maxHeight: "400px" }}
       >
-        <div style={{ padding: "10px" }} className="w-100">
-          <Header2 className="mb-2">My ships</Header2>
-        </div>
+        {myShips.map((ship, idx) => (
+          <Votecard
+            ship={ship}
+            disabled={true}
+            style={{ width: "100%" }}
+            userEmail={userInfo.email}
+          />
+        ))}
       </div>
-      <Row className="mx-auto justify-content-center">
-        <div style={{ width: "900px", maxWidth: "900px" }}>
-          <Row className="mx-auto justify-content-center">
-            {myShips.map((ship, idx) => (
-              <Votecard ship={ship} disabled={true} />
-            ))}
-          </Row>
-        </div>
-      </Row>
-    </>
+      <br />
+      <br />
+      <Header2 className="mb-2">Questions</Header2>
+      <Body>
+        Once you fill out the questions, your ships will see your responses!{" "}
+      </Body>
+      <br />
+      {userInfo.answers && (
+        <Formik
+          initialValues={{
+            restaurant: userInfo.answers[0],
+            study: userInfo.answers[1],
+            cereal: userInfo.answers[2],
+          }}
+          onSubmit={async (values, { setSubmitting }) => {
+            console.log(values);
+            await SaveAnswers(values);
+            setSubmitting(false);
+          }}
+        >
+          {({ errors, isSubmitting, handleSubmit }) => (
+            <Form onSubmit={handleSubmit}>
+              <div>
+                <Body className="mb-1">Favorite New Haven restaurant?</Body>
+                <Field name="restaurant" className="otherField" />
+              </div>
+              <br />
+              <div>
+                <Body className="mb-1">Fav study spot?</Body>
+                <Field name="study" className="otherField" />
+              </div>
+              <br />
+              <div>
+                <Body className="mb-1">Is cereal a soup?</Body>
+                <Field name="cereal" className="otherField" />
+              </div>
+              <br />
+              <div>
+                <MainBtn primary type="submit" disabled={isSubmitting}>
+                  Save
+                </MainBtn>
+              </div>
+            </Form>
+          )}
+        </Formik>
+      )}
+      <br />
+      <br />
+      <Header2 className="mb-2">Privacy</Header2>
+      <Body>Privacy setting: {info[userInfo.privacy]}</Body>
+      {isChanging ? (
+        <Spinner />
+      ) : (
+        <MainBtn secondary onClick={() => togglePrivacy()} className="mt-2">
+          {userInfo.privacy === "public"
+            ? "Toggle to private"
+            : userInfo.privacy === "private"
+            ? "Toggle to public"
+            : null}
+        </MainBtn>
+      )}
+    </div>
   );
 };
 
 export default Profile;
+
+// const Logout = () => {
+//   sendAmplitudeData("log_out");
+//   // Clear cookies
+//   console.log(COOKIE_DOMAIN);
+//   document.cookie = `connect.sid=; expires=${new Date().toUTCString()}; domain=${COOKIE_DOMAIN}; path=/`;
+//   // Redirect to home page and refresh as well
+//   // window.location.pathname = "/";
+// };
