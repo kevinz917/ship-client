@@ -65,7 +65,7 @@
 }
 
 .rock-slow {
-  animation: swing 1.2s infinite ease-in-out;
+  animation: swing 10s infinite ease-in-out;
 }
 
 @keyframes swing {

@@ -63,94 +63,115 @@ const Profile = () => {
     setIsChanging(false);
   };
 
-  if (isLoading) {
-    return <Spinner />;
-  }
-
   return (
     <div
-      style={{ maxWidth: "600px", padding: "20px" }}
-      className="ml-auto mr-auto fade-in"
+      style={{
+        padding: "20px",
+        minHeight: "100vh",
+        backgroundColor: "#f6ebff",
+      }}
     >
-      <Header2 className="mb-2">My matches</Header2>
-      <div
-        className="d-flex flex-column"
-        style={{ overflow: "scroll", maxHeight: "400px" }}
-      >
-        {myShips.map((ship, idx) => (
-          <Votecard
-            ship={ship}
-            disabled={true}
-            userEmail={userInfo.email}
-            userName={userInfo.name}
-          />
-        ))}
-      </div>
-      <br />
-      <br />
-      <Header2 className="mb-2">Questions</Header2>
-      <Body>
-        Once you fill out the questions, your ships will see your responses!{" "}
-      </Body>
-      <br />
-      {userInfo.answers && (
-        <Formik
-          initialValues={{
-            contact: userInfo.answers[0],
-            restaurant: userInfo.answers[1],
-            study: userInfo.answers[2],
-            cereal: userInfo.answers[3],
-          }}
-          onSubmit={async (values, { setSubmitting }) => {
-            await SaveAnswers(values);
-            setSubmitting(false);
-          }}
-        >
-          {({ errors, isSubmitting, handleSubmit }) => (
-            <Form onSubmit={handleSubmit}>
-              <div>
-                <Body className="mb-1">How should people contact you?</Body>
-                <Field name="contact" className="otherField" />
-              </div>
-              <br />
-              <div>
-                <Body className="mb-1">Favorite New Haven restaurant?</Body>
-                <Field name="restaurant" className="otherField" />
-              </div>
-              <br />
-              <div>
-                <Body className="mb-1">Fav study spot?</Body>
-                <Field name="study" className="otherField" />
-              </div>
-              <br />
-              <div>
-                <Body className="mb-1">Is cereal a soup?</Body>
-                <Field name="cereal" className="otherField" />
-              </div>
-              <br />
-              <div>
-                <MainBtn secondary type="submit" disabled={isSubmitting}>
-                  Save
-                </MainBtn>
-              </div>
-            </Form>
-          )}
-        </Formik>
-      )}
-      <br />
-      <br />
-      <Header2 className="mb-2">Privacy</Header2>
-      <Body>Privacy setting: {info[userInfo.privacy]}</Body>
-      {isChanging ? (
+      {isLoading ? (
         <Spinner />
       ) : (
-        <MainBtn secondary onClick={() => togglePrivacy()} className="mt-2">
-          {userInfo.privacy === "public"
-            ? "Toggle to private"
-            : userInfo.privacy === "private"
-            ? "Toggle to public"
-            : null}
-        </MainBtn>
+        <div className="mx-auto" style={{ maxWidth: "600px" }}>
+          <Header2 className="mb-2">My Matches</Header2>
+          {/* <div
+        className="d-flex flex-row"
+        style={{ overflow: "scroll", maxHeight: "400px" }}
+      > */}
+          <Row
+            className="mx-auto flex-nowrap"
+            style={{ whiteSpace: "nowrap", overflow: "scroll" }}
+          >
+            {myShips.map((ship, idx) => (
+              <Votecard
+                ship={ship}
+                disabled={true}
+                userEmail={userInfo.email}
+                userName={userInfo.name}
+              />
+            ))}
+          </Row>
+          {/* </div> */}
+          <br />
+          <br />
+          <Header2 className="mb-2">Questions</Header2>
+          <Body>
+            Once you fill out the questions and save, your ships will see your
+            responses!{" "}
+          </Body>
+          <br />
+          {userInfo.answers && (
+            <Formik
+              initialValues={{
+                contact: userInfo.answers[0],
+                restaurant: userInfo.answers[1],
+                hobby: userInfo.answers[2],
+                quarantine: userInfo.answers[3],
+                ask: userInfo.answers[4],
+              }}
+              onSubmit={async (values, { setSubmitting }) => {
+                await SaveAnswers(values);
+                setSubmitting(false);
+              }}
+            >
+              {({ errors, isSubmitting, handleSubmit }) => (
+                <Form onSubmit={handleSubmit}>
+                  <div>
+                    <Body className="mb-1">How should people contact you?</Body>
+                    <Field name="contact" className="otherField" />
+                  </div>
+                  <br />
+                  <div>
+                    <Body className="mb-1">Favorite New Haven restaurant?</Body>
+                    <Field name="restaurant" className="otherField" />
+                  </div>
+                  <br />
+                  <div>
+                    <Body className="mb-1">Favorite quarantine hobby?</Body>
+                    <Field name="hobby" className="otherField" />
+                  </div>
+                  <br />
+                  <div>
+                    <Body className="mb-1">
+                      First thing you'll do when quarantine ends?
+                    </Body>
+                    <Field name="quarantine" className="otherField" />
+                  </div>
+                  <br />
+                  <div>
+                    <Body className="mb-1">Ask me about ...</Body>
+                    <Field name="ask" className="otherField" />
+                  </div>
+                  <br />
+                  <div>
+                    <MainBtn secondary type="submit" disabled={isSubmitting}>
+                      Save
+                    </MainBtn>
+                  </div>
+                </Form>
+              )}
+            </Formik>
+          )}
+          <br />
+          <br />
+          <Header2 className="mb-2">Privacy</Header2>
+          <Body>Privacy setting: {info[userInfo.privacy]}</Body>
+          {isChanging ? (
+            <Spinner />
+          ) : (
+            <MainBtn secondary onClick={() => togglePrivacy()} className="mt-2">
+              {userInfo.privacy === "public"
+                ? "Toggle to private"
+                : userInfo.privacy === "private"
+                ? "Toggle to public"
+                : null}
+            </MainBtn>
+          )}
+          <br />
+          <br />
+        </div>
       )}
     </div>
   );

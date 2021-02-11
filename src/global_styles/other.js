@@ -45,11 +45,12 @@ export const StyledProfilePic = styled.span`
 
 export const StyledShipBox = styled.div`
   width: ${(props) => (props.disabled ? "400px" : "275px")};
+  min-width: ${(props) => (props.disabled ? "400px" : "275px")};
   border: 2.5px solid ${({ theme }) => theme.primary};
 
   padding: 16px;
   /* margin: 10px; */
-  margin: ${(props) => (props.disabled ? "0px 0px 10px 0px" : "10px")};
+  margin: ${(props) => (props.disabled ? "10px 10px 20px 10px" : "10px")};
 
   box-shadow: ${(props) =>
     props.mine ? `0px 0px 10px ${props.theme.orange}` : null};

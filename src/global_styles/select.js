@@ -6,12 +6,12 @@ export const StyledSelect = {
   }),
   singleValue: (base) => ({
     ...base,
-    color: "#3623A9",
+    color: "#0047FF",
     fontWeight: 500,
   }),
   input: (base) => ({
     ...base,
-    color: "#3623A9",
+    color: "#0047FF",
     fontWeight: 500,
   }),
   placeholder: (base) => ({

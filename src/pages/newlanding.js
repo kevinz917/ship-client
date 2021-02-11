@@ -9,58 +9,18 @@ import { Base } from "../util/base";
 import { initAmplitude, sendAmplitudeData } from "../util/amplitude";
 import Hero from "../assets/hero.png";
 
-const StyledBackground = styled.div`
-  width: 100vw;
-  height: 100vh;
-  background-image: linear-gradient(#815ef2, #ead1ff);
-  display: flex;
-`;
-
-const StyledTitleBackground = styled.div`
-  width: 100vw;
-  height: 100vh;
-  background-image: radial-gradient(
-    circle at 10% 20%,
-    rgba(255, 207, 181, 1) 0%,
-    rgba(255, 207, 181, 0.8) 10%,
-    rgba(255, 207, 181, 0.7) 20%,
-    rgba(255, 207, 181, 0) 60%
-  );
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  color: ${({ theme }) => theme.primary};
-  padding: 50px;
-
-  @media (max-width: 450px) {
-    font-size: 40px;
-    font-weight: 700;
-    padding: 20px;
-  }
-
-  .loading {
-    opacity: 0;
-    pointer-events: none;
-  }
-
-  .loaded {
-    transition: opacity 0.5s;
-    opacity: 1;
-  }
-`;
-
 const Container = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: center;
+  justify-content: center;
   max-width: 1000px;
   margin: 0 auto;
 
   @media (max-width: 450px) {
-    margin-top: 60px;
+    margin-top: 20px;
     flex-direction: column;
     max-width: 100%;
+    padding: 20px;
   }
 `;
 
@@ -77,6 +37,7 @@ const StyledTitle = styled.span`
 
 const HeroContainer = styled.div`
   margin-left: 50px;
+  display: flex;
   @media (max-width: 450px) {
     width: 100%;
     margin-left: 0;
@@ -86,6 +47,7 @@ const HeroContainer = styled.div`
 
 const HeroImage = styled.img`
   width: 450px;
+  margin: auto;
   @media (max-width: 450px) {
     width: 100%;
   }
@@ -151,47 +113,39 @@ const Landing = () => {
   };
 
   return (
-    <StyledBackground
-      className="vw-100 vh-100"
-      id="main"
-      onClick={(e) => setCoordinates(e.clientX, e.clientY)}
-    >
-      <StyledTitleBackground>
-        <Container>
-          <div className={"my-auto fade-in"} style={{ maxWidth: "400px" }}>
-            <Row className="mx-auto">
-              <StyledTitle>
-                Ship friends,
-                <br />
-                Vote couples.
-              </StyledTitle>
-            </Row>
-            <Row className="mx-auto mt-4 mb-5">
-              <StyledDescription style={{ maxWidth: "500px" }}>
-                <div className="mb-3">Hey Yalies ~</div>
-                The creators of YPost are back with Ship, a fun way to set up
-                your friends this Valentine's day :)
-              </StyledDescription>
-              <Body className="mt-4">
-                Total ships: {shipCnt === -1 ? "Loading..." : shipCnt}
-              </Body>
-            </Row>
-            <MainBtn
-              width="100%"
-              onClick={async () => {
-                sendAmplitudeData("login");
-                window.location.href = `${Base}/auth/cas`;
-              }}
-            >
-              Log in with CAS
-            </MainBtn>
-          </div>
-          <HeroContainer className="fade-in rock-slow">
-            <HeroImage src={Hero} alt="hero" />
-          </HeroContainer>
-        </Container>
-      </StyledTitleBackground>
-    </StyledBackground>
+    <Container style={{ minHeight: "calc(100vh - 106px)" }}>
+      <div className={"my-auto fade-in"} style={{ maxWidth: "400px" }}>
+        <Row className="mx-auto">
+          <StyledTitle>
+            Ship friends,
+            <br />
+            Vote couples.
+          </StyledTitle>
+        </Row>
+        <Row className="mx-auto mt-4 mb-5">
+          <StyledDescription style={{ maxWidth: "500px" }}>
+            <div className="mb-3">Hey Yalies ~</div>
+            The creators of YPost are back with Ship, a fun way to set up your
+            friends this Valentine's day :)
+          </StyledDescription>
+          <Body className="mt-4">
+            Total ships: {shipCnt === -1 ? "Loading..." : shipCnt}
+          </Body>
+        </Row>
+        <MainBtn
+          width="100%"
+          onClick={async () => {
+            sendAmplitudeData("login");
+            window.location.href = `${Base}/auth/cas`;
+          }}
+        >
+          Log in with CAS
+        </MainBtn>
+      </div>
+      <HeroContainer className="fade-in rock-slow">
+        <HeroImage src={Hero} alt="hero" />
+      </HeroContainer>
+    </Container>
   );
 };
 

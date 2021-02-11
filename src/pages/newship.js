@@ -77,7 +77,7 @@ const NewShip = () => {
 
   const addShip = () => {
     sendAmplitudeData("add_ship", { currentShips: masterList.length });
-    if (masterList.length === 3) return;
+    if (masterList.length === 5) return;
 
     setMasterList([...masterList, [null, null]]);
   };
@@ -106,12 +106,16 @@ const NewShip = () => {
 
   return (
     <div
-      style={{ maxWidth: "700px", padding: "10px" }}
-      className="mx-auto fade-in"
+      style={{
+        padding: "10px",
+        minHeight: "100vh",
+        backgroundColor: "#f6ebff",
+      }}
+      className="mx-auto w-100"
     >
-      <div className="mx-auto text-center">
+      <div className="mx-auto text-center fade-in">
         <Header2>Create your ships </Header2>
-        <SubtitleMain>Up to 3 ships</SubtitleMain>
+        <SubtitleMain>Up to 5 ships</SubtitleMain>
       </div>
       {isLoading ? (
         <Spinner />
@@ -140,7 +144,7 @@ const NewShip = () => {
             ))}
           </Row>
           <br />
-          {masterList.length < 3 && (
+          {masterList.length < 5 && (
             <MainBtn secondary width="100%" onClick={addShip} className="mb-3">
               Add new ship
             </MainBtn>
@@ -154,7 +158,7 @@ const NewShip = () => {
                   style={{ color: "white" }}
                 />
               ) : (
-                "Submit"
+                "Save"
               )}
             </MainBtn>
           )}

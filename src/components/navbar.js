@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { Navbar, Nav } from "react-bootstrap";
 import styled from "styled-components";
@@ -31,8 +31,6 @@ const ShipNavbar = () => {
   return (
     <Navbar
       expand="lg"
-      fixed={location.pathname === "/" ? "top" : null}
-      sticky={location.pathname === "/" ? null : "top"}
       style={{
         zIndex: 69,
         padding: "1.5rem 1rem",
@@ -40,7 +38,7 @@ const ShipNavbar = () => {
       }}
     >
       <Navbar.Brand as={Link} to="/" style={{ marginLeft: "1rem" }}>
-        <img src={Logo} height={40} />
+        <img src={Logo} height={40} alt="logo" />
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">

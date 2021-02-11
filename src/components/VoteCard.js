@@ -62,8 +62,9 @@ const VoteCard = ({
   const questions = [
     "How should people contact you?",
     "Favorite New Haven Restaurant?",
-    "Favorite study spot?",
-    "Is cereal a soup?",
+    "Favorite quarantine hobby?",
+    "First thing you'll do when quarantine ends?",
+    "Ask me about ...",
   ];
 
   const vote_cnt = ship.votes + 10 * ((ship.shippers ? ship.shippers : 1) - 1);

@@ -188,14 +188,21 @@ const Leaderboard = () => {
   );
 
   return (
-    <Col className="fade-in w-100" style={{ padding: "10px" }}>
+    <Col
+      className="w-100"
+      style={{
+        padding: "10px",
+        backgroundColor: "#f6ebff",
+        minHeight: "100vh",
+      }}
+    >
       <Row className="mx-auto justify-content-center">
         <Header2>Leaderboard ✌️</Header2>
       </Row>
       {isLoading ? (
         <Spinner />
       ) : (
-        <div>
+        <div className="fade-in">
           <Row className="mx-auto mt-3 justify-content-center">
             <MainInput
               placeholder="Search friends' names, etc..."
@@ -244,7 +251,7 @@ const Leaderboard = () => {
                     onScroll={onChildScroll}
                     scrollTop={scrollTop}
                     rowCount={Math.ceil(filteredShips.length / ncol)}
-                    rowHeight={169}
+                    rowHeight={147}
                     rowRenderer={renderRow}
                     style={{ outline: "none" }}
                   />
