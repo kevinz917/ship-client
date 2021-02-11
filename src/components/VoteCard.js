@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col, Dropdown } from "react-bootstrap";
 import { HiArrowUp } from "react-icons/hi";
-import { Body, SubtitleMain, SmallSubtitle } from "../global_styles/typography";
+import {
+  Body,
+  SubtitleMain,
+  SmallSubtitle,
+  Header4,
+} from "../global_styles/typography";
 import { toggleVote } from "../api/ship";
 import { VotingBtn } from "../global_styles/button";
 import { StyledShipBox } from "../global_styles/other";
@@ -64,13 +69,13 @@ const VoteCard = ({
       <Row className="mx-auto">
         <Col className="p-0">
           <Row className="mx-auto mt-2">
-            <Body>{ship.userNames[0]}</Body>
+            <Header4>{ship.userNames[0]}</Header4>
           </Row>
           <Row className="mx-auto">
-            <SubtitleMain>and</SubtitleMain>
+            <SmallSubtitle>and</SmallSubtitle>
           </Row>
           <Row className="mx-auto">
-            <Body>{ship.userNames[1]}</Body>
+            <Header4>{ship.userNames[1]}</Header4>
           </Row>
           {disabled && answers.length > 0 ? (
             <div>
@@ -82,9 +87,9 @@ const VoteCard = ({
                   <div style={{ height: "8px" }} />
                 </div>
               ))}
-              <hr />
+              {/*<hr />
               <Row className="mx-auto">{ship.emails[0]}</Row>
-              <Row className="mx-auto">{ship.emails[1]}</Row>
+              <Row className="mx-auto">{ship.emails[1]}</Row>*/}
             </div>
           ) : null}
         </Col>

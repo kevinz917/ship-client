@@ -16,7 +16,7 @@ export const Header2 = styled.div`
   font-size: 34px;
 
   @media (max-width: 450px) {
-    font-size: 24px;
+    font-size: 22px;
   }
 `;
 
@@ -24,6 +24,12 @@ export const Header3 = styled.div`
   color: ${({ theme }) => theme.primary};
   font-weight: 800;
   font-size: 28px;
+`;
+
+export const Header4 = styled.div`
+  color: black;
+  font-weight: 600;
+  font-size: 20px;
 `;
 
 export const Body = styled.div`
@@ -45,5 +51,5 @@ export const SubtitleMain = styled.div`
 export const SmallSubtitle = styled.div`
   color: ${({ theme }) => theme.text[1]};
   font-weight: 500;
-  font-size: 14px;
+  font-size: 15px;
 `;
