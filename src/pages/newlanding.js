@@ -6,7 +6,7 @@ import { MainBtn } from "../global_styles/button";
 import { Body } from "../global_styles/typography";
 import "../global_styles/animation.css";
 import { Base } from "../util/base";
-import { sendAmplitudeData } from "../util/amplitude";
+import { initAmplitude, sendAmplitudeData } from "../util/amplitude";
 import Hero from "../assets/hero.png";
 
 const StyledBackground = styled.div`
@@ -101,7 +101,8 @@ const StyledDescription = styled.span`
   } */
 `;
 
-sendAmplitudeData("visit_landing");
+// console.log("sending data");
+// sendAmplitudeData("visit_landing");
 
 const randNum = (a, b) => {
   return Math.random() * (b - a) + a;
@@ -130,6 +131,10 @@ const Landing = () => {
   useEffect(() => {
     const onMount = async () => {
       setLoading(true);
+
+      console.log("sending data");
+      sendAmplitudeData("visit_landing");
+
       // Fetch user info
       let count = await countShips();
       console.log(count);
@@ -173,7 +178,7 @@ const Landing = () => {
             </Row>
             <MainBtn
               width="100%"
-              onClick={() => {
+              onClick={async () => {
                 sendAmplitudeData("login");
                 window.location.href = `${Base}/auth/cas`;
               }}
