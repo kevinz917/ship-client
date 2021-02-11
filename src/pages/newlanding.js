@@ -58,6 +58,7 @@ const Container = styled.div`
   margin: 0 auto;
 
   @media (max-width: 450px) {
+    margin-top: 60px;
     flex-direction: column;
     max-width: 100%;
   }
@@ -99,6 +100,8 @@ const StyledDescription = styled.span`
     font-size: 20px;
   } */
 `;
+
+sendAmplitudeData("visit_landing");
 
 const randNum = (a, b) => {
   return Math.random() * (b - a) + a;
