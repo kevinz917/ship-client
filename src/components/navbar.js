@@ -35,11 +35,11 @@ const ShipNavbar = () => {
       sticky={location.pathname === "/" ? null : "top"}
       style={{
         zIndex: 69,
-        padding: "1.5rem 0",
+        padding: "1.5rem 1rem",
         backgroundColor: location.pathname === "/" ? "transparent" : "#F6EBFF",
       }}
     >
-      <Navbar.Brand as={Link} to="/" style={{ marginLeft: "3rem" }}>
+      <Navbar.Brand as={Link} to="/" style={{ marginLeft: "1rem" }}>
         <img src={Logo} height={40} />
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />

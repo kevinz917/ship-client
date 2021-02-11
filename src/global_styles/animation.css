@@ -1,3 +1,7 @@
+.bob {
+  animation: MoveUpDown 2s infinite;
+}
+
 @keyframes MoveUpDown {
   0%,
   100% {
@@ -6,10 +10,6 @@
   50% {
     transform: translateY(-10px);
   }
-}
-
-.bob {
-  animation: MoveUpDown 2s infinite;
 }
 
 .fade-in {
@@ -62,6 +62,10 @@
 
 .rock {
   animation: swing 2s infinite ease-in-out;
+}
+
+.rock-slow {
+  animation: swing 4s infinite ease-in-out;
 }
 
 @keyframes swing {
