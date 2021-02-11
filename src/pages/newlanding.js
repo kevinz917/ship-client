@@ -61,6 +61,11 @@ const StyledDescription = styled.span`
   font-size: 26px;
   font-weight: 500;
   line-height: 1.2;
+  opacity: 0.8;
+
+  @media (max-width: 450px) {
+    font-size: 20px;
+  }
 `;
 
 const randNum = (a, b) => {
@@ -143,7 +148,6 @@ const Landing = () => {
             </StyledDescription>
           </Row>
           <MainBtn
-            secondary
             width="100%"
             onClick={() => {
               sendAmplitudeData("login");
