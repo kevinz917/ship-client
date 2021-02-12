@@ -80,7 +80,7 @@ const VoteCard = ({
                   whiteSpace: "nowrap",
                   overflow: "hidden",
                   textOverflow: "ellipsis",
-                  width: "200px",
+                  width: "190px",
                 }}
               >
                 {ship.userNames[1 - ship.userNames.indexOf(userName)]}
@@ -94,7 +94,7 @@ const VoteCard = ({
                     whiteSpace: "nowrap",
                     overflow: "hidden",
                     textOverflow: "ellipsis",
-                    width: "200px",
+                    width: "190px",
                   }}
                 >
                   {ship.userNames[0]}
@@ -109,7 +109,7 @@ const VoteCard = ({
                     whiteSpace: "nowrap",
                     overflow: "hidden",
                     textOverflow: "ellipsis",
-                    width: "200px",
+                    width: "190px",
                   }}
                 >
                   {ship.userNames[1]}
