@@ -7,8 +7,8 @@ export const MainInput = styled.input`
   border-bottom: 2px solid ${({ theme }) => theme.primary};
   color: ${({ theme }) => theme.text[0]};
   background-color: transparent;
-  // padding: 10px 12px;
   font-size: 17px;
+  border-radius: 0px !important;
 
   &:active,
   &:focus {
