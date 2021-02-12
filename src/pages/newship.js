@@ -116,6 +116,7 @@ const NewShip = () => {
       <div className="mx-auto text-center fade-in">
         <Header2>Create your ships </Header2>
         <SubtitleMain>Up to 5 ships</SubtitleMain>
+        Don't forget to save!
       </div>
       {isLoading ? (
         <Spinner />
