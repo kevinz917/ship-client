@@ -3,25 +3,25 @@ import styled from "styled-components";
 export const MainBtn = styled.button`
   border-radius: 0;
   box-shadow: -6px 6px 0 0
-    ${({ theme, primary }) => (primary ? theme.secondary : theme.primary)};
+    ${({ theme, primary }) => (primary ? "#8a8a8a" : theme.primary)};
   transition: 0.3s;
   font-size: 17px;
   font-weight: 600;
   padding: 8px 14px;
   background-color: ${({ theme, primary, secondary }) =>
-    primary ? theme.primary : secondary ? theme.secondary : theme.orange};
-  color: ${({ theme, primary }) => (primary ? theme.secondary : theme.primary)};
+    primary ? "#c9c9c9" : secondary ? theme.secondary : theme.orange};
+  color: ${({ theme, primary }) => (primary ? "#8a8a8a" : theme.primary)};
   border: 2.5px solid
-    ${({ theme, primary }) => (primary ? theme.secondary : theme.primary)};
+    ${({ theme, primary }) => (primary ? "#8a8a8a" : theme.primary)};
 
   width: ${(props) => props.width};
 
   &:hover {
     background: transparent;
-    box-shadow: 0 0 0 0
-        ${({ theme, primary }) => (primary ? theme.secondary : theme.primary)},
+    box-shadow: -6px 6px 0 0
+        ${({ theme, primary }) => (primary ? "#8a8a8a" : theme.primary)},
       inset 108px 72px 0 0
-        ${({ theme, primary }) => (primary ? theme.secondary : theme.primary)};
+        ${({ theme, primary }) => (primary ? "#8a8a8a" : theme.primary)};
     color: ${({ theme, primary }) =>
       primary ? theme.primary : theme.secondary};
   }

@@ -146,10 +146,12 @@ const NewShip = () => {
           <br />
 
           <MainBtn
-            orange
+            orange={ready ? true : null}
+            primary={ready ? null : true}
             width="100%"
             onClick={ready ? submitShip : null}
             className="mb-3"
+            disabled={ready ? null : true}
           >
             {isSaving ? (
               <VscLoading
