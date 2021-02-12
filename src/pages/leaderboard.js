@@ -13,6 +13,18 @@ import { isMobile } from "react-device-detect";
 import { sendAmplitudeData } from "../util/amplitude";
 import Select from "react-select";
 import { StyledSelect } from "../global_styles/select";
+import { HiOutlineRefresh } from "react-icons/hi";
+
+import styled from "styled-components";
+
+const StyledRefresh = styled.span`
+  cursor: pointer;
+  transition: transform 0.5s;
+  color: ${({ theme }) => theme.orange};
+  &:hover {
+    transform: rotate(-180deg);
+  }
+`;
 
 const sortFunc = (a, b) => {
   const a_votes = a.votes + 10 * ((a.shippers ? a.shippers : 1) - 1);
@@ -94,24 +106,25 @@ const Leaderboard = () => {
     [dispatch, shipInfo]
   );
 
-  useEffect(() => {
-    const onMount = async () => {
-      setIsLoading(true);
+  const onMount = useCallback(async () => {
+    setIsLoading(true);
 
-      // Fetch ships info
-      let fetchedShips = await fetchShips();
-      fetchedShips.sort(sortFunc);
-      setShipInfo(fetchedShips);
-      dispatch(SET_VAL("ships", fetchedShips));
+    // Fetch ships info
+    let fetchedShips = await fetchShips();
+    fetchedShips.sort(sortFunc);
+    setShipInfo(fetchedShips);
+    dispatch(SET_VAL("ships", fetchedShips));
 
-      // Fetch user info
-      let fetchedUser = await fetchUser();
-      setUserEmail(fetchedUser.email);
-      setUserVotes(fetchedUser.votes);
-      setIsLoading(false);
-    };
-    onMount();
+    // Fetch user info
+    let fetchedUser = await fetchUser();
+    setUserEmail(fetchedUser.email);
+    setUserVotes(fetchedUser.votes);
+    setIsLoading(false);
   }, [dispatch]);
+
+  useEffect(() => {
+    onMount();
+  }, [dispatch, onMount]);
 
   useEffect(() => {
     const filtered = shipInfo.filter((ship) => {
@@ -197,7 +210,12 @@ const Leaderboard = () => {
       }}
     >
       <Row className="mx-auto justify-content-center">
-        <Header2>Leaderboard ✌️</Header2>
+        <Header2 className="d-flex">
+          Leaderboard ✌️{" "}
+          <StyledRefresh className="my-auto ml-2" onClick={onMount}>
+            <HiOutlineRefresh style={{ display: "block" }} />
+          </StyledRefresh>
+        </Header2>
       </Row>
       {isLoading ? (
         <Spinner />
