@@ -12,7 +12,10 @@ const Help = () => {
     >
       <OverlayTrigger overlay={<Tooltip>Report a problem</Tooltip>}>
         <div className="textContainer">
-          <BiHelpCircle /> <b>Report</b>
+          <BiHelpCircle />
+          <div className="ml-2">
+            <b>Report</b>
+          </div>
         </div>
       </OverlayTrigger>
     </a>
