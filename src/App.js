@@ -24,6 +24,7 @@ import Profile from "./pages/profile";
 import PrivateRoute from "./components/PrivateRoute";
 import NotFound from "./pages/notFound";
 import TempLanding from "./pages/tempLanding";
+import Secret from "./pages/secret";
 
 //components
 import ShipNavbar from "./components/navbar";
@@ -97,6 +98,7 @@ function App() {
                   path="/leaderboard"
                   component={Leaderboard}
                 />
+                <Route exact path="/secret" component={Secret} />
                 <PrivateRoute exact path="/ship" component={NewShip} />
                 <PrivateRoute exact path="/profile" component={Profile} />
                 <PrivateRoute exact path="/faq" component={About} />

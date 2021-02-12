@@ -4,7 +4,6 @@ import { Navbar, Nav } from "react-bootstrap";
 import styled from "styled-components";
 import Logo from "../assets/logo.svg";
 import { useLocation } from "react-router-dom";
-// import { FiUser } from "react-icons/fi";
 
 const StyledNavLink = styled(NavLink)`
   padding: 0.5rem 3rem 0.5rem 0rem;
