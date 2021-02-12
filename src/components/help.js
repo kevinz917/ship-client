@@ -1,5 +1,6 @@
 import "./help.css";
 import { Tooltip, OverlayTrigger } from "react-bootstrap";
+import { BiHelpCircle } from "react-icons/bi";
 
 const Help = () => {
   return (
@@ -10,7 +11,9 @@ const Help = () => {
       style={{ textDecoration: "none" }}
     >
       <OverlayTrigger overlay={<Tooltip>Report a problem</Tooltip>}>
-        <div>Report</div>
+        <div className="textContainer">
+          <BiHelpCircle /> <b>Report</b>
+        </div>
       </OverlayTrigger>
     </a>
   );
