@@ -4,8 +4,9 @@
   left: 0;
   padding: 20px;
   border-radius: 4px;
-  color: rgb(167, 167, 167);
+  color: black;
   cursor: pointer;
+  z-index: 69;
 }
 
 @media (max-width: 450px) {
