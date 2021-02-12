@@ -57,7 +57,6 @@ const years = [
 ];
 
 const Leaderboard = () => {
-  sendAmplitudeData("visit_leaderboard");
   const dispatch = useDispatch();
   const ships = useSelector((state) => state.state.ships);
   const [userEmail, setUserEmail] = useState("");
@@ -108,7 +107,7 @@ const Leaderboard = () => {
 
   const onMount = useCallback(async () => {
     setIsLoading(true);
-
+    sendAmplitudeData("visit_leaderboard");
     // Fetch ships info
     let fetchedShips = await fetchShips();
     fetchedShips.sort(sortFunc);
