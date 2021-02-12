@@ -27,6 +27,7 @@ import TempLanding from "./pages/tempLanding";
 
 //components
 import ShipNavbar from "./components/navbar";
+import Help from "./components/help";
 
 // const dotenv = require("dotenv");
 
@@ -88,6 +89,7 @@ function App() {
           <Router>
             <GlobalStyle />
             <ShipNavbar />
+            <Help />
             {auth !== -1 && (
               <Switch>
                 <PrivateRoute
