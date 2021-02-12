@@ -210,12 +210,13 @@ const Leaderboard = () => {
       }}
     >
       <Row className="mx-auto justify-content-center">
-        <Header2 className="d-flex">
-          Leaderboard ✌️{" "}
-          <StyledRefresh className="my-auto ml-2" onClick={onMount}>
-            <HiOutlineRefresh style={{ display: "block" }} />
-          </StyledRefresh>
-        </Header2>
+        <Header2 className="d-flex">Leaderboard ✌️ </Header2>
+      </Row>
+      <Row className="mx-auto justify-content-center">
+        Refresh{" "}
+        <StyledRefresh className="my-auto ml-2" onClick={onMount}>
+          <HiOutlineRefresh style={{ display: "block" }} />
+        </StyledRefresh>
       </Row>
       {isLoading ? (
         <Spinner />
