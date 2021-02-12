@@ -18,8 +18,8 @@ export const MainBtn = styled.button`
 
   &:hover {
     background: transparent;
-    box-shadow: -6px 6px 0 0
-        ${({ theme, primary }) => (primary ? "#8a8a8a" : theme.primary)},
+    box-shadow: ${({ theme, primary }) =>
+        primary ? "-6px 6px 0 0 #8a8a8a" : `0 0 0 0 ${theme.primary}`},
       inset 108px 72px 0 0
         ${({ theme, primary }) => (primary ? "#8a8a8a" : theme.primary)};
     color: ${({ theme, primary }) =>
