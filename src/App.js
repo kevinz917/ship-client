@@ -99,8 +99,12 @@ function App() {
                 />
                 <PrivateRoute exact path="/ship" component={NewShip} />
                 <PrivateRoute exact path="/profile" component={Profile} />
+                <PrivateRoute exact path="/faq" component={About} />
+                <Route exact path="/login">
+                  {auth ? <Redirect to="/ship" /> : <Landing />}
+                </Route>
                 <Route exact path="/">
-                  {auth ? <About /> : <Landing />}
+                  {auth ? <Redirect to="/ship" /> : <Redirect to="/login" />}
                 </Route>
                 <Route exact={false} component={NotFound} />
               </Switch>

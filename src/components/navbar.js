@@ -34,10 +34,13 @@ const ShipNavbar = () => {
       style={{
         zIndex: 69,
         padding: "1.5rem 1rem",
-        backgroundColor: location.pathname === "/" ? "transparent" : "#F6EBFF",
+        backgroundColor:
+          location.pathname === "/faq" || location.pathname === "/login"
+            ? "transparent"
+            : "#F6EBFF",
       }}
     >
-      <Navbar.Brand as={Link} to="/" style={{ marginLeft: "1rem" }}>
+      <Navbar.Brand as={Link} to="/faq" style={{ marginLeft: "1rem" }}>
         <img src={Logo} height={40} alt="logo" />
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
