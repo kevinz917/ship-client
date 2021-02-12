@@ -75,20 +75,45 @@ const VoteCard = ({
         <Col className="p-0">
           {disabled ? (
             <Row className="mx-auto mt-2">
-              <Header4>
+              <Header4
+                style={{
+                  whiteSpace: "nowrap",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  width: "200px",
+                }}
+              >
                 {ship.userNames[1 - ship.userNames.indexOf(userName)]}
               </Header4>
             </Row>
           ) : (
             <>
               <Row className="mx-auto mt-2">
-                <Header4>{ship.userNames[0]}</Header4>
+                <Header4
+                  style={{
+                    whiteSpace: "nowrap",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    width: "200px",
+                  }}
+                >
+                  {ship.userNames[0]}
+                </Header4>
               </Row>
               <Row className="mx-auto">
                 <SmallSubtitle>and</SmallSubtitle>
               </Row>
               <Row className="mx-auto">
-                <Header4>{ship.userNames[1]}</Header4>
+                <Header4
+                  style={{
+                    whiteSpace: "nowrap",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    width: "200px",
+                  }}
+                >
+                  {ship.userNames[1]}
+                </Header4>
               </Row>
             </>
           )}
