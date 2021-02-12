@@ -78,9 +78,7 @@ function App() {
     onMount();
   }, [dispatch]);
 
-  return PROD === "1" ? (
-    <TempLanding />
-  ) : (
+  return (
     <ThemeProvider theme={Theme}>
       <StyledBackground
         style={{ minHeight: "100vh", minWidth: "100vw" }}
