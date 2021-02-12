@@ -50,7 +50,7 @@ export const StyledShipBox = styled.div`
 
   padding: 16px;
   /* margin: 10px; */
-  margin: ${(props) => (props.disabled ? "10px 10px 20px 10px" : "10px")};
+  margin: ${(props) => (props.disabled ? "10px 10px 20px 5px" : "10px")};
 
   box-shadow: ${(props) =>
     props.mine ? `0px 0px 10px ${props.theme.orange}` : null};
@@ -58,7 +58,8 @@ export const StyledShipBox = styled.div`
     props.mine ? `2.5px solid ${props.theme.orange}` : null};
 
   @media (max-width: 450px) {
-    width: 100%;
+    width: ${(props) => (props.disabled ? "280px !important" : "100%")};
+    min-width: ${(props) => (props.disabled ? "280px !important" : "100%")};
   }
 `;
 

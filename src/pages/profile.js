@@ -10,9 +10,16 @@ import Votecard from "../components/VoteCard";
 import { sendAmplitudeData } from "../util/amplitude";
 import { Formik, Field, Form } from "formik";
 import { SaveAnswers } from "../api/user";
+import styled from "styled-components";
 
 import "../global_styles/other.css";
 // import { COOKIE_DOMAIN } from "../util/base";
+
+const StyledField = styled(Field)`
+  @media (max-width: 450px) {
+    width: 100% !important;
+  }
+`;
 
 const sortFunc = (a, b) => {
   const a_votes = a.votes + 10 * ((a.shippers ? a.shippers : 1) - 1);
@@ -80,10 +87,7 @@ const Profile = () => {
         className="d-flex flex-row"
         style={{ overflow: "scroll", maxHeight: "400px" }}
       > */}
-          <Row
-            className="mx-auto flex-nowrap"
-            style={{ whiteSpace: "nowrap", overflow: "scroll" }}
-          >
+          <Row className="mx-auto flex-nowrap" style={{ overflow: "scroll" }}>
             {myShips.map((ship, idx) => (
               <Votecard
                 ship={ship}
@@ -120,29 +124,29 @@ const Profile = () => {
                 <Form onSubmit={handleSubmit}>
                   <div>
                     <Body className="mb-1">How should people contact you?</Body>
-                    <Field name="contact" className="otherField" />
+                    <StyledField name="contact" className="otherField" />
                   </div>
                   <br />
                   <div>
                     <Body className="mb-1">Favorite New Haven restaurant?</Body>
-                    <Field name="restaurant" className="otherField" />
+                    <StyledField name="restaurant" className="otherField" />
                   </div>
                   <br />
                   <div>
                     <Body className="mb-1">Favorite quarantine hobby?</Body>
-                    <Field name="hobby" className="otherField" />
+                    <StyledField name="hobby" className="otherField" />
                   </div>
                   <br />
                   <div>
                     <Body className="mb-1">
                       First thing you'll do when quarantine ends?
                     </Body>
-                    <Field name="quarantine" className="otherField" />
+                    <StyledField name="quarantine" className="otherField" />
                   </div>
                   <br />
                   <div>
                     <Body className="mb-1">Ask me about ...</Body>
-                    <Field name="ask" className="otherField" />
+                    <StyledField name="ask" className="otherField" />
                   </div>
                   <br />
                   <div>
