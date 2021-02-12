@@ -149,19 +149,24 @@ const NewShip = () => {
               Add new ship
             </MainBtn>
           )}
-          {ready && (
-            <MainBtn orange width="100%" onClick={submitShip} className="mb-3">
-              {isSaving ? (
-                <VscLoading
-                  size={20}
-                  className="rotate-fast"
-                  style={{ color: "white" }}
-                />
-              ) : (
-                "Save"
-              )}
-            </MainBtn>
-          )}
+
+          <MainBtn
+            orange
+            width="100%"
+            onClick={ready ? submitShip : null}
+            className="mb-3"
+          >
+            {isSaving ? (
+              <VscLoading
+                size={20}
+                className="rotate-fast"
+                style={{ color: "white" }}
+              />
+            ) : (
+              "Save"
+            )}
+          </MainBtn>
+
           <div className="d-flex flex-row align-items-center justify-content-center">
             {show && <div style={{ color: "green" }}>Saved ✔</div>}
           </div>
