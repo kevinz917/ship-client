@@ -231,6 +231,11 @@ const Leaderboard = () => {
               onClick={() => sendAmplitudeData("click_filter")}
             />
           </Row>
+          <Row className="mx-auto justify-content-center mt-1">
+            <div style={{ width: "350px", maxWidth: "400px" }}>
+              Showing {filteredShips.length} results...
+            </div>
+          </Row>
           <Row className="mx-auto my-4 justify-content-center">
             <div style={{ width: "200px", maxWidth: "200px" }} className="mr-2">
               <Select
