@@ -144,11 +144,6 @@ const NewShip = () => {
             ))}
           </Row>
           <br />
-          {masterList.length < 5 && (
-            <MainBtn secondary width="100%" onClick={addShip} className="mb-3">
-              Add new ship
-            </MainBtn>
-          )}
 
           <MainBtn
             orange
@@ -166,6 +161,11 @@ const NewShip = () => {
               "Save"
             )}
           </MainBtn>
+          {masterList.length < 5 && (
+            <MainBtn secondary width="100%" onClick={addShip} className="mb-3">
+              Add new ship
+            </MainBtn>
+          )}
 
           <div className="d-flex flex-row align-items-center justify-content-center">
             {show && <div style={{ color: "green" }}>Saved ✔</div>}
