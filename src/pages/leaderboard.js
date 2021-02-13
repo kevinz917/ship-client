@@ -145,8 +145,7 @@ const Leaderboard = () => {
         ) ||
           ship.userLabels[1].includes(
             selectedYear ? selectedYear.label.slice(-2) : ""
-          )) &&
-        ship.privacy === "public"
+          ))
       );
     });
 
