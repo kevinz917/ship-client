@@ -36,7 +36,8 @@ const Profile = () => {
   const [myShips, setMyShips] = useState([]);
 
   const info = {
-    private: "Others will not be able to vote on ships that includes you",
+    private:
+      "If toggled to private, ships involving you will not show up on the leaderboard. You also will not be able to create any ships (but your previous ships will be saved).",
     public: "Others can vote on ships that include you",
   };
 
@@ -175,7 +176,7 @@ const Profile = () => {
           <br />
           <br />
           <Header2 className="mb-2">Privacy</Header2>
-          <Body>Privacy setting: {info[userInfo.privacy]}</Body>
+          <Body>{info[userInfo.privacy]}</Body>
           {isChanging ? (
             <Spinner />
           ) : (

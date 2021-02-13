@@ -113,13 +113,15 @@ const About = () => {
       title: "What privacy settings are there?",
       contents: (
         <div>
-          Go to the bottom of the “my matches” page to choose whether or not you
-          would like matches involving you to display on the leaderboard. <br />
+          You can delete any ships involving you. There are two ways to do this.
+          Either (1) go to "my matches," click on the three dots underneath the
+          vote count, and click “Delete" or (2) search yourself up on the
+          leaderboard and do the same.
           <br />
-          You can also delete any ships involving you. Search yourself up on the
-          leaderboard, click on the three dots underneath the vote count, and
-          click “Delete”. The ship will be deleted from both your account and
-          the other shippee’s account
+          <br />
+          If you don’t want ships involving you to show up on the leaderboard
+          (but you don’t want to delete them, either), head to the bottom of the
+          “my matches” page and toggle to private.
         </div>
       ),
     },
