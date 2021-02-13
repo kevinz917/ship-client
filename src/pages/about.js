@@ -121,7 +121,10 @@ const About = () => {
           <br />
           If you don’t want ships involving you to show up on the leaderboard
           (but you don’t want to delete them, either), head to the bottom of the
-          “my matches” page and toggle to private.
+          “my matches” page and toggle to private. If toggled to private, any
+          ships involving you will not be displayed on the public leaderboard.
+          Also, you will not be able to create any new ships (but your previous
+          ships will be saved).
         </div>
       ),
     },

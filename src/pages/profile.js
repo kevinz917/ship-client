@@ -37,8 +37,9 @@ const Profile = () => {
 
   const info = {
     private:
-      "If toggled to private, ships involving you will not show up on the leaderboard. You also will not be able to create any ships (but your previous ships will be saved).",
-    public: "Others can vote on ships that include you",
+      "If toggled to public, ships involving you will show up on the leaderboard.",
+    public:
+      "If toggled to private, any ships involving you will not be displayed on the public leaderboard. Also, you will not be able to create any new ships (but your previous ships will be saved).",
   };
 
   useEffect(() => {
@@ -180,7 +181,7 @@ const Profile = () => {
           {isChanging ? (
             <Spinner />
           ) : (
-            <MainBtn secondary onClick={() => togglePrivacy()} className="mt-2">
+            <MainBtn secondary onClick={() => togglePrivacy()} className="my-4">
               {userInfo.privacy === "public"
                 ? "Toggle to private"
                 : userInfo.privacy === "private"
