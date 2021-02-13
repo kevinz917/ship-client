@@ -100,7 +100,7 @@ const Leaderboard = () => {
       setShipInfo(temp);
       dispatch(SET_VAL("ships", temp));
 
-      let res = await removeShip(shipId);
+      await removeShip(shipId);
     },
     [dispatch, shipInfo]
   );
@@ -281,7 +281,6 @@ const Leaderboard = () => {
               </AutoSizer>
             )}
           </WindowScroller>
-          {/* {items} */}
         </div>
       )}
     </Col>
@@ -289,15 +288,3 @@ const Leaderboard = () => {
 };
 
 export default Leaderboard;
-
-// // CHANGE LAUNCH DATE
-// let launchDateStr = "01-Jan-2021";
-// var launchDate = new Date(Date.parse(launchDateStr.replace(/-/g, " ")));
-
-// if (launchDate >= new Date()) {
-//   return (
-//     <div className="w-100 d-flex flex-column align-items-center mt-lg-5 mt-3">
-//       <Header1>Coming soon ✌️</Header1>
-//     </div>
-//   );
-// }

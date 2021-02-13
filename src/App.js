@@ -29,8 +29,6 @@ import NotFound from "./pages/notFound";
 import ShipNavbar from "./components/navbar";
 import Help from "./components/help";
 
-// const dotenv = require("dotenv");
-
 const StyledBackground = styled.div`
   background-image: linear-gradient(#815ef2, #ead1ff);
 `;

@@ -116,6 +116,20 @@ const About = () => {
         "You anonymously submit the names of two friends that you think would be perfect for each other, and we’ll let them know. Yes, you can ship yourself with your crush. They won’t know 😉",
     },
     {
+      title: "What privacy settings are there?",
+      contents: (
+        <div>
+          Go to the bottom of the “my matches” page to choose whether or not you
+          would like matches involving you to display on the leaderboard. <br />
+          <br />
+          You can also delete any ships involving you. Search yourself up on the
+          leaderboard, click on the three dots underneath the vote count, and
+          click “Delete”. The ship will be deleted from both your account and
+          the other shippee’s account
+        </div>
+      ),
+    },
+    {
       title: "Why would someone ship their friends?",
       contents:
         "Maybe you want to help them with their lackluster romantic life? Or, you may just think that two of your mutuals should get to know each other out so all three of you can hang out and finally play three person card games together. Sometimes, War and ERS get old. Or, maybe you think it’s funny and chaotic—this is Ship’s fundamental purpose so we’re glad to help :,)",
@@ -140,29 +154,9 @@ const About = () => {
       contents:
         "Only people that you are shipped with will see your profile information.",
     },
-    {
-      title: "What privacy settings are there?",
-      contents:
-        "Go to the bottom of the “my matches” page to choose whether or not you would like matches involving you to display on the leaderboard.",
-    },
+
     { title: "Is cereal a soup?", contents: "Yes." },
   ];
-
-  // useEffect(() => {
-  //   const onMount = async () => {
-  //     setLoading(true);
-
-  //     console.log("sending data");
-  //     sendAmplitudeData("visit_about");
-
-  //     // Fetch user info
-  //     let count = await countShips();
-  //     console.log(count);
-  //     setShipCnt(count);
-  //     setLoading(false);
-  //   };
-  //   onMount();
-  // }, []);
 
   return (
     <StyledContainer className={"my-auto fade-in"}>

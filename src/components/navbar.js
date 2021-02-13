@@ -45,6 +45,7 @@ const ShipNavbar = () => {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto">
+          <StyledNavLink to="/faq">about</StyledNavLink>
           <StyledNavLink to="/leaderboard">leaderboard</StyledNavLink>
           <StyledNavLink to="/ship">ship!</StyledNavLink>
           <StyledNavLink to="/profile">my matches</StyledNavLink>
