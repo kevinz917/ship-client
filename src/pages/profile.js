@@ -3,7 +3,7 @@ import { Row } from "react-bootstrap";
 import { Header2 } from "../global_styles/typography";
 import { MainBtn } from "../global_styles/button";
 import { fetchUser, TogglePrivacy } from "../api/user";
-import { fetchMyShips } from "../api/ship";
+import { fetchMyShips, removeShip } from "../api/ship";
 import { Body } from "../global_styles/typography";
 import { Spinner } from "../components/LoadingSpinner";
 import Votecard from "../components/VoteCard";
@@ -70,6 +70,18 @@ const Profile = () => {
     setIsChanging(false);
   };
 
+  const deleteShip = async (shipId, idx) => {
+    // delete ship api
+    console.log(myShips);
+    let res = await removeShip(shipId);
+
+    // remove from array
+    let temp = [...myShips];
+    temp.splice(idx, 1);
+    temp.sort(sortFunc);
+    setMyShips(temp);
+  };
+
   return (
     <div
       style={{
@@ -88,12 +100,14 @@ const Profile = () => {
         style={{ overflow: "scroll", maxHeight: "400px" }}
       > */}
           <Row className="mx-auto flex-nowrap" style={{ overflow: "scroll" }}>
-            {myShips.map((ship, idx) => (
+            {myShips.map((ship, indx) => (
               <Votecard
                 ship={ship}
                 disabled={true}
                 userEmail={userInfo.email}
                 userName={userInfo.name}
+                deleteShip={deleteShip}
+                indx={indx}
               />
             ))}
           </Row>

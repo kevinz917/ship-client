@@ -102,13 +102,7 @@ function ContextAwareToggle({ eventKey, callback, question }) {
   );
 }
 
-// console.log("sending data");
-// sendAmplitudeData("visit_landing");
-
 const About = () => {
-  // const [shipCnt, setShipCnt] = useState(-1);
-  // const [loading, setLoading] = useState(1);
-
   const faqs = [
     {
       title: "How does this work?",

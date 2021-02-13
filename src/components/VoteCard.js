@@ -157,7 +157,7 @@ const VoteCard = ({
               {vote_cnt} {disabled && (vote_cnt === 1 ? "vote" : "votes")}
             </SubtitleMain>
           </Row>
-          {ship.emails.includes(userEmail) && !disabled ? (
+          {ship.emails.includes(userEmail) ? (
             <Row className="mx-auto mt-1 justify-content-center">
               <Dropdown>
                 <Dropdown.Toggle
