@@ -169,19 +169,7 @@ const Profile = () => {
           )}
           <br />
           <br />
-          <Header2 className="mb-2">Privacy</Header2>
-          <Body>Privacy setting: {info[userInfo.privacy]}</Body>
-          {isChanging ? (
-            <Spinner />
-          ) : (
-            <MainBtn secondary onClick={() => togglePrivacy()} className="mt-2">
-              {userInfo.privacy === "public"
-                ? "Toggle to private"
-                : userInfo.privacy === "private"
-                ? "Toggle to public"
-                : null}
-            </MainBtn>
-          )}
+
           <br />
           <br />
         </div>

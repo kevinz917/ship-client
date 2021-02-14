@@ -157,21 +157,6 @@ const VoteCard = ({
               {vote_cnt} {disabled && (vote_cnt === 1 ? "vote" : "votes")}
             </SubtitleMain>
           </Row>
-          {ship.emails.includes(userEmail) ? (
-            <Row className="mx-auto mt-1 justify-content-center">
-              <Dropdown>
-                <Dropdown.Toggle
-                  as={CustomToggle}
-                  id="dropdown-custom-components"
-                ></Dropdown.Toggle>
-                <Dropdown.Menu>
-                  <Dropdown.Item onClick={() => deleteShip(ship._id, indx)}>
-                    Delete
-                  </Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
-            </Row>
-          ) : null}
         </Col>
       </Row>
     </StyledShipBox>

@@ -57,14 +57,7 @@ const StyledDescription = styled.span`
   font-size: 20px;
   font-weight: 500;
   opacity: 0.8;
-
-  /* @media (max-width: 450px) {
-    font-size: 20px;
-  } */
 `;
-
-// console.log("sending data");
-// sendAmplitudeData("visit_landing");
 
 const randNum = (a, b) => {
   return Math.random() * (b - a) + a;
@@ -125,8 +118,9 @@ const Landing = () => {
         <Row className="mx-auto mt-4 mb-5">
           <StyledDescription style={{ maxWidth: "500px" }}>
             <div className="mb-3">Hey Yalies ~</div>
-            The creators of YPost are back with Ship, a fun way to set up your
-            friends this Valentine's day :)
+            Thank you for using Ship! We're keeping this site up so you can
+            revisit some memories ~ Enjoy!
+            <br />- 2021
           </StyledDescription>
           <Body className="mt-4">
             Total ships: {shipCnt === -1 ? "Loading..." : shipCnt}
