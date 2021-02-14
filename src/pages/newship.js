@@ -115,8 +115,7 @@ const NewShip = () => {
     >
       <div className="mx-auto text-center fade-in">
         <Header2>Create your ships </Header2>
-        <SubtitleMain>Up to 5 ships</SubtitleMain>
-        Don't forget to save!
+        <SubtitleMain>You can no longer create ships</SubtitleMain>
       </div>
       {isLoading ? (
         <Spinner />
@@ -145,31 +144,6 @@ const NewShip = () => {
             ))}
           </Row>
           <br />
-
-          <MainBtn
-            orange={ready ? true : null}
-            primary={ready ? null : true}
-            width="100%"
-            onClick={ready ? submitShip : null}
-            className="mb-3"
-            disabled={ready ? null : true}
-          >
-            {isSaving ? (
-              <VscLoading
-                size={20}
-                className="rotate-fast"
-                style={{ color: "white" }}
-              />
-            ) : (
-              "Save"
-            )}
-          </MainBtn>
-          {masterList.length < 5 && (
-            <MainBtn secondary width="100%" onClick={addShip} className="mb-3">
-              Add new ship
-            </MainBtn>
-          )}
-
           <div className="d-flex flex-row align-items-center justify-content-center">
             {show && <div style={{ color: "green" }}>Saved ✔</div>}
           </div>

@@ -135,7 +135,7 @@ const VoteCard = ({
         </Col>
         <Col xs="auto" className="p-0">
           {!disabled && (
-            <VotingBtn clicked={voteToggle} onClick={toggle}>
+            <VotingBtn clicked={voteToggle}>
               {isVoting ? (
                 <div
                   style={{ width: "20px", height: "20px" }}

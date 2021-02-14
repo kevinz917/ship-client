@@ -163,11 +163,6 @@ const Profile = () => {
                     <StyledField name="ask" className="otherField" />
                   </div>
                   <br />
-                  <div>
-                    <MainBtn secondary type="submit" disabled={isSubmitting}>
-                      Save
-                    </MainBtn>
-                  </div>
                 </Form>
               )}
             </Formik>
